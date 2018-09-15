@@ -1,0 +1,8 @@
+{
+  "name": "grad-project-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "b90d7ffc"
+}
