@@ -1,18 +1,69 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
+    <ion-title text-center text-capitalize style="font-family: Cambria; font-size: 20px; font-weight: bolder;">Login</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content padding text-center style="background-color: beige">
+  <img src="../../assets/imgs/collaboration.png" width="150" height="150">
+  <ion-list style="box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
+    <ion-item>
+      <ion-icon item-left name="at"></ion-icon>
+      <ion-input type="text" placeholder="Email" [(ngModel)]="userEmailAddress" required></ion-input>
+    </ion-item>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <ion-item>
+      <ion-icon item-left name="lock"></ion-icon>
+      <ion-input [type]="passwordType" placeholder="Password" [(ngModel)]="userPassword" clearOnEdit="false" required></ion-input>
+      <button ion-button clear icon-only item-right (click)="hideShowPassword()" >
+        <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <ion-item no-lines no-padding style="background-color: beige">
+      <ion-label>Remember Me</ion-label>
+      <ion-checkbox checked="false" style="border-radius: 2px;"></ion-checkbox>
+    </ion-item>
+
+  <button ion-button block icon-start style="background-color: limegreen">
+    <ion-icon name="log-in"></ion-icon>
+    Login
+  </button>
+
+  <div style="
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;">
+
+    <p style="
+    font-family: cursive;
+    font-size: 16px;
+    font-weight: bold;
+    "> OR </p>
+  </div>
+
+  <button ion-button block icon-start style="background-color: #3B5998;">
+    <ion-icon name="logo-facebook"></ion-icon>
+    Sign in with Facebook
+  </button>
+
+  <button ion-button block icon-start style="background-color: darkslategrey">
+    <ion-icon name="person"></ion-icon>
+    Login as Guest
+  </button>
+
+
+    <p text-center style="
+    font-family: cursive;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-left: 25px;
+    "> Don't Have An Account? <a (click)="navigateToSignUpPage()">Register Now!</a>
+    </p>
+
+
 </ion-content>
+
