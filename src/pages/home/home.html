@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center text-capitalize style="font-family: Cambria; font-size: 20px; font-weight: bolder;">Login</ion-title>
+    <ion-title text-center text-capitalize style="font-family: cursive; font-size: 20px; font-weight: bolder;">Login</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -21,9 +21,8 @@
     </ion-item>
   </ion-list>
 
-    <ion-item no-lines no-padding style="background-color: beige">
-      <ion-label>Remember Me</ion-label>
-      <ion-checkbox checked="false" style="border-radius: 2px;"></ion-checkbox>
+    <ion-item no-lines no-padding no-margin style="background-color: beige">
+      <a item-right style="font-family: cursive">Forgot Password?</a>
     </ion-item>
 
   <button ion-button block icon-start style="background-color: limegreen">
@@ -31,25 +30,23 @@
     Login
   </button>
 
-  <div style="
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 10%;">
 
-    <p style="
-    font-family: cursive;
-    font-size: 16px;
-    font-weight: bold;
-    "> OR </p>
-  </div>
+  <p text-center style="font-family: cursive; font-size: 16px; font-weight: bold;">
+      OR Login With ...
+  </p>
 
-  <button ion-button block icon-start style="background-color: #3B5998;">
-    <ion-icon name="logo-facebook"></ion-icon>
-    Sign in with Facebook
-  </button>
+  <p style="margin-top: 20px">
+    <button medium  ion-button icon-start style="background-color: #3B5998;">
+      <ion-icon name="logo-facebook"></ion-icon>
+      Facebook
+    </button>
+    <button medium ion-button icon-start style="background-color: #DF4B38;">
+      <ion-icon name="logo-google"></ion-icon>
+      Google
+    </button>
+  </p>
 
-  <button ion-button block icon-start style="background-color: darkslategrey">
+  <button medium ion-button block icon-start style="background-color: darkslategrey">
     <ion-icon name="person"></ion-icon>
     Login as Guest
   </button>
@@ -59,7 +56,7 @@
     font-family: cursive;
     font-size: 14px;
     font-weight: bold;
-    margin-top: 50px;
+    margin-top: 25px;
     margin-left: 25px;
     "> Don't Have An Account? <a (click)="navigateToSignUpPage()">Register Now!</a>
     </p>
