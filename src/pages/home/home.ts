@@ -6,23 +6,11 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  passwordType: string = 'password';
-  passwordIcon: string = 'eye-off';
-
   constructor(public navCtrl: NavController) {
 
   }
 
-  hideShowPassword() {
-    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
-    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad HomePage');
   }
-
-  navigateToSignUpPage(){
-    window.alert('Sign Up!');
-  }
-
-
-
-
 }
