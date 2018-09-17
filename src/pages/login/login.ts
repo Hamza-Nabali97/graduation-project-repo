@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {HomePage} from "../home/home";
+import {User} from "../../models/User";
+import {AngularFireAuth} from 'angularfire2/auth';
+import {SignupPage} from "../signup/signup";
 
 /**
  * Generated class for the LoginPage page.
@@ -16,8 +19,9 @@ import {HomePage} from "../home/home";
 export class LoginPage {
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
+  user = {} as User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth) {
 
   }
   hideShowPassword() {
@@ -26,15 +30,23 @@ export class LoginPage {
   }
 
   navigateToSignUpPage(){
-    window.alert('Sign Up!');
+    this.navCtrl.setRoot(SignupPage);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login(){
-    window.alert('Logged In');
-    this.navCtrl.setRoot(HomePage);
+  async login(user: User){
+    try {
+      const userAuthResult = this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password);
+      if(userAuthResult){
+        window.alert('Authentication Succeeded');
+        this.navCtrl.setRoot(HomePage);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
-  }
+
+}

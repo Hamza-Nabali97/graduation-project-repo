@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center text-capitalize style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bolder;">Login</ion-title>
+    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bolder;">Login</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,12 +9,12 @@
   <ion-list style="box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
     <ion-item>
       <ion-icon item-left name="at"></ion-icon>
-      <ion-input type="text" placeholder="Email" [(ngModel)]="userEmailAddress" required></ion-input>
+      <ion-input type="text" placeholder="Email" [(ngModel)]="user.emailAddress" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="passwordType" placeholder="Password" [(ngModel)]="userPassword" clearOnEdit="false" required></ion-input>
+      <ion-input [type]="passwordType" placeholder="Password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
       <button ion-button clear icon-only item-right (click)="hideShowPassword()" >
         <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
       </button>
@@ -22,10 +22,10 @@
   </ion-list>
 
   <ion-item no-lines no-padding no-margin style="background-color: beige">
-    <a item-right style="font-family: 'Calibri Light'">Forgot Password?</a>
+    <a item-right style="font-family: 'Calibri Light';font-weight: bold;">Forgot Password?</a>
   </ion-item>
 
-  <button ion-button block icon-start style="background-color: limegreen" (click)="login()">
+  <button ion-button block icon-start style="background-color: limegreen" (click)="login(user)">
     <ion-icon name="log-in"></ion-icon>
     Login
   </button>
