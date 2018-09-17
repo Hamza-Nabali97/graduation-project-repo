@@ -15,13 +15,13 @@ export class HomePage {
     this.angularFireAuth.authState.subscribe(data => {
       if(data && data.email && data.uid) {
         this.toastCtrl.create({
-          message: 'Welcome!, ${data.email}',
+          message: `Welcome, ${data.email}`,
           duration: 3000
         }).present();
       }
       else {
         this.toastCtrl.create({
-          message: 'Unauthorized',
+          message: 'Unauthorized/Bad Credentials',
           duration:3000
         }).present();
         this.navCtrl.popToRoot();

@@ -15,12 +15,12 @@
 
     <ion-item>
       <ion-icon item-left name="mail"></ion-icon>
-      <ion-input type="email" placeholder="Email" required></ion-input>
+      <ion-input type="email" placeholder="Email" [(ngModel)]="user.emailAddress" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="passwordType" placeholder="Password" clearOnEdit="false" required></ion-input>
+      <ion-input [type]="passwordType" placeholder="Password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
       <button ion-button clear icon-only item-right (click)="hideShowPassword()" >
         <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
       </button>
@@ -36,7 +36,7 @@
 
   </ion-list>
 
-  <button ion-button block icon-start style="background-color: mediumblue;">
+  <button ion-button block icon-start style= "background-color: mediumblue;" (click)="registerNewUser(user)">
     <ion-icon name="person-add"></ion-icon>
     Register
   </button>

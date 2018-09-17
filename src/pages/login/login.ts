@@ -39,13 +39,12 @@ export class LoginPage {
 
   async login(user: User){
     try {
-      const userAuthResult = this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password);
-      if(userAuthResult){
-        window.alert('Authentication Succeeded');
-        this.navCtrl.setRoot(HomePage);
-      }
-    } catch (err) {
-      console.log(err);
+      const userAuthResult = await this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password);
+      this.navCtrl.setRoot(HomePage);
+    }
+
+    catch (err) {
+      console.error(err);
     }
   }
 
