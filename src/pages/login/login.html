@@ -22,7 +22,7 @@
   </ion-list>
 
   <ion-item no-lines no-padding no-margin style="background-color: beige">
-    <a item-right style="font-family: 'Calibri Light';font-weight: bold;">Forgot Password?</a>
+    <a item-right style="font-family: 'Calibri Light';font-weight: bold; font-size: 16px;">Forgot Password?</a>
   </ion-item>
 
   <button ion-button block icon-start style="background-color: limegreen" (click)="login(user)">
@@ -31,8 +31,12 @@
   </button>
 
 
-  <p text-center style="font-family: 'Calibri Light'; font-size: 16px; font-weight: bold;">
-    OR Login With ...
+  <p text-center style="font-family: 'Calibri Light'; font-size: 20px; font-weight: bold; margin-top: 25px;">
+    --------------------OR--------------------
+  </p>
+
+  <p text-center style="font-family: 'Calibri Light'; font-size: 20px; font-weight: bold; margin-top: 0px;">
+  Login With
   </p>
 
   <p style="margin-top: 30px">
@@ -54,11 +58,10 @@
 
   <p text-center style="
     font-family: 'Calibri Light';
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bolder;
-    margin-top: 25px;
-    margin-left: 25px;
-    "> Don't Have An Account? <a (click)="navigateToSignUpPage()">Register Now!</a>
+    margin-top: 40px;
+    "> Don't Have An Account? <a (click)="navigateToSignUpPage()" style="font-size: 18px;">Register Now!</a>
   </p>
 
 

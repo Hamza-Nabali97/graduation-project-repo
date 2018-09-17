@@ -30,7 +30,7 @@ export class LoginPage {
   }
 
   navigateToSignUpPage(){
-    this.navCtrl.setRoot(SignupPage);
+    this.navCtrl.push(SignupPage);
   }
 
   ionViewDidLoad() {
