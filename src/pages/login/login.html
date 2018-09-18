@@ -9,7 +9,7 @@
   <ion-list style="box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
     <ion-item>
       <ion-icon item-left name="at"></ion-icon>
-      <ion-input type="text" placeholder="Email" [(ngModel)]="user.emailAddress" required></ion-input>
+      <ion-input type="email" placeholder="Email" [(ngModel)]="user.emailAddress" required></ion-input>
     </ion-item>
 
     <ion-item>
@@ -25,7 +25,7 @@
     <a item-right style="font-family: 'Calibri Light';font-weight: bold; font-size: 16px;">Forgot Password?</a>
   </ion-item>
 
-  <button ion-button block icon-start style="background-color: limegreen" (click)="login(user)">
+  <button ion-button block icon-start style="background-color: limegreen" (click)="loginWithEmailAndPassword(user)">
     <ion-icon name="log-in"></ion-icon>
     Login
   </button>
@@ -40,11 +40,11 @@
   </p>
 
   <p style="margin-top: 30px">
-    <button medium  ion-button icon-start style="background-color: #3B5998;">
+    <button medium  ion-button icon-start style="background-color: #3B5998;" (click)="loginWithFacebook()">
       <ion-icon name="logo-facebook"></ion-icon>
       Facebook
     </button>
-    <button medium ion-button icon-start style="background-color: #DF4B38;">
+    <button medium ion-button icon-start style="background-color: #DF4B38;" (click)="loginWithGoogle()">
       <ion-icon name="logo-google"></ion-icon>
       Google
     </button>

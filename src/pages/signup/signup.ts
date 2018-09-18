@@ -19,6 +19,8 @@ export class SignupPage {
   passwordIcon: string = 'eye-off';
   confirmationPasswordType: string = 'password';
   confirmationPasswordIcon: string = 'eye-off';
+  signupButtonDisabledFlag: boolean = true;
+  agreeCheckboxFlag: boolean;
   user = {} as User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -39,11 +41,14 @@ export class SignupPage {
     this.confirmationPasswordIcon = this.confirmationPasswordIcon === 'eye-off' ? 'eye' : 'eye-off';
   }
 
+
+  agreeCheckboxChangedState(isChecked: boolean) {
+    this.signupButtonDisabledFlag = (isChecked === true) ? false : true;
+  }
+
    async registerNewUser(user: User){
-    console.log(this.user);
     try {
       const result = await this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password);
-      console.log(result);
     }
     catch (e) {
       console.error(e);

@@ -15,7 +15,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon item-left name="mail"></ion-icon>
+      <ion-icon item-left name="at"></ion-icon>
       <ion-input type="email" placeholder="Email" [(ngModel)]="user.emailAddress" required></ion-input>
     </ion-item>
 
@@ -41,7 +41,7 @@
     <ion-row>
       <ion-col col-2 no-padding no-margin  style="background-color: beige;">
         <ion-item no-padding no-margin no-lines  style="background-color: beige;">
-          <ion-checkbox [(ngModel)]="agreedFlag"></ion-checkbox>
+          <ion-checkbox [(ngModel)]="agreeCheckboxFlag" (ionChange)="agreeCheckboxChangedState(agreeCheckboxFlag)" ></ion-checkbox>
         </ion-item>
       </ion-col>
       <ion-col col-10 no-padding no-margin>
@@ -52,7 +52,7 @@
     </ion-row>
   </ion-item>
 
-  <button ion-button block  style= "background-color: mediumblue; margin-top: 25px;" (click)="showSignupConfirmationAlert()">
+  <button ion-button block [disabled]="signupButtonDisabledFlag"  style= "background-color: mediumblue; margin-top: 25px;" (click)="showSignupConfirmationAlert()">
     Signup
   </button>
 
