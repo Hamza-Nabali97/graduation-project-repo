@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {SignupPage} from "../signup/signup";
 import {User} from "../../models/User";
@@ -26,12 +26,13 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth) {
 
   }
+
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
     this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
   }
 
-  navigateToSignUpPage(){
+  navigateToSignUpPage() {
     this.navCtrl.push(SignupPage);
   }
 
@@ -39,37 +40,52 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  async loginWithEmailAndPassword(user: User){
-    try {
-      const userAuthResult = await this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password);
-      this.navCtrl.setRoot(HomePage);
-    }
-
-    catch (err) {
-      console.error(err);
-    }
+  loginWithEmailAndPassword(user: User): void {
+    this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password)
+      .then(authenticationResult => {
+        console.log(authenticationResult);
+        this.navCtrl.setRoot(HomePage);
+      }).catch(error => {
+      console.error(error);
+    })
   }
 
-  async loginWithGoogle() {
-    var googleProvider = new firebase.auth.GoogleAuthProvider();
-    try {
-      await firebase.auth().signInWithPopup(googleProvider);
-      console.log('Successful');
-      this.navCtrl.setRoot(HomePage);
-    } catch (e) {
-      console.error(e);
-    }
+  loginWithGoogle(): void {
+    let googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+    this.angularFireAuth.auth.signInWithPopup(googleAuthProvider)
+      .then(authenticationResult => {
+        console.log(authenticationResult);
+        this.navCtrl.setRoot(HomePage);
+      }).catch(error => {
+      console.error(error);
+    });
   }
 
-  async loginWithFacebook() {
-    var facebookProvider = new firebase.auth.FacebookAuthProvider();
-    try {
-      await firebase.auth().signInWithPopup(facebookProvider);
-      console.log('Successful');
-      this.navCtrl.setRoot(HomePage);
-    } catch (e) {
-      console.error(e);
-    }
+  loginWithFacebook(): void {
+    let facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+    this.angularFireAuth.auth.signInWithPopup(facebookAuthProvider)
+      .then(authenticationResult => {
+        console.log(authenticationResult);
+        this.navCtrl.setRoot(HomePage);
+      }).catch(error => {
+      console.error(error);
+    });
   }
+
+  loginAsGuest(): void {
+    this.angularFireAuth.auth.signInAnonymously().catch(error => {
+      console.error(error);
+    })
+    this.angularFireAuth.auth.onAuthStateChanged(authUser => {
+      if(authUser){
+        console.log(authUser);
+        this.navCtrl.setRoot(HomePage);
+      }
+      else {
+        console.log('Signed Out!');
+      }
+    });
+  }
+
 
 }
