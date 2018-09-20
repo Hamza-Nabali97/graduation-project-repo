@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireAuth} from 'angularfire2/auth';
 import {User} from "../../models/User";
+import {LoginPage} from "../login/login";
 
 /**
  * Generated class for the SignupPage page.
@@ -75,6 +76,12 @@ export class SignupPage {
       ]
     });
     confirmationAlert.present();
+  }
+
+  navigateToLoginPage(): void {
+
+
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }

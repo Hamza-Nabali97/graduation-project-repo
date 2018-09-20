@@ -37,24 +37,27 @@
 
   </ion-list>
 
-  <ion-item text-wrap style="background-color: beige;">
+  <!--<ion-item text-wrap style="background-color: beige;">
     <ion-row>
       <ion-col col-2 no-padding no-margin  style="background-color: beige;">
         <ion-item no-padding no-margin no-lines  style="background-color: beige;">
           <ion-checkbox [(ngModel)]="agreeCheckboxFlag" (ionChange)="agreeCheckboxChangedState(agreeCheckboxFlag)" ></ion-checkbox>
         </ion-item>
       </ion-col>
-      <ion-col col-10 no-padding no-margin>
+      <ion-col col-10 no-padding no-margin style="font-size:20px;">
         <ion-item no-padding no-margin no-lines style="font-family: 'Calibri Light';font-weight: bold; font-size: 16px; background-color: beige;">
           By Signing up you Agree to <u><a style="font-size: 14px;">Terms of Service</a></u> and <u><a style="font-size: 16px;font-family: 'Calibri Light';">Privacy Policy</a></u>
         </ion-item>
       </ion-col>
     </ion-row>
-  </ion-item>
+  </ion-item>-->
 
   <button ion-button block [disabled]="signupButtonDisabledFlag"  style= "background-color: mediumblue; margin-top: 25px;" (click)="showSignupConfirmationAlert()">
     Signup
   </button>
+
+  <p style="font-weight: bold;font-size: 18px; margin-top: 50px;">Already Have An Account?</p>
+  <u><a style="font-weight: bold;font-size: 18px;" (click)="navigateToLoginPage()">Login Now!</a></u>
 
 
 
