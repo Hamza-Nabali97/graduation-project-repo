@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage} from "../pages/signup/signup";
+import {PhoneVerificationPage} from "../pages/phone-verification/phone-verification";
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +15,7 @@ import { SignupPage} from "../pages/signup/signup";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = PhoneVerificationPage;
 
   pages: Array<{title: string, component: any}>;
 

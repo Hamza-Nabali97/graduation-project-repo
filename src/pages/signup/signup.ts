@@ -4,6 +4,7 @@ import { AngularFireAuth} from 'angularfire2/auth';
 import {User} from "../../models/User";
 import {LoginPage} from "../login/login";
 import {HomePage} from "../home/home";
+import {PhoneVerificationPage} from "../phone-verification/phone-verification";
 
 /**
  * Generated class for the SignupPage page.
@@ -48,7 +49,7 @@ export class SignupPage {
     this.signupButtonDisabledFlag = (isChecked === true) ? false : true;
   }
 
-   async registerNewUser(user: User){
+    registerNewUser(user: User){
     /*try {
       const result = await this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password);
     }
@@ -58,7 +59,7 @@ export class SignupPage {
     this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password)
       .then(registerResult => {
         console.log(registerResult);
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(PhoneVerificationPage);
       }).catch(registerError => {
         console.error(registerError);
     })
