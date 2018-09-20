@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireAuth} from 'angularfire2/auth';
 import {User} from "../../models/User";
 import {LoginPage} from "../login/login";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the SignupPage page.
@@ -48,12 +49,19 @@ export class SignupPage {
   }
 
    async registerNewUser(user: User){
-    try {
+    /*try {
       const result = await this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password);
     }
     catch (e) {
       console.error(e);
-    }
+    }*/
+    this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password)
+      .then(registerResult => {
+        console.log(registerResult);
+        this.navCtrl.setRoot(HomePage);
+      }).catch(registerError => {
+        console.error(registerError);
+    })
   }
 
   showSignupConfirmationAlert () {
@@ -79,8 +87,6 @@ export class SignupPage {
   }
 
   navigateToLoginPage(): void {
-
-
     this.navCtrl.setRoot(LoginPage);
   }
 

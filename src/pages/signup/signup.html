@@ -3,7 +3,8 @@
     <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bold;">Signup</ion-title>
   </ion-navbar>
 </ion-header>
-
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
 
 <ion-content padding text-center style="background-color: beige">
   <img src="../../assets/imgs/signup-icon.png" width="150" height="150">
@@ -37,27 +38,17 @@
 
   </ion-list>
 
-  <!--<ion-item text-wrap style="background-color: beige;">
-    <ion-row>
-      <ion-col col-2 no-padding no-margin  style="background-color: beige;">
-        <ion-item no-padding no-margin no-lines  style="background-color: beige;">
-          <ion-checkbox [(ngModel)]="agreeCheckboxFlag" (ionChange)="agreeCheckboxChangedState(agreeCheckboxFlag)" ></ion-checkbox>
-        </ion-item>
-      </ion-col>
-      <ion-col col-10 no-padding no-margin style="font-size:20px;">
-        <ion-item no-padding no-margin no-lines style="font-family: 'Calibri Light';font-weight: bold; font-size: 16px; background-color: beige;">
-          By Signing up you Agree to <u><a style="font-size: 14px;">Terms of Service</a></u> and <u><a style="font-size: 16px;font-family: 'Calibri Light';">Privacy Policy</a></u>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-item>-->
+  <ion-item text-wrap  color="login-and-signup-background-color">
+    <ion-label style="font-family: 'Montserrat'; font-size: 16px; font-weight: bold;">By Signing up, You Agree to Our Application <u><a>Terms of Service</a></u> and <u><a>Privacy Policy</a></u></ion-label>
+    <ion-checkbox  color="primary" [(ngModel)]="agreeCheckboxFlag" (ionChange)="agreeCheckboxChangedState(agreeCheckboxFlag)"></ion-checkbox>
+  </ion-item>
 
-  <button ion-button block [disabled]="signupButtonDisabledFlag"  style= "background-color: mediumblue; margin-top: 25px;" (click)="showSignupConfirmationAlert()">
+  <button ion-button block [disabled]="signupButtonDisabledFlag"  style= "background-color: mediumblue; margin-top: 25px; font-family: 'Monotype Corsiva';font-size: 16px;" (click)="showSignupConfirmationAlert()">
     Signup
   </button>
 
-  <p style="font-weight: bold;font-size: 18px; margin-top: 50px;">Already Have An Account?</p>
-  <u><a style="font-weight: bold;font-size: 18px;" (click)="navigateToLoginPage()">Login Now!</a></u>
+  <p style="font-weight: bold;font-size: 18px; font-family:'Montserrat', sans-serif; margin-top: 50px;">Already Have An Account?</p>
+  <u><a style="font-weight: bold;font-size: 18px; font-family: 'Montserrat', sans-serif;" (click)="navigateToLoginPage()">Login Now!</a></u>
 
 
 
