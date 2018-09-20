@@ -87,5 +87,15 @@ export class LoginPage {
     });
   }
 
+  requestPasswordReset(user: User) {
+    this.angularFireAuth.auth.sendPasswordResetEmail(user.emailAddress)
+      .then(resetEmailResult => {
+        console.log(resetEmailResult);
+      }).catch(resetEmailSendError => {
+        console.error(resetEmailSendError);
+      }
+    )
+  }
+
 
 }
