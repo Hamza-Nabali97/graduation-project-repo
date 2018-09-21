@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {MenuController, NavController, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {LoginPage} from "../pages/login/login";
+import {ReportsPage} from "../pages/reports/reports";
+import {InboxPage} from "../pages/inbox/inbox";
+import {OnMyRoutePage} from "../pages/on-my-route/on-my-route";
+import {SettingsPage} from "../pages/settings/settings";
+import {ContactUsPage} from "../pages/contact-us/contact-us";
 
 
 @Component({
@@ -10,10 +14,15 @@ import {LoginPage} from "../pages/login/login";
 })
 export class MyApp {
 
-  rootPage: any = LoginPage;
+  rootPage: any = ReportsPage;
+  inboxPage= InboxPage;
+  onMyRoutePage= OnMyRoutePage;
+  settingsPage = SettingsPage;
+  contactUs=ContactUsPage;
+  @ViewChild('content') content: NavController;
 
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,private menuCtrl: MenuController) {
     this.initializeApp();
 
   }
@@ -25,6 +34,11 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  openPage(page: any) {
+    this.content.setRoot(page);
+    this.menuCtrl.close();
   }
 
 }

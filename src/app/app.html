@@ -1,2 +1,65 @@
+<ion-menu side="left" [content]="content">
+  <ion-header>
+    <ion-toolbar class="user-profile">
 
-<ion-nav [root]="rootPage"></ion-nav>
+      <ion-grid>
+
+        <ion-row text-center>
+          <ion-col>
+            <div>
+              <img
+                src="https://scontent.fjrs1-1.fna.fbcdn.net/v/t1.0-9/42363854_1724974217610996_2437099335788265472_n.jpg?_nc_cat=102&oh=0d97551df07128a30db4205494602e6f&oe=5C178B08">
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <h2 ion-text text-center color="light" style="font-family: 'Monospace'">
+              Yazan Yahya
+            </h2>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="primary">
+
+    <ion-list>
+
+      <button ion-item menuClose (click)="openPage(rootPage)">
+        <ion-icon name="clipboard" color="primary" item-left></ion-icon>
+        <span ion-text color="primary">Reports</span>
+      </button>
+      <button ion-item menuClose (click)="openPage(inboxPage)">
+        <ion-icon name="filing" color="primary" item-left></ion-icon>
+        <span ion-text color="primary">Inbox</span>
+      </button>
+      <button ion-item menuClose (click)="openPage(onMyRoutePage)">
+        <ion-icon name="map" color="primary" item-left></ion-icon>
+        <span ion-text color="primary">On My Route</span>
+      </button>
+      <button ion-item menuClose (click)="openPage(contactUs)">
+        <ion-icon name="contacts" color="primary" item-left></ion-icon>
+        <span ion-text color="primary">Contact Us</span>
+      </button>
+
+      <ion-footer>
+        <button ion-item menuClose (click)="openPage(settingsPage)">
+          <ion-icon name="settings" color="primary" item-left></ion-icon>
+          <span ion-text color="primary">Settings</span>
+        </button>
+
+        <button ion-item menuClose>
+          <ion-icon name="log-out" color="primary" item-left></ion-icon>
+          <span ion-text color="primary">Log Out</span>
+        </button>
+      </ion-footer>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content></ion-nav>
