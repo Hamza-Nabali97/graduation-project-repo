@@ -1,0 +1,9 @@
+{
+	"settings": {
+		"name": "name",
+		"mobile": "Mobile number",
+		"email": "Email",
+    "password": "Change password",
+    "language": "Language"
+	}
+}

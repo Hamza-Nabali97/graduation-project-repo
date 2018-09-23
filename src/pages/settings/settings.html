@@ -17,7 +17,7 @@
 
     <ion-item>
       <ion-icon class="icon-color" name="contact" item-start></ion-icon>
-      Name
+      {{ 'settings.name' | translate }}
       <ion-note item-end>
         Yazan
       </ion-note>
@@ -25,7 +25,7 @@
 
     <ion-item>
       <ion-icon class="icon-color" name="phone-portrait" item-start></ion-icon>
-      Mobile number
+      {{ 'settings.mobile' | translate }}
       <ion-note item-end>
         +972597385606
       </ion-note>
@@ -33,7 +33,7 @@
 
     <ion-item>
       <ion-icon class="icon-color" name="mail" item-start></ion-icon>
-      Email
+      {{ 'settings.email' | translate }}
       <ion-note item-end>
         yn.mr.ya@gmail.com
       </ion-note>
@@ -41,15 +41,7 @@
 
     <ion-item>
       <ion-icon class="icon-color" name="lock" item-start></ion-icon>
-      Change password
-    </ion-item>
-
-    <ion-item>
-      <ion-icon class="icon-color" name="person" item-start></ion-icon>
-      Gender
-      <ion-note item-end>
-        Male
-      </ion-note>
+      {{ 'settings.password' | translate }}
     </ion-item>
 
   </ion-list>
@@ -62,10 +54,14 @@
     </ion-list-header>
 
     <ion-item>
-      Language
+      <ion-label>{{ 'settings.language' | translate }}</ion-label>
+      <ion-select [(ngModel)]="language" (ionChange)="onChange()">
+        <ion-option value="ar">العربية</ion-option>
+        <ion-option value="en">English</ion-option>
+      </ion-select>
       <ion-icon class="icon-color" name='globe' item-start></ion-icon>
-      <ion-note item-end>English</ion-note>
     </ion-item>
+
 
   </ion-list>
 
