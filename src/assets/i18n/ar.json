@@ -1,9 +1,30 @@
 {
   "settings": {
+    "profile": "حساب",
+    "general": "عام",
+    "about": "عن البرنامج",
+    "version": "نسخة البرنامج 1.0",
+    "terms": "الأحكام والشروط",
+    "signout": "تسجيل الخروج",
     "name": "الاسم",
     "mobile": "رقم الهاتف",
     "email": "البريد الإلكتروني",
     "password": "كلمة السر",
     "language": "اللغة"
+  },
+  "menu": {
+    "reports": "التقارير",
+    "inbox": "البريد",
+    "route": "في طريقي",
+    "contactus": "تواصل معنا",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج"
+  },
+  "titles": {
+    "reports": "التقارير",
+    "inbox": "البريد",
+    "route": "في طريقي",
+    "contactus": "تواصل معنا",
+    "settings": "الإعدادات"
   }
 }

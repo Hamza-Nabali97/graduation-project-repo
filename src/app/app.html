@@ -1,4 +1,5 @@
-<ion-menu side="left" [content]="content">
+<ion-menu [attr.side]="this.platform.dir()==='ltr'?'left':'right'" [content]="content" type="overlay" >
+
   <ion-header>
     <ion-toolbar class="user-profile">
 
@@ -8,7 +9,7 @@
           <ion-col>
             <div>
               <img
-                src="https://scontent.fjrs1-1.fna.fbcdn.net/v/t1.0-9/42363854_1724974217610996_2437099335788265472_n.jpg?_nc_cat=102&oh=0d97551df07128a30db4205494602e6f&oe=5C178B08">
+                src="https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/40314904_1970126493049079_956113875332235264_n.jpg?_nc_cat=110&oh=b09e24f20ca8f763801ef778a92341fd&oe=5C60012D">
             </div>
           </ion-col>
         </ion-row>
@@ -31,30 +32,30 @@
 
       <button ion-item menuClose (click)="openPage(rootPage)">
         <ion-icon name="clipboard" color="primary" item-left></ion-icon>
-        <span ion-text color="primary">Reports</span>
+        <span ion-text color="primary"> {{ 'menu.reports' | translate }}</span>
       </button>
       <button ion-item menuClose (click)="openPage(inboxPage)">
         <ion-icon name="filing" color="primary" item-left></ion-icon>
-        <span ion-text color="primary">Inbox</span>
+        <span ion-text color="primary">{{ 'menu.inbox' | translate }}</span>
       </button>
       <button ion-item menuClose (click)="openPage(onMyRoutePage)">
         <ion-icon name="map" color="primary" item-left></ion-icon>
-        <span ion-text color="primary">On My Route</span>
+        <span ion-text color="primary">{{ 'menu.route' | translate }}</span>
       </button>
       <button ion-item menuClose (click)="openPage(contactUs)">
         <ion-icon name="contacts" color="primary" item-left></ion-icon>
-        <span ion-text color="primary">Contact Us</span>
+        <span ion-text color="primary">{{ 'menu.contactus' | translate }}</span>
       </button>
 
       <ion-footer>
         <button ion-item menuClose (click)="openPage(settingsPage)">
           <ion-icon name="settings" color="primary" item-left></ion-icon>
-          <span ion-text color="primary">Settings</span>
+          <span ion-text color="primary">{{ 'menu.settings' | translate }}</span>
         </button>
 
         <button ion-item menuClose>
           <ion-icon name="log-out" color="primary" item-left></ion-icon>
-          <span ion-text color="primary">Log Out</span>
+          <span ion-text color="primary">{{ 'menu.logout' | translate }}</span>
         </button>
       </ion-footer>
     </ion-list>

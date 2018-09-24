@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Settings</ion-title>
+    <ion-title>{{'titles.settings' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
   <ion-list no-border>
 
     <ion-list-header>
-      Profile
+      {{'settings.profile' | translate}}
     </ion-list-header>
 
     <ion-item>
@@ -27,7 +27,7 @@
       <ion-icon class="icon-color" name="phone-portrait" item-start></ion-icon>
       {{ 'settings.mobile' | translate }}
       <ion-note item-end>
-        +972597385606
+        0597385606
       </ion-note>
     </ion-item>
 
@@ -50,14 +50,14 @@
   <ion-list>
 
     <ion-list-header>
-      General
+      {{'settings.general' | translate}}
     </ion-list-header>
 
     <ion-item>
       <ion-label>{{ 'settings.language' | translate }}</ion-label>
-      <ion-select [(ngModel)]="language" (ionChange)="onChange()">
-        <ion-option value="ar">العربية</ion-option>
-        <ion-option value="en">English</ion-option>
+      <ion-select [(ngModel)]="language" (ionChange)="onChange()" dir="ltr">
+        <ion-option value="ar" [selected]="language == 'ar'">العربية</ion-option>
+        <ion-option value="en" [selected]="language == 'en'">English</ion-option>
       </ion-select>
       <ion-icon class="icon-color" name='globe' item-start></ion-icon>
     </ion-item>
@@ -69,19 +69,20 @@
   <ion-list>
 
     <ion-list-header>
-      About
+      {{'settings.about' | translate}}
     </ion-list-header>
 
     <ion-item>
-      <ion-note>App Version 1.0</ion-note>
+      <ion-note>{{'settings.version' | translate}}</ion-note>
     </ion-item>
 
     <ion-item>
-      Terms and conditions
+      {{'settings.terms' | translate}}
     </ion-item>
 
     <ion-item>
-      Sign out
+      <ion-icon name="log-out" color="primary" item-start></ion-icon>
+      {{'settings.signout' | translate}}
     </ion-item>
 
   </ion-list>

@@ -11,4 +11,17 @@
   }
 }
 
+html[dir="rtl"] .alert-tappable {
+  text-align: right;
+}
+
+html[dir="rtl"] .alert-md .alert-radio-icon {
+  left: 0px;
+  right: 13px;
+}
+
+
+
+
+
 
