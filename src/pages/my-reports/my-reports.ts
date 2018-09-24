@@ -22,4 +22,9 @@ export class MyReportsPage {
     console.log('ionViewDidLoad MyReportsPage');
   }
 
+
+  visible = false;
+  toggle() {
+    this.visible = !this.visible;
+  }
 }

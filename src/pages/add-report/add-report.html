@@ -7,12 +7,50 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>add-report</ion-title>
+    <ion-title>Add Report</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list>
 
+    <ion-item>
+      <ion-label>Anonymous</ion-label>
+      <ion-toggle end color=“primary” checked=“true” style=“float:right”></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-textarea placeholder="Description..."></ion-textarea>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button icon-start full color="light">
+          <ion-icon name="images"></ion-icon>
+          Upload photo
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button icon-start full color="light">
+          <ion-icon name="camera"></ion-icon>
+          Take a photo
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start full color="blue">
+          <ion-icon name="pin"></ion-icon>
+          Location photo
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <button ion-button full color="primary"> Report</button>
 </ion-content>

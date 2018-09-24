@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the ReportPage page.
@@ -15,11 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ReportPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController
+) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ReportPage');
   }
 
-}
+
+  ;
+  }
+
