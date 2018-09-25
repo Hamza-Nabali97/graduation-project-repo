@@ -20,6 +20,10 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
+        <config-file parent="/resources" target="./res/values/strings.xml">
+            <string name="fb_app_id">422486318278625</string>
+            <string name="fb_app_name">LoginAuthForGradProject</string>
+        </config-file>
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -82,4 +86,14 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.3.2">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.775594715599-mqq01fjkntcg5gjlnm7vdrue752svaek" />
+        <variable name="PLAY_SERVICES_VERSION" value="11.8.0" />
+    </plugin>
+    <plugin name="cordova-plugin-facebook4" spec="^1.10.1">
+        <variable name="APP_ID" value="422486318278625" />
+        <variable name="APP_NAME" value="LoginAuthForGradProject" />
+    </plugin>
+    <plugin name="cordova-plugin-compat" spec="^1.2.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>

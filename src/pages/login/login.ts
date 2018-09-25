@@ -4,6 +4,8 @@ import {HomePage} from "../home/home";
 import {SignupPage} from "../signup/signup";
 import {User} from "../../models/User";
 import {AngularFireAuth} from 'angularfire2/auth';
+import { GooglePlus } from "@ionic-native/google-plus";
+import { Facebook } from "@ionic-native/facebook";
 import firebase from 'firebase';
 
 
@@ -23,7 +25,9 @@ export class LoginPage {
   passwordIcon: string = 'eye-off';
   user = {} as User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public angularFireAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public angularFireAuth: AngularFireAuth, public googlePlus: GooglePlus,
+              public facebook: Facebook) {
 
   }
 
@@ -51,25 +55,48 @@ export class LoginPage {
   }
 
   loginWithGoogle(): void {
-    let googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    this.angularFireAuth.auth.signInWithPopup(googleAuthProvider)
-      .then(authenticationResult => {
-        console.log(authenticationResult);
-        this.navCtrl.setRoot(HomePage);
-      }).catch(error => {
-      console.error(error);
+    // let googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+    // this.angularFireAuth.auth.signInWithPopup(googleAuthProvider)
+    //   .then(authenticationResult => {
+    //     console.log(authenticationResult);
+    //     this.navCtrl.setRoot(HomePage);
+    //   }).catch(error => {
+    //   console.error(error);
+    // });
+    this.googlePlus.login({
+      'webClientId': '775594715599-niumrsi0kvobse5qcjbtac84j4vssplf.apps.googleusercontent.com',
+      'offline': true,
+      'scopes': 'email profile'
+    }).then(googleConnectSuccess => {
+      let credential = firebase.auth.GoogleAuthProvider.credential(googleConnectSuccess.idToken);
+      this.angularFireAuth.auth.signInWithCredential(credential).then(googleLoginSuccess => {
+        alert(JSON.stringify(googleLoginSuccess));
+      }).catch(googleLoginError => {
+        alert('Login Failure/Error');
+      })
+    }).catch(googleConnectFailure => {
+      alert('Google Connect Failure');
     });
   }
 
   loginWithFacebook(): void {
-    let facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-    this.angularFireAuth.auth.signInWithPopup(facebookAuthProvider)
-      .then(authenticationResult => {
-        console.log(authenticationResult);
-        this.navCtrl.setRoot(HomePage);
-      }).catch(error => {
-      console.error(error);
+    this.facebook.login(['email', 'public_profile']).then(fbAuthResponse => {
+      let credential = firebase.auth.FacebookAuthProvider.credential(fbAuthResponse.authResponse.accessToken);
+      this.angularFireAuth.auth.signInWithCredential(credential).then(info => {
+          alert(JSON.stringify(info));
+        }
+      ).catch(authError => {
+        alert(JSON.stringify(authError));
+      })
     });
+    // let facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+    // this.angularFireAuth.auth.signInWithPopup(facebookAuthProvider)
+    //   .then(authenticationResult => {
+    //     console.log(authenticationResult);
+    //     this.navCtrl.setRoot(HomePage);
+    //   }).catch(error => {
+    //   console.error(error);
+    // });
   }
 
   loginAsGuest(): void {
