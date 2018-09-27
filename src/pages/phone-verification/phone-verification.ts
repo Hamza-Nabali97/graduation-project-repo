@@ -17,7 +17,7 @@ import {User} from "../../models/User";
 })
 export class PhoneVerificationPage {
   //Fetch Data Passed from Signup Page
-  fullName: string;
+  fullName: string = "Hamza Hejja";
   userinfo = {} as User;
   windowRef : any;
   verificationCode: string;
@@ -27,8 +27,10 @@ export class PhoneVerificationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth) {
-    this.fullName = navParams.get('firstAndLastName');
-    this.userinfo = navParams.get('userinfo');
+    // this.fullName = navParams.get('firstAndLastName');
+    // this.userinfo = navParams.get('userinfo');
+    this.userinfo.emailAddress = "hamzahejja@hotmail.com";
+    this.userinfo.password ="123456";
   }
 
   ionViewDidLoad() {

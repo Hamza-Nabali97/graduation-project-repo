@@ -4,18 +4,38 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content [hidden]="user">
-  <ion-label>Phone SMS Authentication:</ion-label>
-  <ion-label>Hello {{fullName}}</ion-label>
-  <ion-label>Email: {{userinfo.emailAddress}}</ion-label>
-  <div id="recaptcha-container"></div>
+<ion-content [hidden]="user" text-center padding style="background-color: beige">
+  <p style="font-family: 'Baskerville Old Face';font-size: 14px; font-weight: bold;" text-left>
+    Please enter your phone number and complete the captcha below to receive a 6-digit code via SMS. This process is
+    to verify your identity and ownership of the account.
+  </p>
+  <ion-label style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">Enter Your Phone Number</ion-label>
+  <ion-item style="height: 10px;background-color: beige">
+    <ion-icon name="phone-portrait" item-left></ion-icon>
+    <ion-item item-end style="background-color: beige">
+      <ion-label inline>+970</ion-label>
+      <ion-input ></ion-input>
+    </ion-item>
+  </ion-item>
+  <!--<ion-label>Hello {{fullName}}</ion-label>-->
+  <!--<ion-label>Email: {{userinfo.emailAddress}}</ion-label>-->
+  <div id="recaptcha-container" margin-top></div>
 
-  <button ion-button block color="danger" (click)="sendSMSVerificationToPhone()">SMS Text Login Code</button>
+  <button ion-button icon-left block color="danger" (click)="sendSMSVerificationToPhone()">
+    <ion-icon name="mail"></ion-icon>
+    Send Code
+  </button>
 
-  <ion-content *ngIf="confirmationResult">
-    <hr>
-    <label>Enter your Verification Code Here</label><br>
-    <input type="text" placeholder="Code Here" [(ngModel)]="verificationCode">
+      <ion-label style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">Enter 6-Digit Verification Code:</ion-label><br>
+      <ion-item style="height: 10px;background-color: beige">
+        <ion-icon name="phone-portrait" item-left></ion-icon>
+        <ion-item item-end style="background-color: beige">
+          <ion-label inline>+970</ion-label>
+          <ion-input ></ion-input>
+        </ion-item>
+      </ion-item>
 
-    <button ion-button block color="secondary" (click)="verifySMSCode()">Verify</button>
-  </ion-content>
+    <button ion-button block icon-start color="secondary" (click)="verifySMSCode()">
+      <ion-icon name="checkmark-circle"></ion-icon>
+      Verify
+    </button>
