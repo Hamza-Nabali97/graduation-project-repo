@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, AlertController, NavParams} from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {SignupPage} from "../signup/signup";
 import {User} from "../../models/User";
@@ -25,7 +25,7 @@ export class LoginPage {
   passwordIcon: string = 'eye-off';
   user = {} as User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth, public googlePlus: GooglePlus,
               public facebook: Facebook) {
 
@@ -129,6 +129,21 @@ export class LoginPage {
       }
     });
   }
+
+  sendResetPasswordEmail(emailAddress: any){
+    this.angularFireAuth.auth.sendPasswordResetEmail(emailAddress).then(emailSendSuccess => {
+      let emailSentAlert = this.alertCtrl.create({
+        title: 'Email Sent!',
+        subTitle: `Please Follow Steps Sent to, ${emailAddress}` + `to Reset Your Password`,
+        buttons:['OK']
+      });
+      emailSentAlert.present();
+    }).catch(emailSendError => {
+      alert('ERROR: INVALID EMAIL ADDRESS');
+    })
+  }
+
+
 
 
 

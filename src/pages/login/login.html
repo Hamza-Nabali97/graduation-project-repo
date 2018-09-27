@@ -23,7 +23,7 @@
   </ion-list>
 
   <ion-item no-lines no-padding no-margin style="background-color: beige">
-    <a item-right style="font-family: 'Montserrat', sans-serif; font-weight: bold; font-size: 18px;" >Forgot Password?</a>
+    <a item-right style="font-family: 'Montserrat', sans-serif; font-weight: bold; font-size: 18px;"(click)="sendResetPasswordEmail(user.emailAddress)" >Forgot Password?</a>
   </ion-item>
 
   <button ion-button block icon-start style="background-color: limegreen;font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginWithEmailAndPassword(user)">
