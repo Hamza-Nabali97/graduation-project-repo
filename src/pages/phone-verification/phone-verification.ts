@@ -15,6 +15,9 @@ import firebase from 'firebase';
   templateUrl: 'phone-verification.html',
 })
 export class PhoneVerificationPage {
+  //Fetch Data Passed from Signup Page
+  fullName: string;
+  userEmail: string;
   windowRef : any;
   verificationCode: string;
   recaptchVerifier: firebase.auth.RecaptchaVerifier;
@@ -23,6 +26,8 @@ export class PhoneVerificationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth) {
+    this.fullName = navParams.get('firstAndLastName');
+    this.userEmail = navParams.get('userEmail');
   }
 
   ionViewDidLoad() {

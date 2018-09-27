@@ -4,6 +4,7 @@ import { AngularFireAuth} from 'angularfire2/auth';
 import {User} from "../../models/User";
 import {LoginPage} from "../login/login";
 import {HomePage} from "../home/home";
+import {PhoneVerificationPage} from "../phone-verification/phone-verification";
 
 /**
  * Generated class for the SignupPage page.
@@ -23,6 +24,7 @@ export class SignupPage {
   confirmationPasswordIcon: string = 'eye-off';
   signupButtonDisabledFlag: boolean = true;
   agreeCheckboxFlag: boolean;
+  fullName: string;
   user = {} as User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -78,7 +80,10 @@ export class SignupPage {
         {
           text:'I Agree',
           handler: () => {
-            this.registerNewUser(this.user);
+            this.navCtrl.push(PhoneVerificationPage, {
+              firstAndLastName: this.fullName,
+              userEmail: this.user.emailAddress
+            });
           }
         }
       ]

@@ -15,7 +15,7 @@ import {PhoneVerificationPage} from "../pages/phone-verification/phone-verificat
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = PhoneVerificationPage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
