@@ -70,7 +70,14 @@ export class LoginPage {
     }).then(googleConnectSuccess => {
       let credential = firebase.auth.GoogleAuthProvider.credential(googleConnectSuccess.idToken);
       this.angularFireAuth.auth.signInWithCredential(credential).then(googleLoginSuccess => {
-        alert(JSON.stringify(googleLoginSuccess));
+        alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
+        this.angularFireAuth.authState.subscribe(data => {
+          alert(data.email);
+          alert(data.uid);
+          alert(data.displayName);
+        })
+
+        this.navCtrl.setRoot(HomePage);
       }).catch(googleLoginError => {
         alert('Login Failure/Error');
       })
@@ -80,15 +87,24 @@ export class LoginPage {
   }
 
   loginWithFacebook(): void {
+    this.facebook.logout();
     this.facebook.login(['email', 'public_profile']).then(fbAuthResponse => {
       let credential = firebase.auth.FacebookAuthProvider.credential(fbAuthResponse.authResponse.accessToken);
       this.angularFireAuth.auth.signInWithCredential(credential).then(info => {
           alert(JSON.stringify(info));
+          this.angularFireAuth.authState.subscribe(data => {
+          alert(data.email);
+          alert(data.uid);
+          alert(data.displayName);
+          })
+          alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
+          this.navCtrl.setRoot(HomePage);
         }
       ).catch(authError => {
         alert(JSON.stringify(authError));
       })
     });
+
     // let facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
     // this.angularFireAuth.auth.signInWithPopup(facebookAuthProvider)
     //   .then(authenticationResult => {
@@ -113,6 +129,8 @@ export class LoginPage {
       }
     });
   }
+
+
 
 
 }
