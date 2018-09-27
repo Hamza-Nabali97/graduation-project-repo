@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bolder;">SMS Verification</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [hidden]="user">
+  <ion-label>Phone SMS Authentication:</ion-label>
+  <div id="recaptcha-container"></div>
+
+  <button ion-button block color="danger" (click)="sendSMSVerificationToPhone()">SMS Text Login Code</button>
+
+  <ion-content *ngIf="confirmationResult">
+    <hr>
+    <label>Enter your Verification Code Here</label><br>
+    <input type="text" placeholder="Code Here" [(ngModel)]="verificationCode">
+
+    <button ion-button block color="secondary" (click)="verifySMSCode()">Verify</button>
+  </ion-content>

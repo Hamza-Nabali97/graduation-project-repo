@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage} from "../pages/signup/signup";
+import { PhoneVerificationPage } from "../pages/phone-verification/phone-verification";
+
 
 import firebase from 'firebase';
 import {FIREBASE_CONFIG} from "./app.firebase.config";
@@ -26,7 +28,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     HomePage,
     ListPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    PhoneVerificationPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     HomePage,
     ListPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    PhoneVerificationPage
   ],
   providers: [
     StatusBar,
