@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from 'firebase';
+import {User} from "../../models/User";
 
 /**
  * Generated class for the PhoneVerificationPage page.
@@ -17,7 +18,7 @@ import firebase from 'firebase';
 export class PhoneVerificationPage {
   //Fetch Data Passed from Signup Page
   fullName: string;
-  userEmail: string;
+  userinfo = {} as User;
   windowRef : any;
   verificationCode: string;
   recaptchVerifier: firebase.auth.RecaptchaVerifier;
@@ -27,7 +28,7 @@ export class PhoneVerificationPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth) {
     this.fullName = navParams.get('firstAndLastName');
-    this.userEmail = navParams.get('userEmail');
+    this.userinfo = navParams.get('userinfo');
   }
 
   ionViewDidLoad() {
@@ -55,8 +56,16 @@ export class PhoneVerificationPage {
   verifySMSCode(){
     this.confirmationResult.confirm(this.verificationCode)
       .then(phoneVerificationResult => {
-        alert('Verified');
-        this.user = phoneVerificationResult.user;
+        //Register New User
+        this.angularFireAuth.auth.createUserWithEmailAndPassword(this.userinfo.emailAddress, this.userinfo.password)
+          .then(userRegistrationSuccess => {
+            if(userRegistrationSuccess.additionalUserInfo.isNewUser === true){
+              let newUser = userRegistrationSuccess.user;
+              alert(JSON.stringify(newUser));
+            }
+          }).catch(userRegistrationError => {
+            alert(JSON.stringify(userRegistrationError));
+        })
         console.log(this.user);
       }).catch(incorrectVerificationCodeError => {
       alert('Incorrect Verification Code');

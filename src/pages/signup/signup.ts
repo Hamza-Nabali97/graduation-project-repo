@@ -82,7 +82,7 @@ export class SignupPage {
           handler: () => {
             this.navCtrl.push(PhoneVerificationPage, {
               firstAndLastName: this.fullName,
-              userEmail: this.user.emailAddress
+              userinfo: this.user
             });
           }
         }

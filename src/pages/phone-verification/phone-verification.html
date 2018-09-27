@@ -7,7 +7,7 @@
 <ion-content [hidden]="user">
   <ion-label>Phone SMS Authentication:</ion-label>
   <ion-label>Hello {{fullName}}</ion-label>
-  <ion-label>Email: {{userEmail}}</ion-label>
+  <ion-label>Email: {{userinfo.emailAddress}}</ion-label>
   <div id="recaptcha-container"></div>
 
   <button ion-button block color="danger" (click)="sendSMSVerificationToPhone()">SMS Text Login Code</button>
