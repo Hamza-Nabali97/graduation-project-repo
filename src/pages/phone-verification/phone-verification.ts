@@ -17,8 +17,9 @@ import {User} from "../../models/User";
 })
 export class PhoneVerificationPage {
   //Fetch Data Passed from Signup Page
-  fullName: string = "Hamza Hejja";
+  fullName: string;
   userinfo = {} as User;
+  phoneNumber: any;
   windowRef : any;
   verificationCode: string;
   recaptchVerifier: firebase.auth.RecaptchaVerifier;
@@ -27,10 +28,8 @@ export class PhoneVerificationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth) {
-    // this.fullName = navParams.get('firstAndLastName');
-    // this.userinfo = navParams.get('userinfo');
-    this.userinfo.emailAddress = "hamzahejja@hotmail.com";
-    this.userinfo.password ="123456";
+    this.fullName = navParams.get('firstAndLastName');
+    this.userinfo = navParams.get('userinfo');
   }
 
   ionViewDidLoad() {
@@ -45,9 +44,9 @@ export class PhoneVerificationPage {
 
   sendSMSVerificationToPhone(){
     let appRecaptchaVerifier = this.recaptchVerifier;
-    let phoneNumber = "+970569490340";
-    console.log(phoneNumber);
-    this.angularFireAuth.auth.signInWithPhoneNumber(phoneNumber, appRecaptchaVerifier)
+    this.phoneNumber = "+970" + this.phoneNumber;
+    alert(this.phoneNumber);
+    this.angularFireAuth.auth.signInWithPhoneNumber(this.phoneNumber, appRecaptchaVerifier)
       .then(phoneSigninResult => {
         this.confirmationResult = phoneSigninResult;
       }).catch(phoneSigninError => {

@@ -14,7 +14,7 @@
     <ion-icon name="phone-portrait" item-left></ion-icon>
     <ion-item item-end style="background-color: beige">
       <ion-label inline>+970</ion-label>
-      <ion-input ></ion-input>
+      <ion-input [(ngModel)]="phoneNumber"></ion-input>
     </ion-item>
   </ion-item>
   <!--<ion-label>Hello {{fullName}}</ion-label>-->
@@ -26,16 +26,16 @@
     Send Code
   </button>
 
-      <ion-label margin-top style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">Enter 6-Digit Verification Code:</ion-label><br>
-      <ion-item style="height: 10px;background-color: beige">
+      <ion-label [hidden]="!confirmationResult" margin-top style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">Enter 6-Digit Verification Code:</ion-label><br>
+      <ion-item [hidden]="!confirmationResult"  style="height: 10px;background-color: beige">
         <ion-icon name="unlock" item-left></ion-icon>
         <ion-item item-end style="background-color: beige">
           <ion-label inline>Code Here</ion-label>
-          <ion-input ></ion-input>
+          <ion-input [(ngModel)]="verificationCode"></ion-input>
         </ion-item>
       </ion-item>
 
-    <button ion-button block icon-start color="secondary" (click)="verifySMSCode()">
+    <button [hidden]="!confirmationResult" ion-button block icon-start color="secondary" (click)="verifySMSCode()">
       <ion-icon name="checkmark-circle"></ion-icon>
       Verify
     </button>
