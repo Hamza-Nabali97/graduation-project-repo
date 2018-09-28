@@ -23,7 +23,6 @@ export class SignupPage {
   confirmationPasswordType: string = 'password';
   confirmationPasswordIcon: string = 'eye-off';
   signupButtonDisabledFlag: boolean = true;
-  agreeCheckboxFlag: boolean;
   fullName: string;
   user = {} as User;
 
@@ -46,17 +45,11 @@ export class SignupPage {
   }
 
 
-  agreeCheckboxChangedState(isChecked: boolean) {
-    this.signupButtonDisabledFlag = (isChecked === true) ? false : true;
+  agreeToggleChangedState() {
+    this.signupButtonDisabledFlag = !this.signupButtonDisabledFlag;
   }
 
    async registerNewUser(user: User){
-    /*try {
-      const result = await this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password);
-    }
-    catch (e) {
-      console.error(e);
-    }*/
     this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password)
       .then(registerResult => {
         console.log(registerResult);
