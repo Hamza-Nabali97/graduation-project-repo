@@ -10,7 +10,6 @@ import {InboxPage} from "../pages/inbox/inbox";
 import {LoginPage} from "../pages/login/login";
 import {MyReportsPage} from "../pages/my-reports/my-reports";
 import {OnMyRoutePage} from "../pages/on-my-route/on-my-route";
-import {RegisterPage} from "../pages/register/register";
 import {ReportPage} from "../pages/report/report";
 import {ReportsPage} from "../pages/reports/reports";
 import {SettingsPage} from "../pages/settings/settings";
