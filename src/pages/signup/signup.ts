@@ -3,7 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireAuth} from 'angularfire2/auth';
 import {User} from "../../models/user";
 import {LoginPage} from "../login/login";
-import {HomePage} from "../home/home";
+import {ReportsPage} from "../reports/reports";
 import {PhoneVerificationPage} from "../phone-verification/phone-verification";
 
 /**
@@ -53,7 +53,7 @@ export class SignupPage {
     this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password)
       .then(registerResult => {
         console.log(registerResult);
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(ReportsPage);
       }).catch(registerError => {
         console.error(registerError);
     })

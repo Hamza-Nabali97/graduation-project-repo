@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, AlertController, NavParams} from 'ionic-angular';
-import {HomePage} from "../home/home";
+import {ReportsPage} from "../reports/reports";
 import {SignupPage} from "../signup/signup";
 import {User} from "../../models/user";
 import {AngularFireAuth} from 'angularfire2/auth';
@@ -48,7 +48,7 @@ export class LoginPage {
     this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password)
       .then(authenticationResult => {
         console.log(authenticationResult);
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(ReportsPage);
       }).catch(error => {
       console.error(error);
     })
@@ -60,6 +60,7 @@ export class LoginPage {
       'offline': true,
       'scopes': 'email profile'
     }).then(googleConnectSuccess => {
+      alert('Logged In');
       let credential = firebase.auth.GoogleAuthProvider.credential(googleConnectSuccess.idToken);
       this.angularFireAuth.auth.signInWithCredential(credential).then(googleLoginSuccess => {
         alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
@@ -69,9 +70,10 @@ export class LoginPage {
           alert(data.displayName);
         })
 
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(ReportsPage);
       }).catch(googleLoginError => {
         alert('Login Failure/Error');
+        alert('FAILURE!');
       })
     }).catch(googleConnectFailure => {
       alert('Google Connect Failure');
@@ -90,7 +92,7 @@ export class LoginPage {
           alert(data.displayName);
           })
           alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(ReportsPage);
         }
       ).catch(authError => {
         alert(JSON.stringify(authError));
@@ -116,7 +118,7 @@ export class LoginPage {
     this.angularFireAuth.auth.onAuthStateChanged(authUser => {
       if(authUser){
         console.log(authUser);
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(ReportsPage);
       }
       else {
         console.log('Signed Out!');

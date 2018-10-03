@@ -11,15 +11,15 @@ import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
 
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import {LoginPage} from "../pages/login/login";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
 
-  rootPage: any = ReportsPage;
+  rootPage: any = LoginPage;
+  reportsPage: ReportsPage;
   inboxPage = InboxPage;
   onMyRoutePage = OnMyRoutePage;
   settingsPage = SettingsPage;
