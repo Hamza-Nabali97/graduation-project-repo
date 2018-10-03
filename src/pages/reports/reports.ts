@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ReportPage} from "../report/report";
+import {AddReportPage} from "../add-report/add-report";
 
 /**
  * Generated class for the ReportsPage page.
@@ -23,7 +25,20 @@ export class ReportsPage {
   }
 
   visible = false;
+
   toggle() {
     this.visible = !this.visible;
   }
+
+  onAddReport() {
+    const params = {mode: 'New'}
+    this.navCtrl.push(AddReportPage, params);
+  }
+
+  onShowReport() {
+    const params = {mode: 'Details'}
+    this.navCtrl.push(ReportPage, params);
+  }
+
+
 }

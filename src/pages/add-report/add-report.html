@@ -1,56 +1,69 @@
-<!--
-  Generated template for the AddReportPage page.!
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
+<ion-header padding-top>
   <ion-navbar>
-    <ion-title>Add Report</ion-title>
+    <ion-title>New Report</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
 
-    <ion-item>
-      <ion-label>Anonymous</ion-label>
-      <ion-toggle end color=“primary” checked=“true” style=“float:right”></ion-toggle>
-    </ion-item>
 
-    <ion-item>
-      <ion-label>Description</ion-label>
-      <ion-textarea placeholder="Description..."></ion-textarea>
-    </ion-item>
+  <!--
+    <form #f="ngForm" /*(ngSubmit)="onAddItem(f)"*/>
+  -->
+  <form>
 
-  </ion-list>
-
-  <ion-grid>
-    <ion-row>
-      <ion-col col-6>
-        <button ion-button icon-start full color="light">
-          <ion-icon name="images"></ion-icon>
-          Upload photo
+    <ion-list>
+      <ion-list-header>
+        {{ mode }} Report
+        <button type="submit" ion-button item-right clear small (click)="onSubmit()">
+          <ion-icon name="checkmark"></ion-icon>
         </button>
-      </ion-col>
-      <ion-col col-6>
-        <button ion-button icon-start full color="light">
-          <ion-icon name="camera"></ion-icon>
-          Take a photo
-        </button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-start full color="blue">
-          <ion-icon name="pin"></ion-icon>
-          Location photo
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <button ion-button full color="primary"> Report</button>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Anonymous</ion-label>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-textarea type="text"
+                      name="description"
+                      ngModel></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Image</ion-label>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <button ion-button icon-start full color="light">
+              <ion-icon name="images"></ion-icon>
+              Upload photo
+            </button>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button icon-start full color="light">
+              <ion-icon name="camera"></ion-icon>
+              Take a photo
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item>
+        <ion-label>Location</ion-label>
+      </ion-item>
+      <button ion-button icon-start full color="blue">
+        <ion-icon name="pin"></ion-icon>
+        Location photo
+      </button>
+      <div>
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </div>
+    </ion-list>
+  </form>
 </ion-content>
