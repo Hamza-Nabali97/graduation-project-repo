@@ -11,7 +11,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
 
 
-
+import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,6 +26,7 @@ export class MyApp {
   contactUs = ContactUsPage;
   @ViewChild('content') content: NavController;
 
+  pages: Array<{title: string, component: any}>;
 
   constructor(private languageService: LanguageService, private translate: TranslateService, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController) {
     this.initializeApp();
@@ -32,6 +34,8 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -55,6 +59,5 @@ export class MyApp {
     else
       this.platform.setDir('rtl', true);
   }
-
 
 }

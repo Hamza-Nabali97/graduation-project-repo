@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bolder;">SMS Verification</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [hidden]="user" text-center padding style="background-color: beige">
+  <p style="font-family: 'Baskerville Old Face';font-size: 14px; font-weight: bold;" text-left>
+    Please enter your phone number and complete the captcha below to receive a 6-digit code via SMS. This process is
+    to verify your identity and ownership of the account.
+  </p>
+  <ion-label style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">Enter Your Phone Number</ion-label>
+  <ion-item style="height: 10px;background-color: beige">
+    <ion-icon name="phone-portrait" item-left></ion-icon>
+    <ion-item item-end style="background-color: beige">
+      <ion-label inline>+970</ion-label>
+      <ion-input [(ngModel)]="phoneNumber"></ion-input>
+    </ion-item>
+  </ion-item>
+  <!--<ion-label>Hello {{fullName}}</ion-label>-->
+  <!--<ion-label>Email: {{userinfo.emailAddress}}</ion-label>-->
+  <div id="recaptcha-container" margin-top></div>
+
+  <button ion-button icon-left block color="danger" (click)="sendSMSVerificationToPhone()">
+    <ion-icon name="mail"></ion-icon>
+    Send Code
+  </button>
+
+      <ion-label [hidden]="!confirmationResult" margin-top style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">Enter 6-Digit Verification Code:</ion-label><br>
+      <ion-item [hidden]="!confirmationResult"  style="height: 10px;background-color: beige">
+        <ion-icon name="unlock" item-left></ion-icon>
+        <ion-item item-end style="background-color: beige">
+          <ion-label inline>Code Here</ion-label>
+          <ion-input [(ngModel)]="verificationCode"></ion-input>
+        </ion-item>
+      </ion-item>
+
+    <button [hidden]="!confirmationResult" ion-button block icon-start color="secondary" (click)="verifySMSCode()">
+      <ion-icon name="checkmark-circle"></ion-icon>
+      Verify
+    </button>
