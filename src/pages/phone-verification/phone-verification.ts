@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from 'firebase';
 import {User} from "../../models/user";
+import {ReportsPage} from "../reports/reports";
 
 /**
  * Generated class for the PhoneVerificationPage page.
@@ -63,13 +64,14 @@ export class PhoneVerificationPage {
             if(userRegistrationSuccess.additionalUserInfo.isNewUser === true){
               let newUser = userRegistrationSuccess.user;
               alert(JSON.stringify(newUser));
+              this.navCtrl.setRoot(ReportsPage);
             }
           }).catch(userRegistrationError => {
             alert(JSON.stringify(userRegistrationError));
         })
         console.log(this.user);
       }).catch(incorrectVerificationCodeError => {
-      alert('Incorrect Verification Code');
+      alert(JSON.stringify(incorrectVerificationCodeError));
     })
   }
 
