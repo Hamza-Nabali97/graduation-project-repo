@@ -7,12 +7,11 @@
 
 <ion-content padding style="background-color: beige" text-center>
   <img src="../../assets/imgs/signup-icon3.png" width="150" height="150">
-  <ion-list style="box-shadow: 4px 10px 14px -1px rgba(0,0,0,0.27); height: auto;  opacity: 0.90; border: 2px solid transparent; margin-top: 20px;" text-left>
-
-    <ion-item>
-      <ion-icon item-left name="contact"></ion-icon>
-      <ion-input type="text" placeholder="Full Name" required [(ngModel)]="fullName"></ion-input>
-    </ion-item>
+  <ion-item-group style="box-shadow: 4px 10px 14px -1px rgba(0,0,0,0.27); height: auto;  opacity: 0.90; border: 2px solid transparent; margin-top: 20px;" text-left>
+      <ion-item>
+        <ion-icon item-left name="contact"></ion-icon>
+        <ion-input type="text" placeholder="Full Name" required [(ngModel)]="fullName"></ion-input>
+      </ion-item>
 
     <ion-item>
       <ion-icon item-left name="at"></ion-icon>
@@ -26,7 +25,6 @@
         <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
       </button>
     </ion-item>
-
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
       <ion-input [type]="confirmationPasswordType" placeholder="Confirm Password" clearOnEdit="false" required></ion-input>
@@ -34,8 +32,12 @@
         <ion-icon [name]="confirmationPasswordIcon" style="color: black;"></ion-icon>
       </button>
     </ion-item>
+  </ion-item-group>
 
-  </ion-list>
+  <button ion-button block icon-start color="danger" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="getLocationFromUser()">
+    <ion-icon name="locate"></ion-icon>
+    LOCATION
+  </button>
 
   <ion-item style="background-color: beige" text-left>
     <ion-toggle checked="false" (ionChange)="agreeToggleChangedState()"></ion-toggle>

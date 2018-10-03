@@ -7,7 +7,7 @@
 
 <ion-content padding text-center style="background-color: beige">
   <img src="../../assets/imgs/collaboration.png" width="150" height="150">
-  <ion-list style="box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
+  <ion-item-group style="box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
     <ion-item>
       <ion-icon item-left name="at"></ion-icon>
       <ion-input type="email" placeholder="Email" [(ngModel)]="user.emailAddress" email required></ion-input>
@@ -20,7 +20,7 @@
         <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
       </button>
     </ion-item>
-  </ion-list>
+  </ion-item-group>
 
   <ion-item no-lines no-padding no-margin style="background-color: beige">
     <a item-right style="font-family: 'Calibri Light', sans-serif; font-weight: bold; font-size: 18px;"(click)="sendResetPasswordEmail(user.emailAddress)" >Forgot Password?</a>
@@ -44,16 +44,16 @@
       <ion-icon name="logo-facebook"></ion-icon>
       Login With Facebook
     </button>
+
     <button block ion-button icon-start color="google" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginWithGoogle()">
       <ion-icon name="logo-google"></ion-icon>
       Login With Google
     </button>
 
-
-  <button medium ion-button block icon-start style="background-color: darkslategrey;font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginAsGuest()">
-    <ion-icon name="person"></ion-icon>
-    Login as Guest
-  </button>
+    <button ion-button block icon-start color="guest" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginAsGuest()">
+      <ion-icon name="person"></ion-icon>
+      Login as Guest
+    </button>
 
 
   <p text-center style="
