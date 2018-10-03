@@ -49,7 +49,6 @@ const config = {
     LoginPage,
     MyReportsPage,
     OnMyRoutePage,
-    RegisterPage,
     ReportPage,
     ReportsPage,
     SettingsPage
@@ -84,7 +83,6 @@ const config = {
     LoginPage,
     MyReportsPage,
     OnMyRoutePage,
-    RegisterPage,
     ReportPage,
     ReportsPage,
     SettingsPage
