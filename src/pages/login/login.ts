@@ -55,14 +55,6 @@ export class LoginPage {
   }
 
   loginWithGoogle(): void {
-    // let googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    // this.angularFireAuth.auth.signInWithPopup(googleAuthProvider)
-    //   .then(authenticationResult => {
-    //     console.log(authenticationResult);
-    //     this.navCtrl.setRoot(HomePage);
-    //   }).catch(error => {
-    //   console.error(error);
-    // });
     this.googlePlus.login({
       'webClientId': '775594715599-niumrsi0kvobse5qcjbtac84j4vssplf.apps.googleusercontent.com',
       'offline': true,
@@ -103,6 +95,8 @@ export class LoginPage {
       ).catch(authError => {
         alert(JSON.stringify(authError));
       })
+    }).catch(fbAuthNoResponse => {
+      alert(JSON.stringify(fbAuthNoResponse));
     });
 
     // let facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
