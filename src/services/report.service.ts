@@ -12,6 +12,7 @@ export class ReportService {
   }
 
   getReports() {
+
     return this.report.slice();
   }
 
