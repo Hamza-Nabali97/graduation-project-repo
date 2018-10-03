@@ -1,19 +1,138 @@
-<ion-menu [content]="content">
+<ion-menu *ngIf="this.platform.dir()==='ltr'" side=left [content]="content" type="push">
+
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar class="user-profile">
+
+      <ion-grid>
+
+        <ion-row text-center>
+          <ion-col>
+            <div>
+              <img
+                src="https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/40314904_1970126493049079_956113875332235264_n.jpg?_nc_cat=110&oh=b09e24f20ca8f763801ef778a92341fd&oe=5C60012D">
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <h2 ion-text text-center color="light">
+              Yazan Yahya
+            </h2>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content color="primary">
+
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+
+      <button ion-item menuClose (click)="openPage(rootPage)">
+        <ion-icon name="clipboard" color="primary" item-left></ion-icon>
+        <span ion-text color="primary"> {{ 'menu.reports' | translate }}</span>
+        <ion-badge item-end color="secondary">10</ion-badge>
       </button>
+      <button ion-item menuClose (click)="openPage(inboxPage)">
+        <ion-icon name="filing" color="primary" item-left></ion-icon>
+        <ion-badge item-end color="danger">3</ion-badge>
+        <span ion-text color="primary">{{ 'menu.inbox' | translate }}</span>
+
+      </button>
+      <button ion-item menuClose (click)="openPage(onMyRoutePage)">
+        <ion-icon name="map" color="primary" item-left></ion-icon>
+        <span ion-text color="primary">{{ 'menu.route' | translate }}</span>
+      </button>
+      <button ion-item menuClose (click)="openPage(contactUs)">
+        <ion-icon name="contacts" color="primary" item-left></ion-icon>
+        <span ion-text color="primary">{{ 'menu.contactus' | translate }}</span>
+      </button>
+
+      <ion-footer>
+        <button ion-item menuClose (click)="openPage(settingsPage)">
+          <ion-icon name="settings" color="primary" item-left></ion-icon>
+          <span ion-text color="primary">{{ 'menu.settings' | translate }}</span>
+        </button>
+
+        <button ion-item menuClose>
+          <ion-icon name="log-out" color="primary" item-left></ion-icon>
+          <span ion-text color="primary">{{ 'menu.logout' | translate }}</span>
+        </button>
+      </ion-footer>
     </ion-list>
   </ion-content>
 
 </ion-menu>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-menu *ngIf="this.platform.dir()==='rtl'" side=right [content]="content" type="push">
+
+  <ion-header>
+    <ion-toolbar class="user-profile">
+
+      <ion-grid>
+
+        <ion-row text-center>
+          <ion-col>
+            <div>
+              <img
+                src="https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/40314904_1970126493049079_956113875332235264_n.jpg?_nc_cat=110&oh=b09e24f20ca8f763801ef778a92341fd&oe=5C60012D">
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <h2 ion-text text-center color="light">
+              Yazan Yahya
+            </h2>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content color="primary">
+
+    <ion-list>
+
+      <button ion-item menuClose (click)="openPage(rootPage)">
+        <ion-icon name="clipboard" color="primary" item-left></ion-icon>
+        <span ion-text color="primary"> {{ 'menu.reports' | translate }}</span>
+        <ion-badge item-end color="secondary">10</ion-badge>
+      </button>
+      <button ion-item menuClose (click)="openPage(inboxPage)">
+        <ion-icon name="filing" color="primary" item-left></ion-icon>
+        <ion-badge item-end color="danger">3</ion-badge>
+        <span ion-text color="primary">{{ 'menu.inbox' | translate }}</span>
+
+      </button>
+      <button ion-item menuClose (click)="openPage(onMyRoutePage)">
+        <ion-icon name="map" color="primary" item-left></ion-icon>
+        <span ion-text color="primary">{{ 'menu.route' | translate }}</span>
+      </button>
+      <button ion-item menuClose (click)="openPage(contactUs)">
+        <ion-icon name="contacts" color="primary" item-left></ion-icon>
+        <span ion-text color="primary">{{ 'menu.contactus' | translate }}</span>
+      </button>
+
+      <ion-footer>
+        <button ion-item menuClose (click)="openPage(settingsPage)">
+          <ion-icon name="settings" color="primary" item-left></ion-icon>
+          <span ion-text color="primary">{{ 'menu.settings' | translate }}</span>
+        </button>
+
+        <button ion-item menuClose>
+          <ion-icon name="log-out" color="primary" item-left></ion-icon>
+          <span ion-text color="primary">{{ 'menu.logout' | translate }}</span>
+        </button>
+      </ion-footer>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+
+<ion-nav [root]="rootPage" #content></ion-nav>

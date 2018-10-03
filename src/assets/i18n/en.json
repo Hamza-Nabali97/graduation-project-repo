@@ -1,0 +1,36 @@
+{
+  "settings": {
+    "profile": "Profile",
+    "general": "General",
+    "about": "About",
+    "version": "App Version 1.0",
+    "terms": "Terms and conditions",
+    "signout": "Sign out",
+    "name": "name",
+    "mobile": "Mobile number",
+    "email": "Email",
+    "password": "Change password",
+    "language": "Language"
+  },
+  "menu": {
+    "reports": "Reports",
+    "inbox": "Inbox",
+    "route": "On My Route",
+    "contactus": "Contact Us",
+    "settings": "Settings",
+    "logout": "Log Out"
+  },
+  "titles": {
+    "reports": "Reports",
+    "inbox": "Inbox",
+    "route": "On My Route",
+    "contactus": "Contact Us",
+    "settings": "Settings"
+  },
+
+  "route": {
+    "select_your_direction": "Select your direction",
+    "locate_me": "Locate me",
+    "get_direction": "Get Direction"
+  }
+}

@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'titles.settings' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list no-border>
+
+    <ion-list-header>
+      {{'settings.profile' | translate}}
+    </ion-list-header>
+
+    <ion-item>
+      <ion-icon class="icon-color" name="contact" item-start></ion-icon>
+      {{ 'settings.name' | translate }}
+      <ion-note item-end>
+        Yazan
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="icon-color" name="phone-portrait" item-start></ion-icon>
+      {{ 'settings.mobile' | translate }}
+      <ion-note item-end>
+        0597385606
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="icon-color" name="mail" item-start></ion-icon>
+      {{ 'settings.email' | translate }}
+      <ion-note item-end>
+        yn.mr.ya@gmail.com
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="icon-color" name="lock" item-start></ion-icon>
+      {{ 'settings.password' | translate }}
+    </ion-item>
+
+  </ion-list>
+
+
+  <ion-list>
+
+    <ion-list-header>
+      {{'settings.general' | translate}}
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>{{ 'settings.language' | translate }}</ion-label>
+      <ion-select [(ngModel)]="language" (ionChange)="onChange()">
+        <ion-option value="ar" [selected]="language == 'ar'">العربية</ion-option>
+        <ion-option value="en" [selected]="language == 'en'">English</ion-option>
+      </ion-select>
+      <ion-icon class="icon-color" name='globe' item-start></ion-icon>
+    </ion-item>
+
+
+  </ion-list>
+
+
+  <ion-list>
+
+    <ion-list-header>
+      {{'settings.about' | translate}}
+    </ion-list-header>
+
+    <ion-item>
+      <ion-note>{{'settings.version' | translate}}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      {{'settings.terms' | translate}}
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="log-out" color="primary" item-start></ion-icon>
+      {{'settings.signout' | translate}}
+    </ion-item>
+
+  </ion-list>
+
+
+</ion-content>
