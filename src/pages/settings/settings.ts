@@ -14,8 +14,9 @@ export class SettingsPage {
   language: any;
 
   constructor(private platform: Platform, private languageService: LanguageService, private translate: TranslateService, public navCtrl: NavController, public navParams: NavParams) {
-    this.translate.use(this.languageService.getLanguage());
     this.language = this.languageService.getLanguage();
+    this.translate.use(this.language);
+
   }
 
 

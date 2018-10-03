@@ -26,5 +26,11 @@
     "route": "في طريقي",
     "contactus": "تواصل معنا",
     "settings": "الإعدادات"
+  },
+
+  "route": {
+    "select_your_direction": "حدد مسارك ",
+    "locate_me": "تحديد مكاني",
+    "get_direction": "تحدد مساري"
   }
 }

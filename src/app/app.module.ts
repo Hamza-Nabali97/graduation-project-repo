@@ -20,6 +20,26 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {LanguageService} from "../services/language";
 
+import {AgmCoreModule} from '@agm/core';
+import {AgmDirectionModule} from 'agm-direction'   // agm-direction
+
+import {Geolocation} from '@ionic-native/geolocation';
+import {Facebook} from '@ionic-native/facebook';
+import {NativeStorage} from '@ionic-native/native-storage';
+
+import {AngularFireAuth} from "angularfire2/auth";
+import {AngularFireModule} from 'angularfire2';
+
+
+const config = {
+  apiKey: "AIzaSyClXaWwUKNned8zZZHHc5AL6pxT4FoC1IM",
+  authDomain: "test-4d5c9.firebaseapp.com",
+  databaseURL: "https://test-4d5c9.firebaseio.com",
+  projectId: "test-4d5c9",
+  storageBucket: "test-4d5c9.appspot.com",
+  messagingSenderId: "999965153007"
+};
+
 
 @NgModule({
   declarations: [
@@ -40,13 +60,19 @@ import {LanguageService} from "../services/language";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    AngularFireModule.initializeApp(config),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: (HttpLoaderFactory),
         deps: [HttpClient]
       }
-    })
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBHzZHoT7JnZJrJ7iUY2XDaZBYrDrEWXnY',
+      libraries: ['places','geometry']
+    }),
+    AgmDirectionModule     // agm-direction
 
   ],
 
@@ -67,7 +93,11 @@ import {LanguageService} from "../services/language";
   ],
   providers: [
     StatusBar,
+    Geolocation,
+    Facebook,
+    NativeStorage,
     SplashScreen,
+    AngularFireAuth,
     LanguageService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

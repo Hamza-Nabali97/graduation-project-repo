@@ -11,6 +11,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
 
 
+
+
 @Component({
   templateUrl: 'app.html'
 })

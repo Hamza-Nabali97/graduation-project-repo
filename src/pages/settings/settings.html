@@ -55,7 +55,7 @@
 
     <ion-item>
       <ion-label>{{ 'settings.language' | translate }}</ion-label>
-      <ion-select [(ngModel)]="language" (ionChange)="onChange()" dir="ltr">
+      <ion-select [(ngModel)]="language" (ionChange)="onChange()">
         <ion-option value="ar" [selected]="language == 'ar'">العربية</ion-option>
         <ion-option value="en" [selected]="language == 'en'">English</ion-option>
       </ion-select>

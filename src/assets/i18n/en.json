@@ -26,5 +26,11 @@
     "route": "On My Route",
     "contactus": "Contact Us",
     "settings": "Settings"
+  },
+
+  "route": {
+    "select_your_direction": "Select your direction",
+    "locate_me": "Locate me",
+    "get_direction": "Get Direction"
   }
 }

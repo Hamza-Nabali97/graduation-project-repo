@@ -1,6 +1,6 @@
 export class LanguageService {
 
-  language = 'ar';
+  language = 'en';
 
   setLanguage(language: string) {
     this.language = language;

@@ -15,5 +15,16 @@
 
 
 <ion-content padding>
+  <button ion-button full (click)="loginWithFB()">Login!</button>
+
+  <ion-card *ngIf="isLogin()">
+    <img [src]="imageUrl"/>
+    <ion-card-content>
+      <p>Email: {{email}}</p>
+      <p>Name: {{ username }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button full (click)="logoutFB()">Logout</button>
 
 </ion-content>
