@@ -1,40 +1,38 @@
-<!--
-  Generated template for the ReportsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header padding-top>
 
   <ion-navbar>
-    <ion-title>Reports </ion-title>
-    <ion-buttons end> <button ion-button item-left clear small (click)="onAddReport()">
-      <ion-icon name="add"></ion-icon>
-    </button></ion-buttons>
+    <ion-title>Reports</ion-title>
+    <ion-buttons end>
+      <button ion-button item-left clear small (click)="onAddReport()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+
+  <ion-card *ngFor="let report of reports">
+
     <ion-item>
       <ion-avatar item-start>
-        <img src="../assets/imgs/person-icon.png">
+        <!--<img src="{{report.user.image}}">-->
       </ion-avatar>
-      <h2>Nibras Misk</h2>
+      <h2>{{report.user.name}}</h2>
+
       <ion-note>
-        11h ago
+        {{report.createdDate}}
       </ion-note>
       <button ion-button item-right clear small (click)="onShowReport()">
         <ion-icon name="more"></ion-icon>
       </button>
     </ion-item>
 
-    <img src="../assets/imgs/rubbish.jpg">
+    <img style="width: 150px;height: 150px" src={{report.image}}>
 
     <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a
-        DeLorean?! Whoa. This is heavy.</p>
+      <p>{{report.description}}</p>
     </ion-card-content>
 
 
@@ -42,7 +40,7 @@
       <ion-col col-3 text-center>
         <button ion-button icon-left clear small>
           <ion-icon name="star" color="yellow"></ion-icon>
-          <p>12</p>
+          <p>{{report.numberOfVotes}}</p>
         </button>
       </ion-col>
     </ion-row>
@@ -50,66 +48,12 @@
     <ion-row>
       <ion-col col-6>
         <button ion-button icon-start clear small (click)="toggle()">
-          <ion-icon  [name]="visible ? 'ios-star-outline' :'ios-star'" color="yellow"></ion-icon>
+          <ion-icon [name]="visible ? 'ios-star-outline' :'ios-star'" color="yellow"></ion-icon>
           <div>Vote</div>
         </button>
       </ion-col>
-    <!--  <ion-col col-6>
-        <button ion-button icon-start clear small>
-          <ion-icon name="pin"></ion-icon>
-          <div>Location</div>
-        </button>
-      </ion-col>-->
     </ion-row>
   </ion-card>
 
-  <ion-card>
 
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="../assets/imgs/anonymous-icon.png">
-      </ion-avatar>
-      <h2>Anonymous</h2>
-      <ion-note>
-        11h ago
-      </ion-note>
-      <button ion-button item-right clear small (click)="onShowReport()">
-        <ion-icon name="more"></ion-icon>
-      </button>
-    </ion-item>
-
-    <img src="../assets/imgs/rubbish.jpg">
-
-    <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a
-        DeLorean?! Whoa. This is heavy.</p>
-    </ion-card-content>
-
-
-    <ion-row>
-      <ion-col col-3 text-center>
-        <button ion-button icon-left clear small>
-          <ion-icon name="star" color="yellow"></ion-icon>
-          <p>12</p>
-        </button>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col col-6>
-        <button ion-button icon-start clear small (click)="toggle()">
-          <ion-icon  [name]="visible ? 'ios-star-outline' :'ios-star'"></ion-icon>
-          <div>Vote</div>
-        </button>
-      </ion-col>
-
-
-     <!-- <ion-col col-6>
-        <button ion-button icon-start clear small>
-          <ion-icon name="pin"></ion-icon>
-          <div>Location</div>
-        </button>
-      </ion-col>-->
-    </ion-row>
-  </ion-card>
 </ion-content>

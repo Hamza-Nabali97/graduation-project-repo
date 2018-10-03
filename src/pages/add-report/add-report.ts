@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
-
-/**
- * Generated class for the AddReportPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {UserService} from "../../services/user.service";
+import {ReportService} from "../../services/report.service";
+import {NgForm} from "@angular/forms";
+import {ReportsPage} from "../reports/reports";
+import {Report} from "../../models/report";
+import {Location} from "../../models/location";
+import {User} from "../../models/user";
 
 @IonicPage()
 @Component({
@@ -15,15 +15,15 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 })
 export class AddReportPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public userService: UserService, public reportService: ReportService, public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddReportPage');
-  }
 
-  onSubmit(){
-
+  onAddReport(form: NgForm) {
+    this.reportService.addReport(new Report(form.value.description, 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/PM5544_with_non-PAL_signals.png/200px-PM5544_with_non-PAL_signals.png', this.userService.getLoginUser(), new Location(0, 0), 0, '12h'));
+    form.reset();
+    this.navCtrl.push(ReportsPage);
   }
 
 }
+

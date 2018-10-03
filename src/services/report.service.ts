@@ -1,13 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Report} from "../models/report.model";
+import {Report} from "../models/report";
 
 @Injectable()
 export class ReportService {
 
   private report: Report[] = [];
 
-  constructor() {
-  }
 
   addReport(report: Report) {
     this.report.push(report);

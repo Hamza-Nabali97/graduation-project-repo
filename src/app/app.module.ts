@@ -18,17 +18,15 @@ import {SettingsPage} from "../pages/settings/settings";
 import {AngularFireModule} from 'angularfire2';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {firebaseConfig} from './credentials';
-
 import {AgmCoreModule} from "@agm/core";
-import {EditReportPage} from "../pages/edit-report/edit-report";
 import {ReportService} from "../services/report.service";
+import {UserService} from "../services/user.service";
 
 @NgModule({
   declarations: [
     MyApp,
     AddReportPage,
     ContactUsPage,
-    EditReportPage,
     InboxPage,
     LoginPage,
     MyReportsPage,
@@ -51,7 +49,6 @@ import {ReportService} from "../services/report.service";
     MyApp,
     AddReportPage,
     ContactUsPage,
-    EditReportPage,
     InboxPage,
     LoginPage,
     MyReportsPage,
@@ -65,6 +62,8 @@ import {ReportService} from "../services/report.service";
   providers: [
     StatusBar,
     SplashScreen,
+    UserService,
+    ReportService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ReportService
   ]
