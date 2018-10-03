@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, AlertController, NavParams} from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {SignupPage} from "../signup/signup";
-import {User} from "../../models/User";
+import {User} from "../../models/user";
 import {AngularFireAuth} from 'angularfire2/auth';
 import { GooglePlus } from "@ionic-native/google-plus";
 import { Facebook } from "@ionic-native/facebook";

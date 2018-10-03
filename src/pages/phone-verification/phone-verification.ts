@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from 'firebase';
-import {User} from "../../models/User";
+import {User} from "../../models/user";
 
 /**
  * Generated class for the PhoneVerificationPage page.
