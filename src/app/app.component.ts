@@ -1,7 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {MenuController, NavController, Platform} from 'ionic-angular';
+import {MenuController, NavController, LoadingController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import {LoginPage} from "../pages/login/login";
 import {ReportsPage} from "../pages/reports/reports";
 import {InboxPage} from "../pages/inbox/inbox";
 import {OnMyRoutePage} from "../pages/on-my-route/on-my-route";
@@ -9,9 +10,7 @@ import {SettingsPage} from "../pages/settings/settings";
 import {ContactUsPage} from "../pages/contact-us/contact-us";
 import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
-
-
-import {LoginPage} from "../pages/login/login";
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +27,9 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(private languageService: LanguageService, private translate: TranslateService, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController) {
+  constructor(private languageService: LanguageService, private translate: TranslateService,
+  public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              private menuCtrl: MenuController, private loadingCtrl: LoadingController, private angularFireAuth: AngularFireAuth) {
     this.initializeApp();
   }
 
@@ -58,6 +59,26 @@ export class MyApp {
       this.platform.setDir('ltr', true)
     else
       this.platform.setDir('rtl', true);
+  }
+  userLogout(){
+    this.angularFireAuth.auth.signOut().then(() => {
+      this.angularFireAuth.auth.onAuthStateChanged(currentUser =>{
+        if(currentUser == null){
+         alert('User Logged Out');
+         let loader = this.loadingCtrl.create({
+           spinner: 'circles',
+           content: 'Logging Out',
+           duration: 3000,
+         });
+         loader.present();
+         loader.onDidDismiss(() => {
+           this.openPage(LoginPage);
+         })
+        }
+      });
+    }).catch(signoutError => {
+      alert(JSON.stringify(signoutError))
+    })
   }
 
 }

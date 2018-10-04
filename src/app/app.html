@@ -56,8 +56,8 @@
           <span ion-text color="primary">{{ 'menu.settings' | translate }}</span>
         </button>
 
-        <button ion-item menuClose>
-          <ion-icon name="log-out" color="primary" item-left></ion-icon>
+        <button ion-item menuClose (click)="userLogout()">
+          <ion-icon name="log-out" color="primary" item-left ></ion-icon>
           <span ion-text color="primary">{{ 'menu.logout' | translate }}</span>
         </button>
       </ion-footer>
