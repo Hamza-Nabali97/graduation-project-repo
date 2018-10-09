@@ -13,47 +13,32 @@
 
 <ion-content padding>
 
-  <ion-card *ngFor="let report of reports">
-
+  <ion-card *ngFor="let report of reports; let i =  index">
     <ion-item>
       <ion-avatar item-start>
         <img src="{{report.user.image}}">
       </ion-avatar>
-      <h2>{{report.user.name}}</h2>
-
+      <h2> {{report.user.name}}</h2>
       <ion-note>
         {{report.createdDate}}
       </ion-note>
-      <button ion-button item-right clear small (click)="onShowReport()">
+      <button ion-button item-right clear small (click)="onShowReport(i)">
         <ion-icon name="more"></ion-icon>
       </button>
     </ion-item>
-
-    <img style="width: 150px;height: 150px" src={{report.image}}>
-
+    <img style=" align-items: center"
+         src="{{report.image}}">
     <ion-card-content>
       <p>{{report.description}}</p>
     </ion-card-content>
-
-
     <ion-row>
       <ion-col col-3 text-center>
-        <button ion-button icon-left clear small>
-          <ion-icon name="star" color="yellow"></ion-icon>
+        <button ion-button icon-left clear small text-center (click)="toggle(i)">
+        <ion-icon name="ios-star-outline" *ngIf="!visible"></ion-icon>
+        <ion-icon name="star" *ngIf="visible"></ion-icon>
           <p>{{report.numberOfVotes}}</p>
         </button>
       </ion-col>
     </ion-row>
-
-    <ion-row>
-      <ion-col col-6>
-        <button ion-button icon-start clear small (click)="toggle()">
-          <ion-icon [name]="visible ? 'ios-star-outline' :'ios-star'" color="yellow"></ion-icon>
-          <div>Vote</div>
-        </button>
-      </ion-col>
-    </ion-row>
   </ion-card>
-
-
 </ion-content>

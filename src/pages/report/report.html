@@ -15,9 +15,6 @@
   <ion-list>
     <ion-list-header>
       Report Details
-      <button ion-button item-right clear small (click)="onEditReport()">
-        <ion-icon name="create"></ion-icon>
-      </button>
       <button ion-button item-right clear small (click)="onDeletereport()">
         <ion-icon name="trash" danger></ion-icon>
       </button>
@@ -26,18 +23,18 @@
     <ion-item>
       <ion-label>User</ion-label>
       <ion-label>
-        {{report.user}}
+        {{report.user.name}}
       </ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label> Time</ion-label>
-      <ion-label>{{ report.time}}</ion-label>
+      <ion-label>{{ report.createdDate}}</ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label>Votes</ion-label>
-      <ion-label>{{report.votes}}</ion-label>
+      <ion-label>{{report.numberOfVotes}}</ion-label>
     </ion-item>
 
     <ion-item>
@@ -47,15 +44,22 @@
 
     <ion-item>
       <ion-label></ion-label>
-      <img item-start src={{report.img}}>
+      <img item-start src={{report.image}}>
     </ion-item>
 
     <ion-item>
       <ion-label>Location</ion-label>
+      <ion-label>  <p>{{report.location.lat}}</p>
+        <p>   {{report.location.lng}}</p> </ion-label>
+
     </ion-item>
     <div>
-      <agm-map [latitude]="lat" [longitude]="lng">
-        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      <agm-map [latitude]="report.location.lat" [longitude]="report.location.lng" [zoom]="16">
+        <agm-marker
+                    [latitude]="report.location.lat"
+                    [longitude]="report.location.lng"
+                    [iconUrl]="'../../assets/icon/problem.png'">
+        </agm-marker>
       </agm-map>
     </div>
   </ion-list>

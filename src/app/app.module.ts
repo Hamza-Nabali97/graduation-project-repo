@@ -21,6 +21,8 @@ import {firebaseConfig} from './credentials';
 import {AgmCoreModule} from "@agm/core";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
+import { Camera} from "@ionic-native/camera";
+import { Geolocation } from "@ionic-native/geolocation";
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import {UserService} from "../services/user.service";
     UserService,
     ReportService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ReportService
+    ReportService,
+    Camera,
+    Geolocation
   ]
 })
 export class AppModule {

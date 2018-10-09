@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the MyReportsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ReportPage} from "../report/report";
+import {AddReportPage} from "../add-report/add-report";
+import {ReportService} from "../../services/report.service";
+import {Report} from "../../models/report";
+import {User} from "../../models/user";
+import {UserService} from "../../services/user.service";
+import {Location} from "../../models/location";
+import {Geolocation} from '@ionic-native/geolocation';
 
 @IonicPage()
 @Component({
@@ -15,16 +16,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MyReportsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  myReports: Report[] = [];
+  index: number;
+
+  constructor(
+    public reportService: ReportService,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private geolocation: Geolocation) {
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyReportsPage');
+
+  ionViewWillEnter() {
+    this.myReports = this.reportService.getReports();
   }
 
 
-  visible = false;
-  toggle() {
-    this.visible = !this.visible;
+  onAddReport() {
+    this.navCtrl.push(AddReportPage);
+  }
+
+
+  onShowReport(index:number) {
+    const params = {report: this.myReports[index], index: index}
+    this.navCtrl.push(ReportPage, params);
   }
 }

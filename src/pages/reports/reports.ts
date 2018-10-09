@@ -6,6 +6,7 @@ import {ReportService} from "../../services/report.service";
 import {Report} from "../../models/report";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
+import {Location} from "../../models/location";
 
 @IonicPage()
 @Component({
@@ -15,14 +16,19 @@ import {UserService} from "../../services/user.service";
 export class ReportsPage {
 
   reports: Report[] = [];
+  index: number;
 
-  constructor(public reportService:ReportService,public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(
+    public reportService: ReportService,
+    public navCtrl: NavController,
+    public navParams: NavParams) {
 
   }
 
 
   ionViewWillEnter() {
-    this.reports=this.reportService.getReports();
+    this.reports = this.reportService.getReports();
   }
 
 
@@ -31,10 +37,21 @@ export class ReportsPage {
   }
 
 
-  onShowReport() {
-    // const params = {mode: 'Details'}
-    // this.navCtrl.push(ReportPage, params);
+  onShowReport(index:number) {
+     const params = {report: this.reports[index], index: index}
+    this.navCtrl.push(ReportPage, params);
   }
 
 
+  visible = false;
+  toggle(index) {
+    if(this.visible){
+      this.visible = !this.visible;
+      this.reports[index].numberOfVotes-=1;
+    }
+    else if(!this.visible){
+      this.visible = !this.visible;
+      this.reports[index].numberOfVotes+=1;
+    }
+  }
 }

@@ -8,9 +8,9 @@
 <ion-content padding>
 
 
-    <form #f="ngForm" (ngSubmit)="onAddReport(f)">
+  <form #f="ngForm" (ngSubmit)="onAddReport(f)">
 
-      <ion-list>
+    <ion-list>
 
       <ion-item>
         <ion-label>Anonymous</ion-label>
@@ -33,26 +33,20 @@
 
         <ion-row>
           <ion-col col-6>
-            <button ion-button icon-start full color="light">
+            <button ion-button icon-start full color="light" (click)="uploadPhoto()">
               <ion-icon name="images"></ion-icon>
               Upload photo
             </button>
           </ion-col>
           <ion-col col-6>
-            <button ion-button icon-start full color="light">
+            <button ion-button icon-start full color="light" (click)="takePhoto()">
               <ion-icon name="camera"></ion-icon>
               Take a photo
             </button>
           </ion-col>
         </ion-row>
       </ion-grid>
-      <ion-item>
-        <ion-label>Location</ion-label>
-      </ion-item>
-      <button ion-button icon-start full color="blue">
-        <ion-icon name="pin"></ion-icon>
-        Location photo
-      </button>
+
       <div>
         <agm-map [latitude]="lat" [longitude]="lng">
           <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
@@ -60,9 +54,10 @@
       </div>
     </ion-list>
 
-      <button
-        ion-button
-        type="submit"
-        block>Add Report</button>
+    <button
+      ion-button
+      type="submit"
+      block>Add Report
+    </button>
   </form>
 </ion-content>
