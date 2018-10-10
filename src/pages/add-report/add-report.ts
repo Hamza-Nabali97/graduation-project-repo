@@ -20,6 +20,7 @@ export class AddReportPage implements OnInit{
 
 
   public  base64Image: string;
+  source:string="";
 
   myLocation: Location = new Location(0, 0);
   mylocationIsSet = false;
@@ -38,23 +39,23 @@ export class AddReportPage implements OnInit{
     ngOnInit(){
       this.onLocate();
     }
-    uploadPhoto(){
-      const options: CameraOptions = {
-        quality: 100,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        saveToPhotoAlbum: false
-      }
-
-      this.camera.getPicture(options).then((imageData) => {
-        // imageData is either a base64 encoded string or a file URI
-        // If it's base64 (DATA_URL):
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
-      }, (err) => {
-        // Handle error
-      });
-    }
+    uploadPhoto(){}
+    //   const options: CameraOptions = {
+    //     quality: 100,
+    //     destinationType: this.camera.DestinationType.FILE_URI,
+    //     encodingType: this.camera.EncodingType.JPEG,
+    //     mediaType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    //     saveToPhotoAlbum: false
+    //   }
+    //
+    //   this.camera.getPicture(options).then((imageData) => {
+    //     // imageData is either a base64 encoded string or a file URI
+    //     // If it's base64 (DATA_URL):
+    //     let base64Image = 'data:image/jpeg;base64,' + imageData;
+    //   }, (err) => {
+    //     // Handle error
+    //   });
+    // }
 
 
   takePhoto() {
@@ -68,7 +69,8 @@ export class AddReportPage implements OnInit{
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      // let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.source=imageData;
     }, (err) => {
       // Handle error
     });
