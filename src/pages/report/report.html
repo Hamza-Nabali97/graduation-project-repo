@@ -1,67 +1,73 @@
-<!--
-  Generated template for the ReportPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header padding-top>
-  <ion-navbar>
+<ion-header>
+  <ion-navbar color="primary">
     <ion-title> Report Details</ion-title>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
-  <ion-list>
+<ion-content padding-right>
+
+  <ion-list no-border>
+
     <ion-list-header>
       Report Details
-      <button ion-button item-right clear small (click)="onDeletereport()">
-        <ion-icon name="trash" danger></ion-icon>
-      </button>
     </ion-list-header>
 
     <ion-item>
-      <ion-label>User</ion-label>
-      <ion-label>
+      <ion-icon class="icon-color" name="contact" item-start></ion-icon>
+      User
+      <ion-note item-end>
         {{report.user.name}}
-      </ion-label>
+      </ion-note>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-icon class="icon-color" name="calendar" item-start></ion-icon>
+      Date
+      <ion-note item-end>
+        {{ report.createdDate | date}}
+      </ion-note>
     </ion-item>
 
     <ion-item>
-      <ion-label> Time</ion-label>
-      <ion-label>{{ report.createdDate}}</ion-label>
+      <ion-icon class="icon-color" name="thumbs-up" item-start></ion-icon>
+      Number of votes
+      <ion-note item-end>
+        {{report.numberOfVotes}}
+      </ion-note>
     </ion-item>
 
     <ion-item>
-      <ion-label>Votes</ion-label>
-      <ion-label>{{report.numberOfVotes}}</ion-label>
+      <ion-icon class="icon-color" name="clipboard" item-start></ion-icon>
+      Description
+      <ion-note item-end>
+        {{ report.description}}
+      </ion-note>
     </ion-item>
+
 
     <ion-item>
-      <ion-label>Description</ion-label>
-      <ion-label> {{ report.description}}</ion-label>
+      <ion-icon class="icon-color" name="image" item-start></ion-icon>
+      <ion-note item-right>
+        <img  src={{report.image}}>
+      </ion-note>
     </ion-item>
+
 
     <ion-item>
-      <ion-label></ion-label>
-      <img item-start src={{report.image}}>
+      <ion-icon class="icon-color" name="pin" item-start></ion-icon>
+
+      <ion-note>
+        <agm-map [latitude]="report.location.lat" [longitude]="report.location.lng" [zoom]="16">
+          <agm-marker [latitude]="report.location.lat"
+                      [longitude]="report.location.lng"
+                      [iconUrl]="'../../assets/icon/problem1.png'"></agm-marker>
+        </agm-map>
+      </ion-note>
+
     </ion-item>
 
-    <ion-item>
-      <ion-label>Location</ion-label>
-      <ion-label>  <p>{{report.location.lat}}</p>
-        <p>   {{report.location.lng}}</p> </ion-label>
-
-    </ion-item>
-    <div>
-      <agm-map [latitude]="report.location.lat" [longitude]="report.location.lng" [zoom]="16">
-        <agm-marker
-                    [latitude]="report.location.lat"
-                    [longitude]="report.location.lng"
-                    [iconUrl]="'../../assets/icon/problem.png'">
-        </agm-marker>
-      </agm-map>
-    </div>
   </ion-list>
 
 </ion-content>

@@ -6,13 +6,7 @@ import {Location} from "../models/location";
 @Injectable()
 export class ReportService {
 
-  private report: Report[] = [ new Report ("broken street light ",
-    '../../assets/imgs/broken-light.jpg',
-    new User('nibras','test@test.com','123','https://www.w3schools.com/howto/img_avatar2.png'),
-    new Location(31.898043, 35.204269), 0, '10h'),new Report ("garbage in street",
-    '../../assets/imgs/garbage-dirty-street.jpg',
-    new User('nibras','test@test.com','123','https://www.w3schools.com/howto/img_avatar2.png'),
-    new Location(31.898043, 35.204269), 0, '15h')];
+  private report: Report[] = [];
 
 
   addReport(report: Report) {

@@ -14,7 +14,6 @@ import {RegisterPage} from "../pages/register/register";
 import {ReportPage} from "../pages/report/report";
 import {ReportsPage} from "../pages/reports/reports";
 import {SettingsPage} from "../pages/settings/settings";
-
 import {AngularFireModule} from 'angularfire2';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {firebaseConfig} from './credentials';

@@ -5,9 +5,9 @@ export class Report {
   constructor(public description: string,
               public image: string,
               public user: User,
-              public location:Location,
+              public location: Location,
               public numberOfVotes: number,
-              public createdDate: any) {
+              public createdDate: Date) {
   }
 }
 

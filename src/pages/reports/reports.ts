@@ -4,9 +4,7 @@ import {ReportPage} from "../report/report";
 import {AddReportPage} from "../add-report/add-report";
 import {ReportService} from "../../services/report.service";
 import {Report} from "../../models/report";
-import {User} from "../../models/user";
-import {UserService} from "../../services/user.service";
-import {Location} from "../../models/location";
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -19,10 +17,9 @@ export class ReportsPage {
   index: number;
 
 
-  constructor(
-    public reportService: ReportService,
-    public navCtrl: NavController,
-    public navParams: NavParams) {
+  constructor(public reportService: ReportService,
+              public navCtrl: NavController,
+              public navParams: NavParams) {
 
   }
 
@@ -37,21 +34,13 @@ export class ReportsPage {
   }
 
 
-  onShowReport(index:number) {
-     const params = {report: this.reports[index], index: index}
+  onShowReport(index: number) {
+    const params = {report: this.reports[index], index: index}
     this.navCtrl.push(ReportPage, params);
   }
 
 
-  visible = false;
-  toggle(index) {
-    if(this.visible){
-      this.visible = !this.visible;
-      this.reports[index].numberOfVotes-=1;
-    }
-    else if(!this.visible){
-      this.visible = !this.visible;
-      this.reports[index].numberOfVotes+=1;
-    }
+  getTimeAgo(report: Report) {
+    return moment(report.createdDate).fromNow();
   }
 }

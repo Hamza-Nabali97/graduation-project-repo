@@ -1,11 +1,11 @@
-<ion-header padding-top>
-  <ion-navbar>
+<ion-header>
+  <ion-navbar color="primary">
     <ion-title>New Report</ion-title>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
 
   <form #f="ngForm" (ngSubmit)="onAddReport(f)">
@@ -13,53 +13,64 @@
     <ion-list>
 
       <ion-item>
-        <ion-label>Anonymous</ion-label>
+        <ion-icon name="eye-off" item-start color="primary"></ion-icon>
+        <ion-label color="primary">Anonymous</ion-label>
         <ion-toggle></ion-toggle>
       </ion-item>
 
+      <ion-item>
+        <ion-label floating color="primary">Description</ion-label>
+        <ion-textarea required name="description" ngModel></ion-textarea>
+      </ion-item>
+
 
       <ion-item>
-        <ion-label>Description</ion-label>
-        <ion-textarea type="text"
-                      name="description"
-                      ngModel></ion-textarea>
+        <div item-content style="width:100%">
+          <ion-label color="primary">Add Image</ion-label>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6>
+                <button ion-button icon-start full color="secondary" (click)="uploadPhoto()" type="button">
+                  <ion-icon name="images"></ion-icon>
+                  Upload photo
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                <button ion-button icon-start full color="danger" (click)="takePhoto()" type="button">
+                  <ion-icon name="camera"></ion-icon>
+                  Take a photo
+                </button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col text-center="">
+                <img src="{{source}}">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
       </ion-item>
 
       <ion-item>
-        <ion-label>Image</ion-label>
+        <div item-content style="width:100%">
+          <ion-label color="primary">Location</ion-label>
+          <agm-map [latitude]="myLocation.lat" [longitude]="myLocation.lng" [zoom]="16">
+            <agm-marker [latitude]="myLocation.lat" [longitude]="myLocation.lng"></agm-marker>
+          </agm-map>
+        </div>
       </ion-item>
-      <ion-grid>
 
-
-        <ion-row>
-          <ion-col col-6>
-            <button ion-button icon-start full color="light" (click)="uploadPhoto()">
-              <ion-icon name="images"></ion-icon>
-              Upload photo
-            </button>
-          </ion-col>
-          <ion-col col-6>
-            <button ion-button icon-start full color="light" (click)="takePhoto()">
-              <ion-icon name="camera"></ion-icon>
-              Take a photo
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      
-      <img src="source">
-
-      <div>
-        <agm-map [latitude]="lat" [longitude]="lng">
-          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-        </agm-map>
-      </div>
     </ion-list>
 
-    <button
-      ion-button
-      type="submit"
-      block>Add Report
+    <button style="width: 80%;margin-left: auto;margin-right: auto;margin-bottom: 5px;margin-top: 5px"
+            ion-button
+            [disabled]="!f.valid || source==''"
+            type="submit"
+            block>Add Report
+
     </button>
   </form>
+
 </ion-content>
