@@ -1,6 +1,14 @@
 <ion-header>
   <ion-navbar text-center color="primary">
     <ion-title>Reports</ion-title>
+    <ion-buttons end>
+      <button ion-button tappable>
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button tappable (click)="options($event)">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

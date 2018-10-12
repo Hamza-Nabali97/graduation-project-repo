@@ -20,8 +20,9 @@ import {firebaseConfig} from './credentials';
 import {AgmCoreModule} from "@agm/core";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
-import { Camera, CameraOptions} from "@ionic-native/camera";
-import { Geolocation } from "@ionic-native/geolocation";
+import {Camera, CameraOptions} from "@ionic-native/camera";
+import {Geolocation} from "@ionic-native/geolocation";
+import {OptionsPage} from "../pages/options/options";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { Geolocation } from "@ionic-native/geolocation";
     RegisterPage,
     ReportPage,
     ReportsPage,
-    SettingsPage
+    SettingsPage,
+    OptionsPage
 
   ],
   imports: [
@@ -57,7 +59,8 @@ import { Geolocation } from "@ionic-native/geolocation";
     RegisterPage,
     ReportPage,
     ReportsPage,
-    SettingsPage
+    SettingsPage,
+    OptionsPage
 
   ],
   providers: [
