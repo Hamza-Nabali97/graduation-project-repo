@@ -47,7 +47,7 @@ export class OnMyRoutePage {
   dest: any
 
   constructor(private mapsAPILoader: MapsAPILoader, private geolocation: Geolocation, private loadingCtrl: LoadingController,
-              private toastCtrl: ToastController,) {
+              private toastCtrl: ToastController) {
   }
 
 

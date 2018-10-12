@@ -18,7 +18,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 export class MyApp {
 
   rootPage: any = LoginPage;
-  reportsPage: ReportsPage;
+  reportsPage =  ReportsPage;
   inboxPage = InboxPage;
   onMyRoutePage = OnMyRoutePage;
   settingsPage = SettingsPage;

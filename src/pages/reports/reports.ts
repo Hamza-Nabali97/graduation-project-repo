@@ -1,6 +1,13 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, AlertController, ToastController} from 'ionic-angular';
+import { Component } from '@angular/core';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+
+/**
+ * Generated class for the ReportsPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
@@ -9,29 +16,20 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class ReportsPage {
 
-  constructor(public alertCtrl: AlertController, public toastCtrl: ToastController, public angularFireAuth: AngularFireAuth) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private angularFire: AngularFireAuth) {
   }
 
-  ionViewDidLoad(){
-    let toastNotification = this.toastCtrl.create();
-    toastNotification.setDuration(3000);
-    this.angularFireAuth.authState.subscribe(data => {
-      if(data) {
-        if (data.isAnonymous == true) {
-          toastNotification.setMessage('Logged In Anonymously');
-        } else {
-          if (data.uid && data.email) {
-            let userEmail = data.email
-            toastNotification.setMessage(`Welcome, ${userEmail}`);
-          }
+  ionViewDidLoad() {
+    let toast = this.toastCtrl.create({
+      duration: 3000,
+    });
+    this.angularFire.authState.subscribe(loggedInUser => {
+      if(loggedInUser && loggedInUser.uid){
+        if(loggedInUser.isAnonymous){
+          toast.setMessage('Logged ')
         }
       }
-      else {
-        toastNotification.setMessage('Unauthorized/Unregistered Account');
-      }
-      toastNotification.present();
-    });
+    })
   }
 
 }
