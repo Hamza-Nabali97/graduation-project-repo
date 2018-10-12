@@ -6,9 +6,13 @@ export class UserService {
 
 
   signIn(){
-    this.loginUser=new User('nibras','test@test.com','123','https://www.w3schools.com/howto/img_avatar2.png');
+    this.loginUser=new User('nibras','test@test.com','123','https://www.w3schools.com/howto/img_avatar2.png', false);
   }
 
+
+  getLoginUserAsAnonymous() {
+    return this.loginUser = new User('nibras', 'test@test.com', '123', 'https://www.w3schools.com/howto/img_avatar2.png', true);
+  }
   getLoginUser(){
     this.signIn();
     return this.loginUser;

@@ -14,7 +14,7 @@
 
       <ion-item>
         <ion-label>Anonymous</ion-label>
-        <ion-toggle></ion-toggle>
+        <ion-toggle [(ngModel)]="isToggled" name="anonymous"(ionChange)="notify()"></ion-toggle>
       </ion-item>
 
 

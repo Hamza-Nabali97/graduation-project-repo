@@ -24,6 +24,8 @@ export class AddReportPage implements OnInit{
 
   myLocation: Location = new Location(0, 0);
   mylocationIsSet = false;
+  public isToggled: boolean;
+
 
   constructor(
     public userService: UserService,
@@ -33,7 +35,10 @@ export class AddReportPage implements OnInit{
     public camera: Camera,
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController) {}
+    private toastCtrl: ToastController) {
+
+    this.isToggled=false;
+  }
 
 
     ngOnInit(){
@@ -76,9 +81,14 @@ export class AddReportPage implements OnInit{
     });
   }
 
+  notify(){
+    console.log("Toggled: "+ this.isToggled);
+    console.log("Nibras");
+  }
   onAddReport(form: NgForm) {
 
     console.log(this.myLocation.lng+" loc"+this.myLocation.lat+"  set"+this.mylocationIsSet)
+    this.userService
     this.reportService.addReport(new Report(form.value.description, './../assets/imgs/rubbish.jpg', this.userService.getLoginUser(), new Location( this.myLocation.lat, this.myLocation.lng), 0, '12h'));
     form.reset();
     this.navCtrl.push(ReportsPage);
