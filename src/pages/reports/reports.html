@@ -35,9 +35,11 @@
 
     <ion-row>
       <ion-col>
-        <button ion-button color="primary" clear small icon-start>
-          <ion-icon name='thumbs-up' style=" font-size: 25px;"></ion-icon>
-          <ion-badge style="margin-right: 5px;margin-left: 5px">20</ion-badge>
+        <button ion-button color="primary" clear small icon-start  (click)="toggle(i)">
+          <ion-icon
+            [name]="report.voted ? 'ios-thumbs-up' :'ios-thumbs-up-outline'"  style="font-size: 25px;">
+          </ion-icon>
+          <ion-badge style="margin-right: 5px;margin-left: 5px">{{report.numberOfVotes}}</ion-badge>
           <p id="votes">Votes</p>
         </button>
       </ion-col>

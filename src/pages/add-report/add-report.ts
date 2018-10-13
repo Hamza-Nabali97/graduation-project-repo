@@ -80,7 +80,7 @@ export class AddReportPage {
   }
 
   onAddReport(form: NgForm) {
-    this.reportService.addReport(new Report(form.value.description, this.source, this.userService.getLoginUser(), new Location(this.myLocation.lat, this.myLocation.lng), 0, new Date()));
+    this.reportService.addReport(new Report(form.value.description, this.source, this.userService.getLoginUser(), new Location(this.myLocation.lat, this.myLocation.lng), 0, new Date(), false));
     form.reset();
     this.navCtrl.popToRoot();
   }

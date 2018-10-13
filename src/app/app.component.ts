@@ -13,7 +13,7 @@ import {ReportPage} from "../pages/report/report";
 })
 export class MyApp {
 
-  rootPage: any = ReportsPage;
+  rootPage: any = MyReportsPage;
 
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {

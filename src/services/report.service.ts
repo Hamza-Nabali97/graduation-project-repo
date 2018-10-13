@@ -12,6 +12,7 @@ export class ReportService {
   addReport(report: Report) {
     this.report.push(report);
   }
+  
 
   getReports() {
 

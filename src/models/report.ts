@@ -7,7 +7,9 @@ export class Report {
               public user: User,
               public location: Location,
               public numberOfVotes: number,
-              public createdDate: Date) {
+              public createdDate: Date,
+              public voted: boolean //for vote click only
+  ) {
   }
 }
 

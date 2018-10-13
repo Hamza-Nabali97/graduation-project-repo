@@ -33,6 +33,7 @@ export class ReportsPage {
 
   onAddReport() {
     this.navCtrl.push(AddReportPage);
+
   }
 
 
@@ -51,5 +52,17 @@ export class ReportsPage {
     popover.present({
       ev: myEvent
     });
+  }
+
+  toggle(index) {
+    if(this.reports[index].voted == false){
+      this.reports[index].numberOfVotes+=1;
+      this.reports[index].voted=true;
+    }
+
+    else if(this.reports[index].voted == true){
+      this.reports[index].numberOfVotes-=1;
+      this.reports[index].voted=false;
+    }
   }
 }

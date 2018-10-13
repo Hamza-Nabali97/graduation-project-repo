@@ -1,13 +1,11 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
 import {ReportPage} from "../report/report";
 import {AddReportPage} from "../add-report/add-report";
 import {ReportService} from "../../services/report.service";
 import {Report} from "../../models/report";
-import {User} from "../../models/user";
-import {UserService} from "../../services/user.service";
-import {Location} from "../../models/location";
-import {Geolocation} from '@ionic-native/geolocation';
+import * as moment from 'moment';
+import {OptionsPage} from "../options/options";
 
 @IonicPage()
 @Component({
@@ -16,30 +14,44 @@ import {Geolocation} from '@ionic-native/geolocation';
 })
 export class MyReportsPage {
 
-  myReports: Report[] = [];
+  reports: Report[] = [];
   index: number;
 
-  constructor(
-    public reportService: ReportService,
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private geolocation: Geolocation) {
+
+  constructor(public reportService: ReportService,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public popoverCtrl: PopoverController) {
 
   }
 
 
   ionViewWillEnter() {
-    this.myReports = this.reportService.getReports();
+    this.reports = this.reportService.getReports();
   }
 
 
   onAddReport() {
     this.navCtrl.push(AddReportPage);
+
   }
 
 
-  onShowReport(index:number) {
-    const params = {report: this.myReports[index], index: index}
+  onShowReport(index: number) {
+    const params = {report: this.reports[index], index: index}
     this.navCtrl.push(ReportPage, params);
   }
+
+
+  getTimeAgo(report: Report) {
+    return moment(report.createdDate).fromNow();
+  }
+
+  options(myEvent) {
+    let popover = this.popoverCtrl.create(OptionsPage);
+    popover.present({
+      ev: myEvent
+    });
+  }
+
 }
