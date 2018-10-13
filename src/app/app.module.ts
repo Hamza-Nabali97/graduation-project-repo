@@ -16,7 +16,6 @@ import {ReportsPage} from "../pages/reports/reports";
 import {SettingsPage} from "../pages/settings/settings";
 import {AngularFireModule} from 'angularfire2';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
-import {firebaseConfig} from './credentials';
 import {AgmCoreModule} from "@agm/core";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";

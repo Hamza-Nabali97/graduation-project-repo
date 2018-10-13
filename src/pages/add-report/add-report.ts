@@ -21,6 +21,7 @@ export class AddReportPage {
   source: string = '';
   myLocation: Location = new Location(31.898043, 35.204269);
   mylocationIsSet = false;
+  isToggled: false
 
   constructor(private geolocation: Geolocation,
               public userService: UserService,
@@ -30,7 +31,9 @@ export class AddReportPage {
               public camera: Camera,
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController) {
-    this.source = "https://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"
+    this.source = "https://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
+
+    this.isToggled= false;
 
 
   }
@@ -80,7 +83,7 @@ export class AddReportPage {
   }
 
   onAddReport(form: NgForm) {
-    this.reportService.addReport(new Report(form.value.description, this.source, this.userService.getLoginUser(), new Location(this.myLocation.lat, this.myLocation.lng), 0, new Date(), false));
+    this.reportService.addReport(new Report(form.value.description, this.source, this.userService.getLoginUser(this.isToggled), new Location(this.myLocation.lat, this.myLocation.lng), 0, new Date(), false));
     form.reset();
     this.navCtrl.popToRoot();
   }
@@ -111,7 +114,6 @@ export class AddReportPage {
         }
       );
   }
-
 
 }
 
