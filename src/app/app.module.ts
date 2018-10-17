@@ -1,37 +1,40 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { MyApp } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
+import {MyApp} from './app.component';
 
-import { LoginPage } from '../pages/login/login';
-import { SignupPage} from "../pages/signup/signup";
-import { PhoneVerificationPage } from "../pages/phone-verification/phone-verification";
-import { AddReportPage } from "../pages/add-report/add-report";
-import { ContactUsPage } from "../pages/contact-us/contact-us";
-import { InboxPage } from "../pages/inbox/inbox";
-import { MyReportsPage } from "../pages/my-reports/my-reports";
-import { ReportsPage } from "../pages/reports/reports";
-import { OnMyRoutePage } from "../pages/on-my-route/on-my-route";
-import { ReportPage } from "../pages/report/report";
-import { SettingsPage } from "../pages/settings/settings";
+import {LoginPage} from '../pages/login/login';
+import {SignupPage} from "../pages/signup/signup";
+import {PhoneVerificationPage} from "../pages/phone-verification/phone-verification";
+import {AddReportPage} from "../pages/add-report/add-report";
+import {ContactUsPage} from "../pages/contact-us/contact-us";
+import {InboxPage} from "../pages/inbox/inbox";
+import {ReportsPage} from "../pages/reports/reports";
+import {OnMyRoutePage} from "../pages/on-my-route/on-my-route";
+import {ReportPage} from "../pages/report/report";
+import {SettingsPage} from "../pages/settings/settings";
 
 import {AgmCoreModule} from '@agm/core';
 import {AgmDirectionModule} from 'agm-direction'   // agm-direction
-import { HttpClient, HttpClientModule } from "@angular/common/http";
-import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { LanguageService} from "../services/language";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {LanguageService} from "../services/language";
 
 import firebase from 'firebase';
 import {FIREBASE_CONFIG} from "./app.firebase.config";
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule} from 'angularfire2/auth';
-import { GooglePlus } from '@ionic-native/google-plus';
-import { Facebook } from "@ionic-native/facebook";
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {GooglePlus} from '@ionic-native/google-plus';
+import {Facebook} from "@ionic-native/facebook";
 import {NativeStorage} from '@ionic-native/native-storage';
 import {Geolocation} from '@ionic-native/geolocation';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import {Camera, CameraOptions} from "@ionic-native/camera";
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {OptionsPage} from "../pages/options/options";
+import {ReportService} from "../services/report.service";
+import {UserService} from "../services/user.service";
 
 
 firebase.initializeApp(FIREBASE_CONFIG)
@@ -45,11 +48,11 @@ firebase.initializeApp(FIREBASE_CONFIG)
     AddReportPage,
     ContactUsPage,
     InboxPage,
-    MyReportsPage,
     OnMyRoutePage,
     ReportPage,
     SettingsPage,
-    ReportsPage
+    ReportsPage,
+    OptionsPage
 
   ],
   imports: [
@@ -67,7 +70,7 @@ firebase.initializeApp(FIREBASE_CONFIG)
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBHzZHoT7JnZJrJ7iUY2XDaZBYrDrEWXnY',
-      libraries: ['places','geometry']
+      libraries: ['places', 'geometry']
     }),
     AgmDirectionModule     // agm-direction
   ],
@@ -81,11 +84,11 @@ firebase.initializeApp(FIREBASE_CONFIG)
     AddReportPage,
     ContactUsPage,
     InboxPage,
-    MyReportsPage,
     OnMyRoutePage,
     ReportPage,
     SettingsPage,
-    ReportsPage
+    ReportsPage,
+    OptionsPage
 
   ],
   providers: [
@@ -96,6 +99,10 @@ firebase.initializeApp(FIREBASE_CONFIG)
     GooglePlus,
     Facebook,
     LanguageService,
+    ReportService,
+    UserService,
+    Camera,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, AlertController, NavParams} from 'ionic-angular';
+import {NavController, AlertController, NavParams, LoadingController} from 'ionic-angular';
 import {ReportsPage} from "../reports/reports";
 import {SignupPage} from "../signup/signup";
 import {User} from "../../models/user";
@@ -27,7 +27,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth, public googlePlus: GooglePlus,
-              public facebook: Facebook) {
+              public facebook: Facebook,private loadingCtrl: LoadingController) {
 
   }
 
@@ -45,11 +45,17 @@ export class LoginPage {
   }
 
   loginWithEmailAndPassword(user: User): void {
+    const loader = this.loadingCtrl.create({
+      content: 'Login...'
+    });
+    loader.present();
     this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password)
       .then(authenticationResult => {
+        loader.dismiss();
         console.log(authenticationResult);
         this.navCtrl.setRoot(ReportsPage);
       }).catch(error => {
+      loader.dismiss();
       console.error(error);
     })
   }

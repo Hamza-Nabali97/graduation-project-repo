@@ -1,3 +1,16 @@
 page-report {
+  agm-map {
+    height: 300px;
+  }
 
+  ion-icon[name="trash"] {
+    color: red !important;
+  }
+  ion-labe {
+    color: color($colors, primary);
+  }
+
+  .icon-color {
+    color: color($colors, primary);
+  }
 }

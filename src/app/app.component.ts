@@ -11,6 +11,8 @@ import {ContactUsPage} from "../pages/contact-us/contact-us";
 import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
 import {AngularFireAuth} from 'angularfire2/auth';
+import {ReportService} from "../services/report.service";
+import {Report} from "../models/report";
 
 @Component({
   templateUrl: 'app.html'
@@ -18,17 +20,16 @@ import {AngularFireAuth} from 'angularfire2/auth';
 export class MyApp {
 
   rootPage: any = LoginPage;
-  reportsPage =  ReportsPage;
+  reportsPage = ReportsPage;
   inboxPage = InboxPage;
   onMyRoutePage = OnMyRoutePage;
   settingsPage = SettingsPage;
   contactUs = ContactUsPage;
+
   @ViewChild('content') content: NavController;
 
-  pages: Array<{title: string, component: any}>;
-
-  constructor(private languageService: LanguageService, private translate: TranslateService,
-  public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+  constructor(public reportService: ReportService, private languageService: LanguageService, private translate: TranslateService,
+              public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private menuCtrl: MenuController, private loadingCtrl: LoadingController, private angularFireAuth: AngularFireAuth) {
     this.initializeApp();
   }
@@ -60,20 +61,21 @@ export class MyApp {
     else
       this.platform.setDir('rtl', true);
   }
-  userLogout(){
+
+  userLogout() {
     this.angularFireAuth.auth.signOut().then(() => {
-      this.angularFireAuth.auth.onAuthStateChanged(currentUser =>{
-        if(currentUser == null){
-         alert('User Logged Out');
-         let loader = this.loadingCtrl.create({
-           spinner: 'circles',
-           content: 'Logging Out',
-           duration: 3000,
-         });
-         loader.present();
-         loader.onDidDismiss(() => {
-           this.openPage(LoginPage);
-         })
+      this.angularFireAuth.auth.onAuthStateChanged(currentUser => {
+        if (currentUser == null) {
+          alert('User Logged Out');
+          let loader = this.loadingCtrl.create({
+            spinner: 'circles',
+            content: 'Logging Out',
+            duration: 3000,
+          });
+          loader.present();
+          loader.onDidDismiss(() => {
+            this.openPage(LoginPage);
+          })
         }
       });
     }).catch(signoutError => {
