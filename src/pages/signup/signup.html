@@ -7,34 +7,45 @@
 
 <ion-content padding style="background-color: beige" text-center>
   <img src="../../assets/imgs/signup-icon3.png" width="150" height="150">
-  <ion-item-group style="box-shadow: 4px 10px 14px -1px rgba(0,0,0,0.27); height: auto;  opacity: 0.90; border: 2px solid transparent; margin-top: 20px;" text-left>
+  <form [formGroup]="signupForm" (submit)="showSignupConfirmationAlert()" style="box-shadow: 4px 10px 14px -1px rgba(0,0,0,0.27); height: auto;  opacity: 0.90; border: 2px solid transparent; margin-top: 20px;" text-left>
       <ion-item>
         <ion-icon item-left name="contact"></ion-icon>
-        <ion-input type="text" placeholder="Full Name" required [(ngModel)]="fullName"></ion-input>
+        <ion-input type="text" placeholder="Full Name" formControlName="fullName" [(ngModel)]="fullName" required ></ion-input>
+        <button ion-button type="button"  clear icon-only item-right (click)="showHelperTextForInput(fullNameInputHelpText)" >
+          <ion-icon name="help-circle" style="color: black;"></ion-icon>
+        </button>
       </ion-item>
 
     <ion-item>
       <ion-icon item-left name="at"></ion-icon>
-      <ion-input type="email" placeholder="Email" [(ngModel)]="user.emailAddress" required></ion-input>
+      <ion-input type="email" placeholder="Email" formControlName="email" [(ngModel)]="user.emailAddress" required></ion-input>
+      <button ion-button type="button"  clear icon-only item-right (click)="showHelperTextForInput(emailInputHelpText)" >
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
+      </button>
     </ion-item>
 
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="passwordType" placeholder="Password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
-      <button ion-button clear icon-only item-right (click)="hideShowPassword()" >
+      <ion-input [type]="passwordType" placeholder="Password" formControlName="password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
+      <button ion-button type="button" clear icon-only item-right (click)="hideShowPassword()" >
         <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
       </button>
+      <button ion-button type="button"  clear icon-only item-right (click)="showHelperTextForInput(passwordInputHelpText)" >
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
+      </button>
     </ion-item>
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="confirmationPasswordType" placeholder="Confirm Password" clearOnEdit="false" required></ion-input>
-      <button ion-button clear icon-only item-right (click)="hideShowPasswordForConfirmPassword()" >
+      <ion-input [type]="confirmationPasswordType" placeholder="Confirm Password" formControlName="confirmPassword" clearOnEdit="false" required></ion-input>
+      <button ion-button type="button" clear icon-only item-right (click)="hideShowPasswordForConfirmPassword()" >
         <ion-icon [name]="confirmationPasswordIcon" style="color: black;"></ion-icon>
       </button>
+      <button ion-button type="button"  clear icon-only item-right (click)="showHelperTextForInput(confirmPasswordInputHelpText)" >
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
+      </button>
     </ion-item>
-  </ion-item-group>
 
-  <button ion-button block icon-start color="danger" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="getLocationFromUser()">
+  <button ion-button type="button" block icon-start color="danger" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="getLocationFromUser()">
     <ion-icon name="locate"></ion-icon>
     LOCATION
   </button>
@@ -51,10 +62,10 @@
     mandatory to complete your registration
   </p>
 
-  <button ion-button block [disabled]="signupButtonDisabledFlag"  style= "background-color: mediumblue; margin-top: 25px; font-family: 'Monotype Corsiva';font-size: 16px;" (click)="showSignupConfirmationAlert()">
+  <button ion-button type="submit" block [disabled]="signupButtonDisabledFlag || !signupForm.valid"  style= "background-color: mediumblue; margin-top: 25px; font-family: 'Monotype Corsiva';font-size: 16px;">
     Signup
   </button>
-
+  </form>
   <p style="font-weight: bold;font-size: 16px; font-family:'Calibri Light', sans-serif; margin-top: 50px;">Already Have An Account?</p>
   <a style="font-weight: bold;font-size: 18px; font-family: 'Calibri Light', sans-serif;" (click)="navigateToLoginPage()">Login Now!</a>
 

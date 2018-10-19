@@ -5,31 +5,43 @@
 </ion-header>
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-<ion-content padding text-center style="background-color: beige">
+<ion-content padding text-center style="background-color: beige" >
   <img src="../../assets/imgs/collaboration.png" width="150" height="150">
-  <ion-item-group style=" box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
-    <ion-item>
-      <ion-icon item-left name="at"></ion-icon>
-      <ion-input type="email" placeholder="Email" [(ngModel)]="user.emailAddress" email required></ion-input>
-    </ion-item>
+  <form [formGroup]= "loginForm" (submit)="loginWithEmailAndPassword(user)" text-left>
+      <ion-item no-lines>
+        <ion-icon item-left name="at"></ion-icon>
+        <ion-input type="email" placeholder="Email" formControlName="email" [(ngModel)]="user.emailAddress" email required (mouseon)="inputMouseOn()"></ion-input>
+        <button ion-button type="button"  clear icon-only item-right (click)="showHelperTextForInput(emailInputHelpText)" >
+          <ion-icon name="help-circle" style="color: black;"></ion-icon>
+        </button>
+      </ion-item>
+      <mat-error style="color: red;" *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid"><ion-icon name="close" margin-right></ion-icon>{{getEmailValidationError()}}</mat-error>
+      <mat-hint  style="color: green;" *ngIf="loginForm.controls['email'].valid"><ion-icon name="checkmark" color="secondary" margin-right></ion-icon>OK</mat-hint>
 
-    <ion-item>
-      <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="passwordType" placeholder="Password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
-      <button ion-button clear icon-only item-right (click)="hideShowPassword()" >
-        <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-item-group>
+      <ion-item no-lines margin-top>
+        <ion-icon item-left name="lock"></ion-icon>
+        <ion-input [type]="passwordType" placeholder="Password" formControlName="password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
+        <button ion-button type="button"  clear icon-only item-right (click)="hideShowPassword()" >
+          <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
+        </button>
+
+        <button ion-button type="button"  clear icon-only item-right (click)="showHelperTextForInput(passwordInputHelpText)" >
+          <ion-icon name="help-circle" style="color: black;"></ion-icon>
+        </button>
+
+      </ion-item>
+    <mat-error style="color: red;" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid"><ion-icon name="close" margin-right></ion-icon>{{getPasswordValidationError()}}</mat-error>
+    <mat-hint  style="color: green;" *ngIf="loginForm.controls['password'].valid"><ion-icon name="checkmark" color="secondary" margin-right></ion-icon>OK</mat-hint>
 
   <ion-item no-lines no-padding no-margin style="background-color: beige">
     <a item-right style="font-family: 'Calibri Light', sans-serif; font-weight: bold; font-size: 18px;"(click)="sendResetPasswordEmail(user.emailAddress)" >Forgot Password?</a>
   </ion-item>
 
-  <button ion-button block icon-start style="background-color: limegreen;font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginWithEmailAndPassword(user)">
+  <button ion-button type="submit" block icon-start style="background-color: limegreen;font-family: 'Monotype Corsiva';font-size: 16px;" [disabled]="!loginForm.valid">
     <ion-icon name="log-in"></ion-icon>
     Login
   </button>
+  </form>
 
 
   <p text-center style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold; margin-top: 25px;">

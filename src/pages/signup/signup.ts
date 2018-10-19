@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { AngularFireAuth} from 'angularfire2/auth';
-import {User} from "../../models/user";
-import {LoginPage} from "../login/login";
-import {ReportsPage} from "../reports/reports";
-import {PhoneVerificationPage} from "../phone-verification/phone-verification";
+import {NavController, NavParams, AlertController, ToastController} from 'ionic-angular';
+import { User } from "../../models/user";
+import { LoginPage } from "../login/login";
+import { PhoneVerificationPage } from "../phone-verification/phone-verification";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {passwordMatchValidator} from "../../CustomValidators/password-match";
 
 /**
  * Generated class for the SignupPage page.
@@ -25,9 +25,34 @@ export class SignupPage {
   signupButtonDisabledFlag: boolean = true;
   fullName: string;
   user = {} as User;
+  signupForm: FormGroup;
+  fullNameInputHelpText: string = 'Enter Your Full Name';
+  emailInputHelpText: string = 'Enter Your Email Address';
+  passwordInputHelpText: string = 'Password Must be At Least 8 Characters';
+  confirmPasswordInputHelpText: string = 'Re-type Your Password';
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public angularFireAuth: AngularFireAuth, public alertCtrl: AlertController) {
+              public alertCtrl: AlertController, public toastCtrl: ToastController,
+              public formBuilder: FormBuilder) {
+
+    this.signupForm = this.formBuilder.group({
+      fullName:  ['', [
+        Validators.required
+      ]],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(30)
+      ]],
+      confirmPassword : ['', [
+        Validators.required,
+        passwordMatchValidator('password')
+      ]]
+    })
   }
 
   ionViewDidLoad() {
@@ -47,16 +72,6 @@ export class SignupPage {
 
   agreeToggleChangedState() {
     this.signupButtonDisabledFlag = !this.signupButtonDisabledFlag;
-  }
-
-   async registerNewUser(user: User){
-    this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password)
-      .then(registerResult => {
-        console.log(registerResult);
-        this.navCtrl.setRoot(ReportsPage);
-      }).catch(registerError => {
-        console.error(registerError);
-    })
   }
 
   getLocationFromUser() {
@@ -84,7 +99,7 @@ export class SignupPage {
         }
       ]
     });
-    locationPromptBox.present();
+    locationPromptBox.present().then();
   }
 
   showSignupConfirmationAlert () {
@@ -109,8 +124,21 @@ export class SignupPage {
         }
       ]
     });
-    confirmationAlert.present();
+    confirmationAlert.present().then();
   }
+
+  showHelperTextForInput(inputHelpText) {
+    this.showToastMessage(inputHelpText, 2000, 'top');
+  }
+
+  showToastMessage(message, duration, position) {
+    this.toastCtrl.create({
+      message: message,
+      duration: duration,
+      position: position
+    }).present().then();
+  }
+
 
   navigateToLoginPage(): void {
     this.navCtrl.setRoot(LoginPage);

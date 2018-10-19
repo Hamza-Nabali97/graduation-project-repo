@@ -12,7 +12,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
 import {AngularFireAuth} from 'angularfire2/auth';
 import {ReportService} from "../services/report.service";
-import {Report} from "../models/report";
 
 @Component({
   templateUrl: 'app.html'
@@ -63,17 +62,16 @@ export class MyApp {
   }
 
   userLogout() {
+    let loader = this.loadingCtrl.create({
+      spinner: 'circles',
+      content: 'Logging Out'
+    });
+    loader.present().then();
     this.angularFireAuth.auth.signOut().then(() => {
       this.angularFireAuth.auth.onAuthStateChanged(currentUser => {
         if (currentUser == null) {
-          alert('User Logged Out');
-          let loader = this.loadingCtrl.create({
-            spinner: 'circles',
-            content: 'Logging Out',
-            duration: 3000,
-          });
-          loader.present();
-          loader.onDidDismiss(() => {
+         /* User Logged Out */
+          loader.dismiss().then(() => {
             this.openPage(LoginPage);
           })
         }

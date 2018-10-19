@@ -29,12 +29,14 @@ import {GooglePlus} from '@ionic-native/google-plus';
 import {Facebook} from "@ionic-native/facebook";
 import {NativeStorage} from '@ionic-native/native-storage';
 import {Geolocation} from '@ionic-native/geolocation';
-import {Camera, CameraOptions} from "@ionic-native/camera";
+import {Camera} from "@ionic-native/camera";
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {OptionsPage} from "../pages/options/options";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule } from "@angular/material";
 
 
 firebase.initializeApp(FIREBASE_CONFIG)
@@ -72,7 +74,9 @@ firebase.initializeApp(FIREBASE_CONFIG)
       apiKey: 'AIzaSyBHzZHoT7JnZJrJ7iUY2XDaZBYrDrEWXnY',
       libraries: ['places', 'geometry']
     }),
-    AgmDirectionModule     // agm-direction
+    AgmDirectionModule, // agm-direction
+    ReactiveFormsModule,
+    MatFormFieldModule
   ],
 
   bootstrap: [IonicApp],
