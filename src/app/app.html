@@ -9,7 +9,7 @@
           <ion-col>
             <div>
               <img
-                src="https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/40314904_1970126493049079_956113875332235264_n.jpg?_nc_cat=110&oh=b09e24f20ca8f763801ef778a92341fd&oe=5C60012D">
+                src="https://www.w3schools.com/howto/img_avatar.png">
             </div>
           </ion-col>
         </ion-row>
@@ -124,7 +124,7 @@
           <span ion-text color="primary">{{ 'menu.settings' | translate }}</span>
         </button>
 
-        <button ion-item menuClose>
+        <button ion-item menuClose (click)="userLogout()">
           <ion-icon name="log-out" color="primary" item-left></ion-icon>
           <span ion-text color="primary">{{ 'menu.logout' | translate }}</span>
         </button>

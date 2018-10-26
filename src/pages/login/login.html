@@ -1,59 +1,65 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bolder;">Login</ion-title>
-  </ion-navbar>
 </ion-header>
-<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-<ion-content padding text-center style="background-color: beige">
+<ion-content padding text-center>
   <img src="../../assets/imgs/collaboration.png" width="150" height="150">
-  <ion-item-group style=" box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
+  <ion-item-group
+    style=" box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
     <ion-item>
       <ion-icon item-left name="at"></ion-icon>
-      <ion-input type="email" placeholder="Email" [(ngModel)]="user.emailAddress" email required></ion-input>
+      <ion-input type="email" placeholder="{{'login.email' | translate}}" [(ngModel)]="user.emailAddress" email required
+                 [ngStyle]="{'text-align':this.platform.dir()==='rtl'? 'right' : 'left' }"
+
+      ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="passwordType" placeholder="Password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
-      <button ion-button clear icon-only item-right (click)="hideShowPassword()" >
+      <ion-input [type]="passwordType" placeholder="{{'login.password' | translate}}" [(ngModel)]="user.password"
+                 clearOnEdit="false" required></ion-input>
+      <button ion-button clear icon-only item-right (click)="hideShowPassword()">
         <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
       </button>
     </ion-item>
   </ion-item-group>
 
-  <ion-item no-lines no-padding no-margin style="background-color: beige">
-    <a item-right style="font-family: 'Calibri Light', sans-serif; font-weight: bold; font-size: 18px;"(click)="sendResetPasswordEmail(user.emailAddress)" >Forgot Password?</a>
+  <ion-item no-lines no-padding no-margin>
+    <a item-right style="font-family: 'Calibri Light', sans-serif; font-weight: bold; font-size: 18px;"
+       (click)="sendResetPasswordEmail(user.emailAddress)">{{'login.forgot_password' | translate}}</a>
   </ion-item>
 
-  <button ion-button block icon-start style="background-color: limegreen;font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginWithEmailAndPassword(user)">
+  <button ion-button block icon-start
+          style="background-color: limegreen;font-family: 'Monotype Corsiva';font-size: 16px;"
+          (click)="loginWithEmailAndPassword(user)">
     <ion-icon name="log-in"></ion-icon>
-    Login
+    {{'login.login' | translate}}
   </button>
 
 
   <p text-center style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold; margin-top: 25px;">
-    OR
+    {{'login.or' | translate}}
   </p>
 
   <!--<p text-center style="font-family: 'Gill Sans MT Condensed'; font-size: 24px; font-weight: bold; margin-top: 0px;">-->
   <!--Login With-->
   <!--</p>-->
 
-    <button block ion-button icon-start color="facebook" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginWithFacebook()">
-      <ion-icon name="logo-facebook"></ion-icon>
-      Login With Facebook
-    </button>
+  <button block ion-button icon-start color="facebook" style="font-family: 'Monotype Corsiva';font-size: 16px;"
+          (click)="loginWithFacebook()">
+    <ion-icon name="logo-facebook"></ion-icon>
+    {{'login.facebook' | translate}}
+  </button>
 
-    <button block ion-button icon-start color="google" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginWithGoogle()">
-      <ion-icon name="logo-google"></ion-icon>
-      Login With Google
-    </button>
+  <button block ion-button icon-start color="google" style="font-family: 'Monotype Corsiva';font-size: 16px;"
+          (click)="loginWithGoogle()">
+    <ion-icon name="logo-google"></ion-icon>
+    {{'login.google' | translate}}
+  </button>
 
-    <button ion-button block icon-start color="guest" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="loginAsGuest()">
-      <ion-icon name="person"></ion-icon>
-      Login as Guest
-    </button>
+  <button ion-button block icon-start color="guest" style="font-family: 'Monotype Corsiva';font-size: 16px;"
+          (click)="loginAsGuest()">
+    <ion-icon name="person"></ion-icon>
+    {{'login.guest' | translate}}
+  </button>
 
 
   <p text-center style="
@@ -61,7 +67,8 @@
     font-size: 16px;
     font-weight: bolder;
     margin-top: 40px;
-    "> Don't Have An Account? <a (click)="navigateToSignUpPage()" style="font-size: 18px;">Register Now!</a>
+    "> {{'login.account' | translate}} <a (click)="navigateToSignUpPage()" style="font-size: 18px;">{{'login.register' |
+    translate}}</a>
   </p>
 
 

@@ -3,7 +3,8 @@ import {IonicPage, LoadingController, ToastController} from 'ionic-angular';
 import {Location} from "../../models/location";
 import {Geolocation} from '@ionic-native/geolocation';
 import {} from 'googlemaps';
-import {MapsAPILoader} from '@agm/core'
+import {ReportService} from "../../services/report.service";
+import {Report} from "../../models/report";
 
 @IonicPage()
 @Component({
@@ -17,47 +18,31 @@ export class OnMyRoutePage {
   destination: Location;
   destinationIsSet = false;
   getdirectionIsSet = false;
+  origin: any;
+  dest: any;
+  reportsPoints: Location[] = [];
+  reports: Report[];
 
 
-  waypoints: object = [
-    {
-      location: {lat: 31.90537214457491, lng: 35.19275284326636},
-      stopover: true,
-    },
-    {
-      location: {lat: 31.90675938835044, lng: 35.189086933782164},
-      stopover: true,
-    },
-    {
-      location: {lat: 31.90335907697418, lng: 35.18656923353228},
-      stopover: true,
-    },
-    {
-      location: {lat: 31.89704387897999, lng: 35.18742754025334},
-      stopover: true,
+  ionViewWillEnter() {
+    this.onLocate();
+    this.reports = this.reportService.getReports();
+
+    for (let report of this.reports) {
+      this.reportsPoints.push(report.location);
     }
-  ];
 
-  points: Location[] = [new Location(31.90537214457491, 35.19275284326636),
-    new Location(31.90675938835044, 35.189086933782164),
-    new Location(31.90335907697418, 35.18656923353228),
-    new Location(31.89704387897999, 35.18742754025334)];
+  }
 
-  origin: any
-  dest: any
-
-  constructor(private mapsAPILoader: MapsAPILoader, private geolocation: Geolocation, private loadingCtrl: LoadingController,
+  constructor(private reportService: ReportService, private geolocation: Geolocation, private loadingCtrl: LoadingController,
               private toastCtrl: ToastController) {
   }
 
 
   displayDirection(event: any) {
-
-
+    this.reportService.removeOnMyRouteReports();
     let inputPath = event.routes[0].overview_path;
-
     let newPath: any[] = [];
-
 
     inputPath.forEach(point => {
       newPath.push(new google.maps.LatLng(point.lat(), point.lng()));
@@ -71,12 +56,14 @@ export class OnMyRoutePage {
 
     console.log(newPath);
 
+    for (var i = 0; i < (this.reportsPoints.length); i++) {
 
-    for (let point of this.points) {
+      let reportPoint = new google.maps.LatLng(this.reportsPoints[i].lat, this.reportsPoints[i].lng);
+      if (google.maps.geometry.poly.isLocationOnEdge(reportPoint, line, 10e-5)) {
 
-      let myPosition = new google.maps.LatLng(point.lat, point.lng);
+        console.log("in " + this.reports[i]);
 
-      if (google.maps.geometry.poly.isLocationOnEdge(myPosition, line, 10e-5)) {
+        this.reportService.addOnMyRouteReport(this.reports[i]);
 
         const toast = this.toastCtrl.create({
           message: 'Near To Problems Check It Now !!',
@@ -84,9 +71,7 @@ export class OnMyRoutePage {
         });
         toast.present();
         console.log("true");
-
       }
-
     }
 
 
@@ -101,9 +86,6 @@ export class OnMyRoutePage {
 
 
   onSetMarker(event: any) {
-    console.log(event.coords.lat);
-    console.log(event.coords.lng);
-
     this.destinationIsSet = true;
     this.destination = new Location(event.coords.lat, event.coords.lng);
   }
@@ -136,3 +118,23 @@ export class OnMyRoutePage {
 
 
 }
+
+
+// waypoints: object = [
+//   {
+//     location: {lat: 31.90537214457491, lng: 35.19275284326636},
+//     stopover: true,
+//   },
+//   {
+//     location: {lat: 31.90675938835044, lng: 35.189086933782164},
+//     stopover: true,
+//   },
+//   {
+//     location: {lat: 31.90335907697418, lng: 35.18656923353228},
+//     stopover: true,
+//   },
+//   {
+//     location: {lat: 31.89704387897999, lng: 35.18742754025334},
+//     stopover: true,
+//   }
+// ];

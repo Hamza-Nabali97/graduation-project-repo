@@ -35,6 +35,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {OptionsPage} from "../pages/options/options";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
+import {LanguagePage} from "../pages/language/language";
 
 
 firebase.initializeApp(FIREBASE_CONFIG)
@@ -52,7 +53,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     ReportPage,
     SettingsPage,
     ReportsPage,
-    OptionsPage
+    OptionsPage,
+    LanguagePage
 
   ],
   imports: [
@@ -88,7 +90,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     ReportPage,
     SettingsPage,
     ReportsPage,
-    OptionsPage
+    OptionsPage,
+    LanguagePage
 
   ],
   providers: [

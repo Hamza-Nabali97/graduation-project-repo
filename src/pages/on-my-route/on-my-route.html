@@ -9,40 +9,43 @@
 
 
 <ion-content text-center>
-  <ion-title padding>{{ 'route.select_your_direction' | translate }}:</ion-title>
+  <!--<ion-title padding>{{ 'route.select_your_direction' | translate }}:</ion-title>-->
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <button id="locateme"
-                ion-button
-                block
-                outline
-                type="button"
-                icon-left
-                (click)="onLocate()">
-          <ion-icon name="locate"></ion-icon>
-          {{ 'route.locate_me' | translate }}
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <!--<ion-grid>-->
+    <!--<ion-row>-->
+      <!--<ion-col>-->
+        <!--<button id="locateme"-->
+                <!--ion-button-->
+                <!--block-->
+                <!--outline-->
+                <!--type="button"-->
+                <!--icon-left-->
+                <!--(click)="onLocate()">-->
+          <!--<ion-icon name="locate"></ion-icon>-->
+          <!--{{ 'route.locate_me' | translate }}-->
+        <!--</button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-grid>-->
 
 
-  <div id="#map">
+  <div id="#map" style="height: 92%;width: 100%">
     <agm-map [latitude]="myLocation.lat" [longitude]="myLocation.lng" [zoom]="16" (mapClick)="onSetMarker($event)">
 
 
-      <agm-marker *ngFor="let point of points;"
+      <agm-marker *ngFor="let point of reportsPoints;let i =  index"
                   [latitude]="point.lat"
                   [longitude]="point.lng"
                   [iconUrl]="'../../assets/icon/problem1.png'">
 
-        <agm-info-window>
-          <div>
-            Problem Info..
+        <agm-info-window [isOpen]="true">
+          <div >
+            {{reports[i].description}}
+            <br>
+            <img src="{{reports[i].image}}"style="height: auto;width:120px;">
           </div>
         </agm-info-window>
+
       </agm-marker>
 
 
@@ -52,22 +55,21 @@
                   label="Me"
       ></agm-marker>
 
-      <agm-marker *ngIf="destinationIsSet && !getdirectionIsSet"
+      <agm-marker *ngIf="destinationIsSet"
                   [latitude]="destination.lat"
                   [longitude]="destination.lng"
+                  label="Destination"
       ></agm-marker>
 
-      <agm-direction  *ngIf="getdirectionIsSet"
-                      [origin]="origin"
-                      [destination]="dest"
-                      (onChange)="displayDirection($event)">
+      <agm-direction *ngIf="getdirectionIsSet"
+                     [origin]="origin"
+                     [destination]="dest"
+                     (onResponse)="displayDirection($event)">
       </agm-direction>
 
 
     </agm-map>
   </div>
-
-  <br>
 
   <button
     id="get_direction_btn"

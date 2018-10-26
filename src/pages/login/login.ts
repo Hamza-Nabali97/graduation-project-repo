@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, AlertController, NavParams, LoadingController} from 'ionic-angular';
+import {NavController, AlertController, NavParams, LoadingController, Platform} from 'ionic-angular';
 import {ReportsPage} from "../reports/reports";
 import {SignupPage} from "../signup/signup";
 import {User} from "../../models/user";
@@ -25,7 +25,7 @@ export class LoginPage {
   passwordIcon: string = 'eye-off';
   user = {} as User;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams,
+  constructor(public  platform:Platform,public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth, public googlePlus: GooglePlus,
               public facebook: Facebook,private loadingCtrl: LoadingController) {
 
@@ -118,11 +118,19 @@ export class LoginPage {
   }
 
   loginAsGuest(): void {
+    const loader = this.loadingCtrl.create({
+      content: 'Login...'
+    });
+    loader.present();
+
+
     this.angularFireAuth.auth.signInAnonymously().catch(error => {
       console.error(error);
+      loader.dismiss();
     })
     this.angularFireAuth.auth.onAuthStateChanged(authUser => {
       if(authUser){
+        loader.dismiss();
         console.log(authUser);
         this.navCtrl.setRoot(ReportsPage);
       }

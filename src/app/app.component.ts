@@ -13,13 +13,14 @@ import {LanguageService} from "../services/language";
 import {AngularFireAuth} from 'angularfire2/auth';
 import {ReportService} from "../services/report.service";
 import {Report} from "../models/report";
+import {LanguagePage} from "../pages/language/language";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-
-  rootPage: any = LoginPage;
+  rootPage:any =LanguagePage;
+  loginPage = LoginPage;
   reportsPage = ReportsPage;
   inboxPage = InboxPage;
   onMyRoutePage = OnMyRoutePage;

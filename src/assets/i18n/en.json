@@ -32,5 +32,19 @@
     "select_your_direction": "Select your direction",
     "locate_me": "Locate me",
     "get_direction": "Get Direction"
+  },
+
+  "login":{
+    "email":"Email",
+    "password":"Password",
+    "forgot_password":"Forgot Password?",
+    "or":"OR",
+    "facebook":"Login With Facebook",
+    "google":"Login With Google",
+    "guest":"Login As Guest",
+    "login":"Login",
+    "account":"Don't Have An Account?",
+    "register":"Register Now!"
+
   }
 }

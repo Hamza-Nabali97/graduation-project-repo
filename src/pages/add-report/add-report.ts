@@ -30,7 +30,7 @@ export class AddReportPage {
               public camera: Camera,
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController) {
-    this.source = "https://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg";
+    this.source = "http://www.dcwastemanagement.co.uk/wp-content/uploads/2012/03/skip1.jpg";
 
     this.isToggled = false;
 

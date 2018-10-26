@@ -9,68 +9,111 @@
 
 
 <ion-content padding>
+  <ion-card *ngFor="let report of onMyRouteReports; let i =  index">
 
-  <ion-card>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{report.user.image}}">
+      </ion-avatar>
+      <h2>{{report.user.name}}</h2>
+      <p>{{report.createdDate| date}}</p>
+      <button ion-button item-right clear small (click)="onShowReport(i)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-item>
+
+    <img src="{{report.image}}">
+
     <ion-card-content>
-      <ion-card-title color="danger">
-        Problem 1
-      </ion-card-title>
-      <p>
-        There is a problem near to you check it now !
-      </p>
+      <p>{{report.description}}</p>
     </ion-card-content>
 
-    <ion-row no-padding>
-
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name="arrow-dropright-circle"></ion-icon>
-          check it
+    <ion-row>
+      <ion-col>
+        <button ion-button color="primary" clear small icon-start (click)="toggle(i)">
+          <ion-icon
+            [name]="report.voted ? 'ios-thumbs-up' :'ios-thumbs-up-outline'" style="font-size: 25px;">
+          </ion-icon>
+          <ion-badge style="margin-right: 5px;margin-left: 5px">{{report.numberOfVotes}}</ion-badge>
+          <p id="votes">Agrements</p>
         </button>
       </ion-col>
-    </ion-row>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-      <ion-card-title color="danger">
-        Problem 2
-      </ion-card-title>
-      <p>
-        There is a problem near to you check it now !
-      </p>
-    </ion-card-content>
-
-    <ion-row no-padding>
-
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name="arrow-dropright-circle"></ion-icon>
-          check it
-        </button>
+      <ion-col align-self-center text-center>
+        <ion-note>
+          {{getTimeAgo(report)}}
+        </ion-note>
       </ion-col>
     </ion-row>
+
   </ion-card>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-card-title color="danger">
-        Problem 3
-      </ion-card-title>
-      <p>
-        There is a problem near to you check it now !
-      </p>
-    </ion-card-content>
 
-    <ion-row no-padding>
 
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name="arrow-dropright-circle"></ion-icon>
-          check it
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
+
+
+
+
+  <!--<ion-card>-->
+    <!--<ion-card-content>-->
+      <!--<ion-card-title color="danger">-->
+        <!--Problem 1-->
+      <!--</ion-card-title>-->
+      <!--<p>-->
+        <!--There is a problem near to you check it now !-->
+      <!--</p>-->
+    <!--</ion-card-content>-->
+
+    <!--<ion-row no-padding>-->
+
+      <!--<ion-col text-right>-->
+        <!--<button ion-button clear small color="danger" icon-start>-->
+          <!--<ion-icon name="arrow-dropright-circle"></ion-icon>-->
+          <!--check it-->
+        <!--</button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-card>-->
+
+  <!--<ion-card>-->
+    <!--<ion-card-content>-->
+      <!--<ion-card-title color="danger">-->
+        <!--Problem 2-->
+      <!--</ion-card-title>-->
+      <!--<p>-->
+        <!--There is a problem near to you check it now !-->
+      <!--</p>-->
+    <!--</ion-card-content>-->
+
+    <!--<ion-row no-padding>-->
+
+      <!--<ion-col text-right>-->
+        <!--<button ion-button clear small color="danger" icon-start>-->
+          <!--<ion-icon name="arrow-dropright-circle"></ion-icon>-->
+          <!--check it-->
+        <!--</button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-card>-->
+
+  <!--<ion-card>-->
+    <!--<ion-card-content>-->
+      <!--<ion-card-title color="danger">-->
+        <!--Problem 3-->
+      <!--</ion-card-title>-->
+      <!--<p>-->
+        <!--There is a problem near to you check it now !-->
+      <!--</p>-->
+    <!--</ion-card-content>-->
+
+    <!--<ion-row no-padding>-->
+
+      <!--<ion-col text-right>-->
+        <!--<button ion-button clear small color="danger" icon-start>-->
+          <!--<ion-icon name="arrow-dropright-circle"></ion-icon>-->
+          <!--check it-->
+        <!--</button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-card>-->
 
 </ion-content>
