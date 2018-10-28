@@ -13,6 +13,7 @@ import {ReportsPage} from "../pages/reports/reports";
 import {OnMyRoutePage} from "../pages/on-my-route/on-my-route";
 import {ReportPage} from "../pages/report/report";
 import {SettingsPage} from "../pages/settings/settings";
+import {UserLocationPage} from "../pages/user-location/user-location";
 
 import {AgmCoreModule} from '@agm/core';
 import {AgmDirectionModule} from 'agm-direction'   // agm-direction
@@ -54,7 +55,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     ReportPage,
     SettingsPage,
     ReportsPage,
-    OptionsPage
+    OptionsPage,
+    UserLocationPage
 
   ],
   imports: [
@@ -92,7 +94,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     ReportPage,
     SettingsPage,
     ReportsPage,
-    OptionsPage
+    OptionsPage,
+    UserLocationPage
 
   ],
   providers: [

@@ -12,6 +12,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
 import {AngularFireAuth} from 'angularfire2/auth';
 import {ReportService} from "../services/report.service";
+import {UserLocationPage} from "../pages/user-location/user-location";
+import { timer } from "rxjs";
 
 @Component({
   templateUrl: 'app.html'
@@ -24,6 +26,7 @@ export class MyApp {
   onMyRoutePage = OnMyRoutePage;
   settingsPage = SettingsPage;
   contactUs = ContactUsPage;
+  showSplash = true;
 
   @ViewChild('content') content: NavController;
 
@@ -39,6 +42,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      timer(3000).subscribe(() => this.showSplash = false)
     });
     this.initTranslate();
   }

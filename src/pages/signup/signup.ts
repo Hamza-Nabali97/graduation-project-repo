@@ -5,6 +5,7 @@ import { LoginPage } from "../login/login";
 import { PhoneVerificationPage } from "../phone-verification/phone-verification";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {passwordMatchValidator} from "../../CustomValidators/password-match";
+import {UserLocationPage} from "../user-location/user-location";
 
 /**
  * Generated class for the SignupPage page.
@@ -75,31 +76,7 @@ export class SignupPage {
   }
 
   getLocationFromUser() {
-    let locationPromptBox = this.alertCtrl.create({
-      title:'Location',
-      message:'Please Enter Your Street and City:',
-      inputs:[
-        {
-          placeholder:'Street',
-          name:'street'
-        },
-        {
-          placeholder:'City',
-          name:'city'
-        }
-      ],
-      buttons:[
-        {
-          text: 'Cancel',
-          handler: data => {}
-        },
-        {
-          text:'Submit',
-          handler: data => {alert(JSON.stringify(data.street,data.city))}
-        }
-      ]
-    });
-    locationPromptBox.present().then();
+    this.navCtrl.push(UserLocationPage).then();
   }
 
   showSignupConfirmationAlert () {
