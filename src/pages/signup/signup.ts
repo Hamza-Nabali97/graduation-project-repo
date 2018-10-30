@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { AngularFireAuth} from 'angularfire2/auth';
+import {Component} from '@angular/core';
+import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {AngularFireAuth} from 'angularfire2/auth';
 import {User} from "../../models/user";
 import {LoginPage} from "../login/login";
 import {ReportsPage} from "../reports/reports";
@@ -49,47 +49,50 @@ export class SignupPage {
     this.signupButtonDisabledFlag = !this.signupButtonDisabledFlag;
   }
 
-   async registerNewUser(user: User){
+  async registerNewUser(user: User) {
     this.angularFireAuth.auth.createUserWithEmailAndPassword(user.emailAddress, user.password)
       .then(registerResult => {
         console.log(registerResult);
         this.navCtrl.setRoot(ReportsPage);
       }).catch(registerError => {
-        console.error(registerError);
+      console.error(registerError);
     })
   }
 
   getLocationFromUser() {
     let locationPromptBox = this.alertCtrl.create({
-      title:'Location',
-      message:'Please Enter Your Street and City:',
-      inputs:[
+      title: 'Location',
+      message: 'Please Enter Your Street and City:',
+      inputs: [
         {
-          placeholder:'Street',
-          name:'street'
+          placeholder: 'Street',
+          name: 'street'
         },
         {
-          placeholder:'City',
-          name:'city'
+          placeholder: 'City',
+          name: 'city'
         }
       ],
-      buttons:[
+      buttons: [
         {
           text: 'Cancel',
-          handler: data => {}
+          handler: data => {
+          }
         },
         {
-          text:'Submit',
-          handler: data => {alert(JSON.stringify(data.street,data.city))}
+          text: 'Submit',
+          handler: data => {
+            alert(JSON.stringify(data.street, data.city))
+          }
         }
       ]
     });
     locationPromptBox.present();
   }
 
-  showSignupConfirmationAlert () {
+  showSignupConfirmationAlert() {
     const confirmationAlert = this.alertCtrl.create({
-      title:'Signup Confirmation',
+      title: 'Signup Confirmation',
       message: 'By Signing up, You Agree to our Terms & Conditions and that Your Read Data Use Policy.',
       buttons: [
         {
@@ -99,7 +102,7 @@ export class SignupPage {
           }
         },
         {
-          text:'I Agree',
+          text: 'I Agree',
           handler: () => {
             this.navCtrl.push(PhoneVerificationPage, {
               firstAndLastName: this.fullName,

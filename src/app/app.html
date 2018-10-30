@@ -3,13 +3,13 @@
   <ion-header>
     <ion-toolbar class="user-profile">
 
-      <ion-grid>
+      <ion-grid *ngIf="this.userService.getLoginUser()">
 
         <ion-row text-center>
           <ion-col>
             <div>
               <img
-                src="https://www.w3schools.com/howto/img_avatar.png">
+                src={{this.userService.getLoginUser().image}} style="background-color: white">
             </div>
           </ion-col>
         </ion-row>
@@ -17,7 +17,7 @@
         <ion-row>
           <ion-col>
             <h2 ion-text text-center color="light">
-              Yazan Yahya
+              {{this.userService.getLoginUser().name}}
             </h2>
           </ion-col>
         </ion-row>
@@ -33,11 +33,11 @@
       <button ion-item menuClose (click)="openPage(reportsPage)">
         <ion-icon name="clipboard" color="primary" item-left></ion-icon>
         <span ion-text color="primary"> {{ 'menu.reports' | translate }}</span>
-        <ion-badge item-end color="secondary">10</ion-badge>
+        <ion-badge item-end color="secondary">{{numberOfReports}}</ion-badge>
       </button>
       <button ion-item menuClose (click)="openPage(inboxPage)">
         <ion-icon name="filing" color="primary" item-left></ion-icon>
-        <ion-badge item-end color="danger">3</ion-badge>
+        <ion-badge item-end color="danger">{{numberOfMyRouteReports}}</ion-badge>
         <span ion-text color="primary">{{ 'menu.inbox' | translate }}</span>
 
       </button>
@@ -57,7 +57,7 @@
         </button>
 
         <button ion-item menuClose (click)="userLogout()">
-          <ion-icon name="log-out" color="primary" item-left ></ion-icon>
+          <ion-icon name="log-out" color="primary" item-left></ion-icon>
           <span ion-text color="primary">{{ 'menu.logout' | translate }}</span>
         </button>
       </ion-footer>
@@ -101,11 +101,11 @@
       <button ion-item menuClose (click)="openPage(reportsPage)">
         <ion-icon name="clipboard" color="primary" item-left></ion-icon>
         <span ion-text color="primary"> {{ 'menu.reports' | translate }}</span>
-        <ion-badge item-end color="secondary">10</ion-badge>
+        <ion-badge item-end color="secondary">{{numberOfReports}}</ion-badge>
       </button>
       <button ion-item menuClose (click)="openPage(inboxPage)">
         <ion-icon name="filing" color="primary" item-left></ion-icon>
-        <ion-badge item-end color="danger">3</ion-badge>
+        <ion-badge item-end color="danger">{{numberOfMyRouteReports}}</ion-badge>
         <span ion-text color="primary">{{ 'menu.inbox' | translate }}</span>
 
       </button>

@@ -1,11 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Report, ReportDoc} from "../models/report";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
+import {Observable, Subject} from "rxjs";
 
 @Injectable()
 export class ReportService {
 
-  reports: ReportDoc[] = [];
+  private reports: ReportDoc[] = [];
+  private onMyRouteReports: Report[] = [];
+
+  private subjectReports = new Subject<ReportDoc[]>();
+  private subjectRouteReports = new Subject<Report[]>();
 
   reportsCollection: AngularFirestoreCollection<Report>;
 
@@ -13,9 +18,24 @@ export class ReportService {
     this.reportsCollection = this.db.collection("reports");
   }
 
+  setReports(reports: ReportDoc[]) {
+    this.reports = reports;
+    this.subjectReports.next(this.reports);
+  }
 
-  private onMyRouteReports: Report[] = [];
+  setRouteReports(reports: Report[]) {
+    this.onMyRouteReports = reports;
+    this.subjectRouteReports.next(this.onMyRouteReports);
+  }
 
+
+  getSubjectReports(): Observable<ReportDoc[]> {
+    return this.subjectReports;
+  }
+
+  getSubjectRouteReports(): Observable<Report[]> {
+    return this.subjectRouteReports;
+  }
 
   addReport(report: Report) {
     const data = {
@@ -33,7 +53,7 @@ export class ReportService {
   }
 
   getReports() {
-    return this.reports;
+    return this.reports.slice();
   }
 
 

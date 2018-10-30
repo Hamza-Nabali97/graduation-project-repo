@@ -21,19 +21,18 @@ export class OnMyRoutePage {
   origin: any;
   dest: any;
   reportsPoints: Location[] = [];
-  reports: Report[];
+  reports: Report[] = [];
 
 
   ionViewWillEnter() {
     this.onLocate();
-
+    this.reports = [];
     this.reportService.getReports().forEach(value => {
       this.reports.push(value.report);
     });
 
-
     for (let report of this.reports) {
-      this.reportsPoints.push(new Location(report.location.lat,report.location.lng));
+      this.reportsPoints.push(new Location(report.location.lat, report.location.lng));
     }
 
   }
@@ -60,15 +59,15 @@ export class OnMyRoutePage {
 
     console.log(newPath);
 
+    let reportRoute: Report[] = [];
+
     for (var i = 0; i < (this.reportsPoints.length); i++) {
 
       let reportPoint = new google.maps.LatLng(this.reportsPoints[i].lat, this.reportsPoints[i].lng);
       if (google.maps.geometry.poly.isLocationOnEdge(reportPoint, line, 10e-5)) {
 
         console.log("in " + this.reports[i]);
-
-        this.reportService.addOnMyRouteReport(this.reports[i]);
-
+        reportRoute.push(this.reports[i]);
         const toast = this.toastCtrl.create({
           message: 'Near To Problems Check It Now !!',
           duration: 2500
@@ -77,6 +76,9 @@ export class OnMyRoutePage {
         console.log("true");
       }
     }
+
+    this.reportService.setRouteReports(reportRoute);
+    console.log("Route" + reportRoute);
 
 
   }

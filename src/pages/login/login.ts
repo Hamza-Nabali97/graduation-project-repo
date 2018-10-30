@@ -4,9 +4,11 @@ import {ReportsPage} from "../reports/reports";
 import {SignupPage} from "../signup/signup";
 import {User} from "../../models/user";
 import {AngularFireAuth} from 'angularfire2/auth';
-import { GooglePlus } from "@ionic-native/google-plus";
-import { Facebook } from "@ionic-native/facebook";
+import {GooglePlus} from "@ionic-native/google-plus";
+import {Facebook} from "@ionic-native/facebook";
 import firebase from 'firebase';
+import {AngularFirestore} from "@angular/fire/firestore";
+import {UserService} from "../../services/user.service";
 
 
 /**
@@ -25,9 +27,9 @@ export class LoginPage {
   passwordIcon: string = 'eye-off';
   user = {} as User;
 
-  constructor(public  platform:Platform,public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams,
-              public angularFireAuth: AngularFireAuth, public googlePlus: GooglePlus,
-              public facebook: Facebook,private loadingCtrl: LoadingController) {
+  constructor(public  platform: Platform, public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams,
+              public angularFireAuth: AngularFireAuth, public googlePlus: GooglePlus, public db: AngularFirestore, private userService: UserService,
+              public facebook: Facebook, private loadingCtrl: LoadingController) {
 
   }
 
@@ -93,9 +95,9 @@ export class LoginPage {
       this.angularFireAuth.auth.signInWithCredential(credential).then(info => {
           alert(JSON.stringify(info));
           this.angularFireAuth.authState.subscribe(data => {
-          alert(data.email);
-          alert(data.uid);
-          alert(data.displayName);
+            alert(data.email);
+            alert(data.uid);
+            alert(data.displayName);
           })
           alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
           this.navCtrl.setRoot(ReportsPage);
@@ -129,7 +131,14 @@ export class LoginPage {
       loader.dismiss();
     })
     this.angularFireAuth.auth.onAuthStateChanged(authUser => {
-      if(authUser){
+      if (authUser) {
+        let user = {
+          name: 'Guest',
+          emailAddress: '',
+          image: '../../assets/imgs/anonymous.png'
+        };
+
+        this.userService.setLoginUser(user);
         loader.dismiss();
         console.log(authUser);
         this.navCtrl.setRoot(ReportsPage);
@@ -140,22 +149,18 @@ export class LoginPage {
     });
   }
 
-  sendResetPasswordEmail(emailAddress: any){
+  sendResetPasswordEmail(emailAddress: any) {
     this.angularFireAuth.auth.sendPasswordResetEmail(emailAddress).then(emailSendSuccess => {
       let emailSentAlert = this.alertCtrl.create({
         title: 'Email Sent!',
         subTitle: `Please Follow Steps Sent to, ${emailAddress}` + `to Reset Your Password`,
-        buttons:['OK']
+        buttons: ['OK']
       });
       emailSentAlert.present();
     }).catch(emailSendError => {
       alert('ERROR: INVALID EMAIL ADDRESS');
     })
   }
-
-
-
-
 
 
 }

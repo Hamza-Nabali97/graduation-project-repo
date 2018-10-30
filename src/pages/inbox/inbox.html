@@ -16,7 +16,7 @@
         <!--<img src="{{report.user.image}}">-->
       <!--</ion-avatar>-->
       <!--<h2>{{report.user.name}}</h2>-->
-      <p>{{report.createdDate| date}}</p>
+      <p>{{report.createdDate.toDate()| date}}</p>
       <button ion-button item-right clear small (click)="onShowReport(i)">
         <ion-icon name="more"></ion-icon>
       </button>

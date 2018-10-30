@@ -17,7 +17,7 @@
       <ion-icon class="icon-color" name="contact" item-start></ion-icon>
       User
       <!--<ion-note item-end>-->
-        <!--{{report.user.name}}-->
+      <!--{{report.user.name}}-->
       <!--</ion-note>-->
     </ion-item>
 
@@ -33,9 +33,9 @@
     <ion-item>
       <ion-icon class="icon-color" name="thumbs-up" item-start></ion-icon>
       Number of votes
-      <!--<ion-note item-end>-->
-        <!--{{report.numberOfVotes}}-->
-      <!--</ion-note>-->
+      <ion-note item-end>
+        {{report.whoAgree.length}}
+      </ion-note>
     </ion-item>
 
     <ion-item>
@@ -50,7 +50,7 @@
     <ion-item>
       <ion-icon class="icon-color" name="image" item-start></ion-icon>
       <ion-note item-right>
-        <img  src={{report.image}}>
+        <img src={{report.image}}>
       </ion-note>
     </ion-item>
 

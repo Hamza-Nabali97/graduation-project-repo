@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {MenuController, NavController, LoadingController, Platform} from 'ionic-angular';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {LoadingController, MenuController, NavController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
@@ -12,26 +12,42 @@ import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
 import {AngularFireAuth} from 'angularfire2/auth';
 import {ReportService} from "../services/report.service";
-import {Report} from "../models/report";
-import {LanguagePage} from "../pages/language/language";
+import {Subscription} from "rxjs";
+import {UserService} from "../services/user.service";
+
+// import {LanguagePage} from "../pages/language/language";
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
-  rootPage:any =LanguagePage;
-  loginPage = LoginPage;
+export class MyApp implements OnDestroy {
+  // rootPage:any =LanguagePage;
+  // loginPage = LoginPage;
+  rootPage: any = LoginPage;
   reportsPage = ReportsPage;
   inboxPage = InboxPage;
   onMyRoutePage = OnMyRoutePage;
   settingsPage = SettingsPage;
   contactUs = ContactUsPage;
+  numberOfReports: number = 0;
+  numberOfMyRouteReports: number = 0;
+  subscriptionReports: Subscription;
+  subscriptionRouteReports: Subscription;
 
   @ViewChild('content') content: NavController;
 
-  constructor(public reportService: ReportService, private languageService: LanguageService, private translate: TranslateService,
+  constructor(private userService: UserService, public reportService: ReportService, private languageService: LanguageService, private translate: TranslateService,
               public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private menuCtrl: MenuController, private loadingCtrl: LoadingController, private angularFireAuth: AngularFireAuth) {
+    this.subscriptionReports = this.reportService.getSubjectReports().subscribe(value => {
+      this.numberOfReports = value.length;
+    });
+
+    this.subscriptionRouteReports = this.reportService.getSubjectRouteReports().subscribe(value => {
+      this.numberOfMyRouteReports = value.length;
+    });
+
+
     this.initializeApp();
   }
 
@@ -44,6 +60,7 @@ export class MyApp {
     });
     this.initTranslate();
   }
+
 
   openPage(page: any) {
     this.content.setRoot(page);
@@ -82,6 +99,11 @@ export class MyApp {
     }).catch(signoutError => {
       alert(JSON.stringify(signoutError))
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionReports.unsubscribe();
+    this.subscriptionRouteReports.unsubscribe();
   }
 
 }

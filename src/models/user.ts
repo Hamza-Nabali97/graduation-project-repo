@@ -6,3 +6,9 @@ export class User {
               public anonymomus: boolean) {
   }
 }
+
+export interface UserDoc {
+  name: string;
+  emailAddress: string;
+  image: string;
+}
