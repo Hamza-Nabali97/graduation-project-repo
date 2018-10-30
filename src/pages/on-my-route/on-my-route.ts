@@ -26,10 +26,14 @@ export class OnMyRoutePage {
 
   ionViewWillEnter() {
     this.onLocate();
-    this.reports = this.reportService.getReports();
+
+    this.reportService.getReports().forEach(value => {
+      this.reports.push(value.report);
+    });
+
 
     for (let report of this.reports) {
-      this.reportsPoints.push(report.location);
+      this.reportsPoints.push(new Location(report.location.lat,report.location.lng));
     }
 
   }

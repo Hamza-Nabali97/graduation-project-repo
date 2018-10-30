@@ -36,6 +36,7 @@ import {OptionsPage} from "../pages/options/options";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
 import {LanguagePage} from "../pages/language/language";
+import {AngularFirestore} from "@angular/fire/firestore";
 
 
 firebase.initializeApp(FIREBASE_CONFIG)
@@ -106,6 +107,7 @@ firebase.initializeApp(FIREBASE_CONFIG)
     UserService,
     Camera,
     Geolocation,
+    AngularFirestore,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

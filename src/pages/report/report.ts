@@ -35,8 +35,8 @@ export class ReportPage implements OnInit{
     this.index = this.navParams.get('index');
   }
 
-  onDeletereport() {
-    this.reportService.removeReport(this.index);
-    this.navCtrl.popToRoot();
-  }
+  // onDeletereport() {
+  //   this.reportService.removeReport(this.index);
+  //   this.navCtrl.popToRoot();
+  // }
 }

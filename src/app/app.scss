@@ -11,8 +11,13 @@
   }
 }
 
+[dir="rtl"] .text-input {
+  text-align: right;
+}
 
-
+html[dir="ltr"] .text-input {
+  text-align: left;
+}
 
 
 

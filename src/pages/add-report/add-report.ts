@@ -8,6 +8,7 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 import {Geolocation} from '@ionic-native/geolocation';
 import {} from 'googlemaps';
 import {Report} from "../../models/report";
+import {AngularFireAuth} from "@angular/fire/auth";
 
 
 @IonicPage()
@@ -23,6 +24,7 @@ export class AddReportPage {
   isToggled: false
 
   constructor(private geolocation: Geolocation,
+              private angularFire: AngularFireAuth,
               public userService: UserService,
               public reportService: ReportService,
               public navCtrl: NavController,
@@ -82,7 +84,28 @@ export class AddReportPage {
   }
 
   onAddReport(form: NgForm) {
-    this.reportService.addReport(new Report(form.value.description, this.source, this.userService.getLoginUser(this.isToggled), new Location(this.myLocation.lat, this.myLocation.lng), 0, new Date(), false));
+    let user = '';
+    if (this.angularFire.auth.currentUser) {
+      user = this.angularFire.auth.currentUser.uid;
+    }
+
+    if (form.value.anonymous || this.angularFire.auth.signInAnonymously()) {
+      user = 'anonymous';
+    }
+
+
+    const data = {
+      ownerId: user,
+      description: form.value.description,
+      location: {lat: this.myLocation.lat, lng: this.myLocation.lng},
+      image: this.source,
+      createdDate: new Date(),
+      status: 'submitted',
+      lastUpdate: new Date(),
+      whoAgree: []
+    };
+
+    this.reportService.addReport(data);
     form.reset();
     this.navCtrl.popToRoot();
   }

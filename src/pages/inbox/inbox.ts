@@ -31,17 +31,17 @@ export class InboxPage {
     this.navCtrl.push(ReportPage, params);
   }
 
-  toggle(index) {
-    if (this.onMyRouteReports[index].voted == false) {
-      this.onMyRouteReports[index].numberOfVotes += 1;
-      this.onMyRouteReports[index].voted = true;
-    }
-
-    else if (this.onMyRouteReports[index].voted == true) {
-      this.onMyRouteReports[index].numberOfVotes -= 1;
-      this.onMyRouteReports[index].voted = false;
-    }
-  }
+  // toggle(index) {
+  //   if (this.onMyRouteReports[index].voted == false) {
+  //     this.onMyRouteReports[index].numberOfVotes += 1;
+  //     this.onMyRouteReports[index].voted = true;
+  //   }
+  //
+  //   else if (this.onMyRouteReports[index].voted == true) {
+  //     this.onMyRouteReports[index].numberOfVotes -= 1;
+  //     this.onMyRouteReports[index].voted = false;
+  //   }
+  // }
 
 
 }
