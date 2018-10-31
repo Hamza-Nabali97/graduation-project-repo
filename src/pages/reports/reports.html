@@ -21,9 +21,9 @@
 
     <ion-item>
       <ion-avatar item-start>
-        <img src="{{report.report.ownerId==='anonymous'?'../../assets/imgs/anonymous.png':''}}">
+        <img src="{{report.report.ownerId==='anonymous'?'../../assets/imgs/anonymous.png':'https://www.w3schools.com/howto/img_avatar.png'}}">
       </ion-avatar>
-      <h2>{{report.report.ownerId==='anonymous'? 'Guest':''}}</h2>
+      <h2>{{report.report.ownerId==='anonymous'? 'Guest':'User'}}</h2>
       <p>{{report.report.createdDate.toDate()| date}}</p>
       <button ion-button item-right clear small (click)="onShowReport(i)">
         <ion-icon name="more"></ion-icon>
@@ -40,7 +40,7 @@
 
       <ion-col>
         <button ion-button color="primary" clear small icon-start (click)="toggle(report)">
-          <ion-icon
+          <ion-icon *ngIf="this.angularFire.auth.currentUser"
             [name]="report.report.whoAgree.indexOf(this.angularFire.auth.currentUser.uid)>-1 ? 'ios-thumbs-up' :'ios-thumbs-up-outline'"
             style="font-size: 25px;">
           </ion-icon>

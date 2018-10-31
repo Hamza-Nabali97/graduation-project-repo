@@ -15,7 +15,7 @@ import {ReportPage} from "../pages/report/report";
 import {SettingsPage} from "../pages/settings/settings";
 
 import {AgmCoreModule} from '@agm/core';
-import {AgmDirectionModule} from 'agm-direction'   // agm-direction
+import {AgmDirectionModule} from 'agm-direction' // agm-direction
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
@@ -29,13 +29,13 @@ import {GooglePlus} from '@ionic-native/google-plus';
 import {Facebook} from "@ionic-native/facebook";
 import {NativeStorage} from '@ionic-native/native-storage';
 import {Geolocation} from '@ionic-native/geolocation';
-import {Camera, CameraOptions} from "@ionic-native/camera";
+import {Camera} from "@ionic-native/camera";
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {OptionsPage} from "../pages/options/options";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
-// import {LanguagePage} from "../pages/language/language";
+import {LanguagePage} from "../pages/language/language";
 import {AngularFirestore} from "@angular/fire/firestore";
 
 
@@ -54,9 +54,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     ReportPage,
     SettingsPage,
     ReportsPage,
-    OptionsPage
-    // ,
-    // LanguagePage
+    OptionsPage,
+    LanguagePage
 
   ],
   imports: [
@@ -92,9 +91,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     ReportPage,
     SettingsPage,
     ReportsPage,
-    OptionsPage
-    // ,
-    // LanguagePage
+    OptionsPage,
+    LanguagePage
 
   ],
   providers: [

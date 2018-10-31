@@ -89,7 +89,7 @@ export class AddReportPage {
       user = this.angularFire.auth.currentUser.uid;
     }
 
-    if (form.value.anonymous || this.angularFire.auth.signInAnonymously()) {
+    if (form.value.anonymous || this.angularFire.auth.currentUser.isAnonymous) {
       user = 'anonymous';
     }
 

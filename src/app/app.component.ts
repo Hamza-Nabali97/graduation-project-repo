@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {LoadingController, MenuController, NavController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -12,42 +12,27 @@ import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from "../services/language";
 import {AngularFireAuth} from 'angularfire2/auth';
 import {ReportService} from "../services/report.service";
-import {Subscription} from "rxjs";
 import {UserService} from "../services/user.service";
-
-// import {LanguagePage} from "../pages/language/language";
+import {LanguagePage} from "../pages/language/language";
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp implements OnDestroy {
-  // rootPage:any =LanguagePage;
-  // loginPage = LoginPage;
-  rootPage: any = LoginPage;
+export class MyApp{
+  rootPage: any = LanguagePage;
+  loginPage = LoginPage;
   reportsPage = ReportsPage;
   inboxPage = InboxPage;
   onMyRoutePage = OnMyRoutePage;
   settingsPage = SettingsPage;
   contactUs = ContactUsPage;
-  numberOfReports: number = 0;
-  numberOfMyRouteReports: number = 0;
-  subscriptionReports: Subscription;
-  subscriptionRouteReports: Subscription;
+
 
   @ViewChild('content') content: NavController;
 
   constructor(private userService: UserService, public reportService: ReportService, private languageService: LanguageService, private translate: TranslateService,
               public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private menuCtrl: MenuController, private loadingCtrl: LoadingController, private angularFireAuth: AngularFireAuth) {
-    this.subscriptionReports = this.reportService.getSubjectReports().subscribe(value => {
-      this.numberOfReports = value.length;
-    });
-
-    this.subscriptionRouteReports = this.reportService.getSubjectRouteReports().subscribe(value => {
-      this.numberOfMyRouteReports = value.length;
-    });
-
-
     this.initializeApp();
   }
 
@@ -84,6 +69,7 @@ export class MyApp implements OnDestroy {
     this.angularFireAuth.auth.signOut().then(() => {
       this.angularFireAuth.auth.onAuthStateChanged(currentUser => {
         if (currentUser == null) {
+          this.userService.setLoginUser(null);
           alert('User Logged Out');
           let loader = this.loadingCtrl.create({
             spinner: 'circles',
@@ -101,9 +87,5 @@ export class MyApp implements OnDestroy {
     })
   }
 
-  ngOnDestroy(): void {
-    this.subscriptionReports.unsubscribe();
-    this.subscriptionRouteReports.unsubscribe();
-  }
 
 }

@@ -33,11 +33,11 @@
       <button ion-item menuClose (click)="openPage(reportsPage)">
         <ion-icon name="clipboard" color="primary" item-left></ion-icon>
         <span ion-text color="primary"> {{ 'menu.reports' | translate }}</span>
-        <ion-badge item-end color="secondary">{{numberOfReports}}</ion-badge>
+        <ion-badge item-end color="secondary">{{this.reportService.getReports().length}}</ion-badge>
       </button>
       <button ion-item menuClose (click)="openPage(inboxPage)">
         <ion-icon name="filing" color="primary" item-left></ion-icon>
-        <ion-badge item-end color="danger">{{numberOfMyRouteReports}}</ion-badge>
+        <ion-badge item-end color="danger">{{this.reportService.getOnMyRouteReports().length}}</ion-badge>
         <span ion-text color="primary">{{ 'menu.inbox' | translate }}</span>
 
       </button>
@@ -101,11 +101,11 @@
       <button ion-item menuClose (click)="openPage(reportsPage)">
         <ion-icon name="clipboard" color="primary" item-left></ion-icon>
         <span ion-text color="primary"> {{ 'menu.reports' | translate }}</span>
-        <ion-badge item-end color="secondary">{{numberOfReports}}</ion-badge>
+        <ion-badge item-end color="secondary">{{this.reportService.getReports().length}}</ion-badge>
       </button>
       <button ion-item menuClose (click)="openPage(inboxPage)">
         <ion-icon name="filing" color="primary" item-left></ion-icon>
-        <ion-badge item-end color="danger">{{numberOfMyRouteReports}}</ion-badge>
+        <ion-badge item-end color="danger">{{this.reportService.getOnMyRouteReports().length}}</ion-badge>
         <span ion-text color="primary">{{ 'menu.inbox' | translate }}</span>
 
       </button>
