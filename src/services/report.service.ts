@@ -1,22 +1,46 @@
 import {Injectable} from '@angular/core';
 import {Report, ReportDoc} from "../models/report";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
+import {AngularFireAuth} from "angularfire2/auth";
 
 @Injectable()
 export class ReportService {
 
   private reports: ReportDoc[] = [];
   private onMyRouteReports: Report[] = [];
+  private visableReport: ReportDoc[] = [];
+  private reportsCollection: AngularFirestoreCollection<Report>;
 
-  reportsCollection: AngularFirestoreCollection<Report>;
-
-  constructor(public db: AngularFirestore) {
+  constructor(public db: AngularFirestore, private angularFire: AngularFireAuth) {
     this.reportsCollection = this.db.collection("reports");
   }
 
   setReports(reports: ReportDoc[]) {
     this.reports = reports;
+    this.visableReport = reports;
   }
+
+
+  getVisibleReports() {
+    return this.visableReport;
+  }
+
+  displayMyReports() {
+    const uid = this.angularFire.auth.currentUser.uid;
+    this.visableReport = this.reports.filter(value => value.report.ownerId === uid);
+  }
+
+  sortByRecentReports() {
+    this.visableReport = this.reports;
+    this.visableReport.sort((a, b) => a.report.createdDate > b.report.createdDate ? -1 : a.report.createdDate < b.report.createdDate ? 1 : 0)
+  }
+
+
+  sortByMostVotedReports() {
+    this.visableReport = this.reports;
+    this.visableReport.sort((a, b) => a.report.whoAgree.length > b.report.whoAgree.length ? -1 : a.report.whoAgree.length < b.report.whoAgree.length ? 1 : 0)
+  }
+
 
   setRouteReports(reports: Report[]) {
     this.onMyRouteReports = reports;

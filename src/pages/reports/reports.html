@@ -17,11 +17,12 @@
 
 <ion-content>
 
-  <ion-card *ngFor="let report of reports; let i =  index">
+  <ion-card *ngFor="let report of this.reportService.getVisibleReports(); let i =  index" id="{{i}}">
 
     <ion-item>
       <ion-avatar item-start>
-        <img src="{{report.report.ownerId==='anonymous'?'../../assets/imgs/anonymous.png':'https://www.w3schools.com/howto/img_avatar.png'}}">
+        <img
+          src="{{report.report.ownerId==='anonymous'?'../../assets/imgs/anonymous.png':'https://www.w3schools.com/howto/img_avatar.png'}}">
       </ion-avatar>
       <h2>{{report.report.ownerId==='anonymous'? 'Guest':'User'}}</h2>
       <p>{{report.report.createdDate.toDate()| date}}</p>
@@ -41,8 +42,8 @@
       <ion-col>
         <button ion-button color="primary" clear small icon-start (click)="toggle(report)">
           <ion-icon *ngIf="this.angularFire.auth.currentUser"
-            [name]="report.report.whoAgree.indexOf(this.angularFire.auth.currentUser.uid)>-1 ? 'ios-thumbs-up' :'ios-thumbs-up-outline'"
-            style="font-size: 25px;">
+                    [name]="report.report.whoAgree.indexOf(this.angularFire.auth.currentUser.uid)>-1 ? 'ios-thumbs-up' :'ios-thumbs-up-outline'"
+                    style="font-size: 25px;">
           </ion-icon>
           <ion-badge style="margin-right: 5px;margin-left: 5px">{{report.report.whoAgree.length}}</ion-badge>
           <p id="votes">Agrements</p>

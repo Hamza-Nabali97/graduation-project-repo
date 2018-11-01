@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {
-  IonicPage,
+  IonicPage, Loading,
   LoadingController,
   NavController,
   NavParams,
@@ -16,7 +16,6 @@ import {AddReportPage} from "../add-report/add-report";
 import {Report, ReportDoc} from "../../models/report";
 import {Subscription} from "rxjs/Rx";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
-import {UserDoc} from "../../models/user";
 import {UserService} from "../../services/user.service";
 
 
@@ -29,27 +28,26 @@ export class ReportsPage implements OnDestroy {
 
   reports: ReportDoc[] = [];
   index: number;
+  loader: Loading;
   subscription: Subscription;
   reportsCollection: AngularFirestoreCollection<Report>;
-
 
   constructor(private loadingCtrl: LoadingController, private userService: UserService, public db: AngularFirestore, public reportService: ReportService, public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private angularFire: AngularFireAuth, public popoverCtrl: PopoverController) {
 
     this.reportsCollection = this.db.collection("reports");
 
-    const loader = this.loadingCtrl.create({
-      content: 'Preparing Data ...'
+    this.loader = this.loadingCtrl.create({
+      content: 'Loading Data ...'
     });
-    loader.present();
 
     this.subscription = this.reportsCollection.snapshotChanges().subscribe(value => {
-
+      this.loader.present();
       this.reports = [];
-      value.forEach(value1 => {
+      value.forEach((value1, index: number) => {
         this.reports.push({reportId: value1.payload.doc.id, report: value1.payload.doc.data()});
       });
       this.reportService.setReports(this.reports);
-      loader.dismiss();
+      this.loader.dismiss();
     });
 
   }
@@ -107,6 +105,5 @@ export class ReportsPage implements OnDestroy {
     }
 
   }
-
 
 }
