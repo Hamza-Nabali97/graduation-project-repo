@@ -38,6 +38,28 @@
     </ion-card-content>
 
     <ion-row>
+      <ion-col>
+        <button ion-button color="primary" clear small *ngIf="report.report.status == 'submitted'" icon-start>
+          <ion-icon  name="ios-megaphone" item-right style="font-size: 25px;">
+          </ion-icon>
+          <p id="submitted">{{report.report.status.toUpperCase()}}</p>
+        </button>
+
+        <button ion-button color="warning" clear small *ngIf="report.report.status == 'in progress'" icon-start>
+          <ion-icon  name="ios-construct" item-right style="font-size: 25px;">
+          </ion-icon>
+          <p id="in-progress">{{report.report.status.toUpperCase()}}</p>
+        </button>
+
+        <button ion-button color="secondary" clear small *ngIf="report.report.status == 'solved'" icon-start>
+          <ion-icon  name="ios-checkmark-circle" item-right style="font-size: 25px;">
+          </ion-icon>
+          <p id="solved">{{report.report.status.toUpperCase()}}</p>
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
 
       <ion-col>
         <button ion-button color="primary" clear small icon-start (click)="toggle(report)">
@@ -57,7 +79,6 @@
         </ion-note>
       </ion-col>
     </ion-row>
-
   </ion-card>
 
 
