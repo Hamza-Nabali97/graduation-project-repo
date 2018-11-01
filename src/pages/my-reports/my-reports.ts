@@ -27,7 +27,7 @@ export class MyReportsPage {
 
 
   ionViewWillEnter() {
-    this.reports = this.reportService.getReports();
+   // this.reports = this.reportService.getReports();
   }
 
 

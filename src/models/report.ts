@@ -1,3 +1,5 @@
+
+/*
 import {User} from "./user";
 import {Location} from "./location";
 
@@ -12,4 +14,19 @@ export class Report {
   ) {
   }
 }
+*/
+export interface Report {
+  ownerId: string;
+  description: string;
+  location: { Latitude: number, Longitude: number };
+  image: string;
+  createdDate: Date;
+  status: string;
+  lastUpdate: Date;
+  whoAgree: string[];
+}
 
+export interface ReportDoc {
+  reportId: string;
+  report: Report;
+}
