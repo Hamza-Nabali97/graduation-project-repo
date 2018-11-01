@@ -28,7 +28,6 @@ export class ReportsPage implements OnDestroy {
 
   reports: ReportDoc[] = [];
   index: number;
-  loader: Loading;
   subscription: Subscription;
   reportsCollection: AngularFirestoreCollection<Report>;
 
@@ -36,18 +35,21 @@ export class ReportsPage implements OnDestroy {
 
     this.reportsCollection = this.db.collection("reports");
 
-    this.loader = this.loadingCtrl.create({
-      content: 'Loading Data ...'
-    });
 
     this.subscription = this.reportsCollection.snapshotChanges().subscribe(value => {
-      this.loader.present();
+
+      let loader = this.loadingCtrl.create({
+        content: 'Loading Data ...',
+        spinner: 'dots'
+      });
+
+      loader.present();
       this.reports = [];
       value.forEach((value1, index: number) => {
         this.reports.push({reportId: value1.payload.doc.id, report: value1.payload.doc.data()});
       });
       this.reportService.setReports(this.reports);
-      this.loader.dismiss();
+      loader.dismiss();
     });
 
   }
