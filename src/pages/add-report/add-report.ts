@@ -1,13 +1,11 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {UserService} from "../../services/user.service";
 import {ReportService} from "../../services/report.service";
 import {NgForm} from "@angular/forms";
 import {Location} from "../../models/location";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {Geolocation} from '@ionic-native/geolocation';
-import {} from 'googlemaps';
-import {Report} from "../../models/report";
 import {AngularFireAuth} from "@angular/fire/auth";
 
 

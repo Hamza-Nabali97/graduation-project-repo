@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   IonicPage, Loading,
   LoadingController,
@@ -24,7 +24,7 @@ import {UserService} from "../../services/user.service";
   selector: 'page-reports',
   templateUrl: 'reports.html',
 })
-export class ReportsPage implements OnDestroy {
+export class ReportsPage implements OnDestroy,OnInit {
 
   reports: ReportDoc[] = [];
   index: number;
@@ -94,6 +94,7 @@ export class ReportsPage implements OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  ngOnInit(){}
 
   toggle(report: ReportDoc) {
     let uid: string = this.angularFire.auth.currentUser.uid;

@@ -7,4 +7,14 @@ page-reports {
     color: color($colors, primary)
   }
 
+  #submitted {
+    color: color($colors, primary)
+  }
+  #in-progress {
+    color: color($colors, warning)
+  }
+  #solved {
+    color: color($colors, secondary)
+  }
+
 }

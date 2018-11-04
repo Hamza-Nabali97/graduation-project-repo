@@ -135,7 +135,7 @@ export class LoginPage {
         let user = {
           name: 'Guest',
           emailAddress: '',
-          image: '../../assets/imgs/anonymous.png'
+          image: 'assets/imgs/anonymous.png'
         };
 
         this.userService.setLoginUser(user);
