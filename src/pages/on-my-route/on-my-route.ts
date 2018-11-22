@@ -92,8 +92,10 @@ export class OnMyRoutePage {
 
 
   onSetMarker(event: any) {
+    console.log("location!!");
     this.destinationIsSet = true;
     this.destination = new Location(event.coords.lat, event.coords.lng);
+    console.log(this.destination);
   }
 
   onLocate() {

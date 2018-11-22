@@ -37,6 +37,7 @@
     "agm-direction": "^0.7.3",
     "angularfire2": "^5.0.1",
     "cordova-android": "7.1.1",
+    "cordova-browser": "5.0.4",
     "cordova-plugin-add-swift-support": "1.7.2",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.2",

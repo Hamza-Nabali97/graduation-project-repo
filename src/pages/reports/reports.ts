@@ -24,7 +24,7 @@ import {UserService} from "../../services/user.service";
   selector: 'page-reports',
   templateUrl: 'reports.html',
 })
-export class ReportsPage implements OnDestroy,OnInit {
+export class ReportsPage implements OnDestroy, OnInit {
 
   reports: ReportDoc[] = [];
   index: number;
@@ -32,25 +32,6 @@ export class ReportsPage implements OnDestroy,OnInit {
   reportsCollection: AngularFirestoreCollection<Report>;
 
   constructor(private loadingCtrl: LoadingController, private userService: UserService, public db: AngularFirestore, public reportService: ReportService, public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private angularFire: AngularFireAuth, public popoverCtrl: PopoverController) {
-
-    this.reportsCollection = this.db.collection("reports");
-
-
-    this.subscription = this.reportsCollection.snapshotChanges().subscribe(value => {
-
-      let loader = this.loadingCtrl.create({
-        content: 'Loading Data ...',
-        spinner: 'dots'
-      });
-
-      loader.present();
-      this.reports = [];
-      value.forEach((value1, index: number) => {
-        this.reports.push({reportId: value1.payload.doc.id, report: value1.payload.doc.data()});
-      });
-      this.reportService.setReports(this.reports);
-      loader.dismiss();
-    });
 
   }
 
@@ -93,8 +74,29 @@ export class ReportsPage implements OnDestroy,OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.reports = [];
   }
-  ngOnInit(){}
+
+  ngOnInit() {
+    let loader = this.loadingCtrl.create({
+      content: 'Loading Data ...',
+      spinner: 'dots'
+    });
+
+    loader.present();
+
+    this.reportsCollection = this.db.collection("reports");
+
+    this.subscription = this.reportsCollection.snapshotChanges().subscribe(value => {
+      this.reports = [];
+      value.forEach((value1, index: number) => {
+        this.reports.push({reportId: value1.payload.doc.id, report: value1.payload.doc.data()});
+      });
+      this.reportService.setReports(this.reports);
+      loader.dismiss();
+    });
+
+  }
 
   toggle(report: ReportDoc) {
     let uid: string = this.angularFire.auth.currentUser.uid;

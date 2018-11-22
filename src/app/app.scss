@@ -19,6 +19,11 @@ html[dir="ltr"] .text-input {
   text-align: left;
 }
 
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
 
 
 
