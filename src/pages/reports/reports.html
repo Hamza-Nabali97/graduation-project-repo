@@ -24,7 +24,7 @@
         <img
           src="{{report.report.ownerId==='anonymous'?'assets/imgs/anonymous.png':'https://www.w3schools.com/howto/img_avatar.png'}}">
       </ion-avatar>
-      <h2>{{report.report.ownerId==='anonymous'? 'Guest':'User'}}</h2>
+      <h2>{{report.report.ownerId!=='anonymous'? 'User': 'reports.guest'| translate}}</h2>
       <p>{{report.report.createdDate.toDate()| date}}</p>
       <button ion-button item-right clear small (click)="onShowReport(i)">
         <ion-icon name="more"></ion-icon>
@@ -43,19 +43,19 @@
         <button ion-button color="primary" clear small *ngIf="report.report.status == 'submitted'" icon-start>
           <ion-icon  name="ios-megaphone" item-right style="font-size: 25px;">
           </ion-icon>
-          <p id="submitted">{{report.report.status.toUpperCase()}}</p>
+          <p id="submitted">{{ 'reports.submitted' | translate}}</p>
         </button>
 
         <button ion-button color="warning" clear small *ngIf="report.report.status == 'in progress'" icon-start>
           <ion-icon  name="ios-construct" item-right style="font-size: 25px;">
           </ion-icon>
-          <p id="in-progress">{{report.report.status.toUpperCase()}}</p>
+          <p id="in-progress">{{'reports.in_progress' | translate}}</p>
         </button>
 
         <button ion-button color="secondary" clear small *ngIf="report.report.status == 'solved'" icon-start>
           <ion-icon  name="ios-checkmark-circle" item-right style="font-size: 25px;">
           </ion-icon>
-          <p id="solved">{{report.report.status.toUpperCase()}}</p>
+          <p id="solved">{{ 'reports.solved' | translate}}</p>
         </button>
       </ion-col>
     </ion-row>
@@ -70,7 +70,7 @@
                     style="font-size: 25px;">
           </ion-icon>
           <ion-badge style="margin-right: 5px;margin-left: 5px">{{report.report.whoAgree.length}}</ion-badge>
-          <p id="votes">Agrements</p>
+          <p id="votes">{{'reports.agreements' | translate}}</p>
         </button>
       </ion-col>
 

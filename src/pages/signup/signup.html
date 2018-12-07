@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bold;">Signup</ion-title>
+    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bold;">{{'signup.signup' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -12,7 +12,7 @@
         text-left>
     <ion-item>
       <ion-icon item-left name="contact"></ion-icon>
-      <ion-input type="text" placeholder="Full Name" formControlName="fullName" [(ngModel)]="user.name"
+      <ion-input type="text" placeholder="{{'signup.full_name' | translate}}" formControlName="fullName" [(ngModel)]="user.name"
                  required></ion-input>
       <button ion-button type="button" clear icon-only item-right
               (click)="showHelperTextForInput(fullNameInputHelpText)">
@@ -31,7 +31,7 @@
 
     <ion-item>
       <ion-icon item-left name="at"></ion-icon>
-      <ion-input type="email" placeholder="Email" formControlName="email" [(ngModel)]="user.emailAddress"
+      <ion-input type="email" placeholder="{{'signup.email' | translate}}" formControlName="email" [(ngModel)]="user.emailAddress"
                  required></ion-input>
       <button ion-button type="button" clear icon-only item-right (click)="showHelperTextForInput(emailInputHelpText)">
         <ion-icon name="help-circle" style="color: black;"></ion-icon>
@@ -48,7 +48,7 @@
 
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="passwordType" placeholder="Password" formControlName="password" [(ngModel)]="password"
+      <ion-input [type]="passwordType" placeholder="{{'signup.password' | translate}}" formControlName="password" [(ngModel)]="password"
                  clearOnEdit="false" required></ion-input>
       <button ion-button type="button" clear icon-only item-right (click)="hideShowPassword()">
         <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
@@ -63,7 +63,7 @@
 
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="confirmationPasswordType" placeholder="Confirm Password" formControlName="confirmPassword"
+      <ion-input [type]="confirmationPasswordType" placeholder="{{'signup.confirm_password' | translate}}" formControlName="confirmPassword"
                  clearOnEdit="false" required></ion-input>
       <button ion-button type="button" clear icon-only item-right (click)="hideShowPasswordForConfirmPassword()">
         <ion-icon [name]="confirmationPasswordIcon" style="color: black;"></ion-icon>
@@ -84,25 +84,24 @@
     <ion-item style="background-color: beige" text-left>
       <ion-toggle checked="false" (ionChange)="agreeToggleChangedState()"></ion-toggle>
       <ion-label style="font-family:'Calibri Light';font-size: 16px;font-weight: bold;">
-        Agree to Terms and Conditions
-      </ion-label>
+        {{'signup.agreement_of_terms' | translate}}      </ion-label>
     </ion-item>
 
-    <p text-left style="font-family: 'Calibri Light';font-size:14px;">
-      By clicking SIGNUP, you agree to our <u><a>Terms of Service</a></u> and that you have read our <u><a>Privacy
-      Policy</a></u>. Please note that this is
-      mandatory to complete your registration
+    <p  style="font-family: 'Calibri Light';font-size:14px;">
+      {{ 'signup.signup_click1' | translate}}<u><a>{{ 'signup.terms_of_service' | translate}}</a></u>
+      {{ 'signup.signup_click2' | translate}}<u><a>{{ 'signup.privacy_policy' | translate}}</a></u>{{ 'signup.signup_click3' | translate}}
+
+
     </p>
 
     <button ion-button type="submit" block [disabled]="signupButtonDisabledFlag || !signupForm.valid"
             style="background-color: mediumblue; margin-top: 25px; font-family: 'Monotype Corsiva';font-size: 16px;">
-      Signup
+      {{'signup.signup' | translate}}
     </button>
   </form>
-  <p style="font-weight: bold;font-size: 16px; font-family:'Calibri Light', sans-serif; margin-top: 50px;">Already Have
-    An Account?</p>
+  <p style="font-weight: bold;font-size: 16px; font-family:'Calibri Light', sans-serif; margin-top: 50px;">{{'signup.account' | translate}}</p>
   <a style="font-weight: bold;font-size: 18px; font-family: 'Calibri Light', sans-serif;"
-     (click)="navigateToLoginPage()">Login Now!</a>
+     (click)="navigateToLoginPage()">{{'signup.login_now' | translate}}</a>
 
 
 </ion-content>
