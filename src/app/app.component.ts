@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {LoadingController, MenuController, NavController, Platform} from 'ionic-angular';
+import {MenuController, NavController, LoadingController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
@@ -14,11 +14,13 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
 import {LanguagePage} from "../pages/language/language";
+import {UserLocationPage} from "../pages/user-location/user-location";
+import {timer} from "rxjs";
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp{
+export class MyApp {
   rootPage: any = LanguagePage;
   loginPage = LoginPage;
   reportsPage = ReportsPage;
@@ -26,7 +28,7 @@ export class MyApp{
   onMyRoutePage = OnMyRoutePage;
   settingsPage = SettingsPage;
   contactUs = ContactUsPage;
-
+  showSplash = true;
 
   @ViewChild('content') content: NavController;
 
@@ -42,6 +44,7 @@ export class MyApp{
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      timer(3000).subscribe(() => this.showSplash = false)
     });
     this.initTranslate();
   }
@@ -66,25 +69,22 @@ export class MyApp{
   }
 
   userLogout() {
+    // let loader = this.loadingCtrl.create({
+    //   spinner: 'circles',
+    //   content: 'Logging Out',
+    //   duration: 10,
+    // });
+    // loader.present().then(() => {
     this.angularFireAuth.auth.signOut().then(() => {
-      this.angularFireAuth.auth.onAuthStateChanged(currentUser => {
-        if (currentUser == null) {
-          this.userService.setLoginUser(null);
-          alert('User Logged Out');
-          let loader = this.loadingCtrl.create({
-            spinner: 'circles',
-            content: 'Logging Out',
-            duration: 3000,
-          });
-          loader.present();
-          loader.onDidDismiss(() => {
-            this.openPage(LoginPage);
-          })
-        }
-      });
-    }).catch(signoutError => {
-      alert(JSON.stringify(signoutError))
+      this.userService.setLoginUser(null);
+      this.reportService.setReports([]);
+      this.openPage(LoginPage);
+      // loader.dismiss();
+
     })
+      .catch((error) => {
+        // loader.dismiss();
+      })
   }
 
 

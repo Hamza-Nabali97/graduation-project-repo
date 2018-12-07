@@ -1,14 +1,20 @@
-export class User {
-  constructor(public name: string,
-              public emailAddress: string,
-              public password: string,
-              public image: string,
-              public anonymomus: boolean) {
-  }
+export interface UserLogin {
+  emailAddress: string;
+  password: string;
+}
+
+
+export interface User {
+  anonymous: boolean;
+  emailAddress: string;
+  image: string;
+  name: string;
+  uid: string;
+
+
 }
 
 export interface UserDoc {
-  name: string;
-  emailAddress: string;
-  image: string;
+  userId: string;
+  user: User;
 }

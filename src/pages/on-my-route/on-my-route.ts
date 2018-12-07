@@ -43,6 +43,7 @@ export class OnMyRoutePage {
 
 
   displayDirection(event: any) {
+    console.log(event);
     this.reportService.removeOnMyRouteReports();
     let inputPath = event.routes[0].overview_path;
     let newPath: any[] = [];

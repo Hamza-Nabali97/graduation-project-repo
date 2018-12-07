@@ -1,16 +1,10 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from 'firebase';
 import {User} from "../../models/user";
 import {ReportsPage} from "../reports/reports";
-
-/**
- * Generated class for the PhoneVerificationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'page-phone-verification',
@@ -18,19 +12,20 @@ import {ReportsPage} from "../reports/reports";
 })
 export class PhoneVerificationPage {
   //Fetch Data Passed from Signup Page
-  fullName: string;
-  userinfo = {} as User;
-  phoneNumber: any;
-  windowRef : any;
+  name: string;
+  emailAddress: string;
+  phoneNumber: string='';
+  windowRef: any;
   verificationCode: string;
   recaptchVerifier: firebase.auth.RecaptchaVerifier;
   confirmationResult: any;
-  user: any;
+  user = {} as User;
+  password: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public angularFireAuth: AngularFireAuth) {
-    this.fullName = navParams.get('firstAndLastName');
-    this.userinfo = navParams.get('userinfo');
+              public angularFireAuth: AngularFireAuth, public userService: UserService) {
+    this.user = this.navParams.get('newuser');
+    this.password = this.navParams.get('password');
   }
 
   ionViewDidLoad() {
@@ -43,7 +38,7 @@ export class PhoneVerificationPage {
     })
   }
 
-  sendSMSVerificationToPhone(){
+  sendSMSVerificationToPhone() {
     let appRecaptchaVerifier = this.recaptchVerifier;
     this.phoneNumber = "+970" + this.phoneNumber;
     alert(this.phoneNumber);
@@ -55,19 +50,23 @@ export class PhoneVerificationPage {
     })
   }
 
-  verifySMSCode(){
+  verifySMSCode() {
     this.confirmationResult.confirm(this.verificationCode)
       .then(phoneVerificationResult => {
         //Register New User
-        this.angularFireAuth.auth.createUserWithEmailAndPassword(this.userinfo.emailAddress, this.userinfo.password)
+        this.angularFireAuth.auth.createUserWithEmailAndPassword(this.user.emailAddress, this.password)
           .then(userRegistrationSuccess => {
-            if(userRegistrationSuccess.additionalUserInfo.isNewUser === true){
+            if (userRegistrationSuccess.additionalUserInfo.isNewUser === true) {
               let newUser = userRegistrationSuccess.user;
               alert(JSON.stringify(newUser));
+
+              this.user.uid = userRegistrationSuccess.user.uid;
+              this.userService.addUser(this.user);
+
               this.navCtrl.setRoot(ReportsPage);
             }
           }).catch(userRegistrationError => {
-            alert(JSON.stringify(userRegistrationError));
+          alert(JSON.stringify(userRegistrationError));
         })
         console.log(this.user);
       }).catch(incorrectVerificationCodeError => {

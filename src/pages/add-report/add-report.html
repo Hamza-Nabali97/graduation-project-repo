@@ -12,7 +12,7 @@
 
     <ion-list>
 
-      <ion-item padding-top>
+      <ion-item padding-top *ngIf="!this.angularFire.auth.currentUser.isAnonymous">
         <ion-icon name="eye-off" item-start color="primary"></ion-icon>
         <ion-label color="primary">Anonymous</ion-label>
         <ion-toggle [(ngModel)]="isToggled" name="anonymous"></ion-toggle>

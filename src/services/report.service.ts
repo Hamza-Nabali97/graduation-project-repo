@@ -6,7 +6,7 @@ import {AngularFireAuth} from "angularfire2/auth";
 @Injectable()
 export class ReportService {
 
-  private reports: ReportDoc[] = [];
+  private reports: any[] = [];
   private onMyRouteReports: Report[] = [];
   private visableReport: ReportDoc[] = [];
   private reportsCollection: AngularFirestoreCollection<Report>;
@@ -15,9 +15,24 @@ export class ReportService {
     this.reportsCollection = this.db.collection("reports");
   }
 
-  setReports(reports: ReportDoc[]) {
+
+  setReports(reports: any) {
     this.reports = reports;
-    this.visableReport = reports;
+    this.visableReport = this.reports;
+
+  }
+
+  loadData() {
+    this.reports = []
+    this.reportsCollection.get()
+      .subscribe((querySnapshot) => {
+        querySnapshot.forEach(doc => {
+          console.log(doc.data())
+          this.reports.push({reportId: doc.id, report: doc.data()})
+        })
+      });
+    this.visableReport = this.reports;
+    return this.reports;
   }
 
 

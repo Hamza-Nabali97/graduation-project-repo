@@ -1,11 +1,11 @@
 export interface Report {
-  ownerId: string;
-  description: string;
-  location: { lat: number, lng: number };
-  image: string;
   createdDate: Date;
-  status: string;
+  description: string;
+  image: string;
   lastUpdate: Date;
+  location: { lat: number, lng: number };
+  ownerId: string;
+  status: string;
   whoAgree: string[];
 }
 

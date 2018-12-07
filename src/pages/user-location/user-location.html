@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bold;">Location</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item-group text-left>
+    <ion-item>
+      <ion-label>Country</ion-label>
+      <ion-input disabled placeholder="Palestine"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>City</ion-label>
+      <ion-select [(ngModel)]="city" okText="Select" cancelText="nO">
+        <ion-option value="Ramallah">Ramallah</ion-option>
+        <ion-option value="Nablus">Nablus</ion-option>
+        <ion-option value="Jenin">Jenin</ion-option>
+        <ion-option value="Hebrew">Hebrew</ion-option>
+        <ion-option value="Jericho">Jericho</ion-option>
+        <ion-option value="Tulkarim">Tulkarim</ion-option>
+        <ion-option value="Qalqilya">Qalqilya</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Street</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item></ion-item>
+  </ion-item-group>
+</ion-content>

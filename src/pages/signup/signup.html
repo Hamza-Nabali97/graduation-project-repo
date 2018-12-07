@@ -6,59 +6,103 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 <ion-content padding style="background-color: beige" text-center>
-  <img src="assets/imgs/signup-icon3.png" width="150" height="150">
-  <ion-item-group style="box-shadow: 4px 10px 14px -1px rgba(0,0,0,0.27); height: auto;  opacity: 0.90; border: 2px solid transparent; margin-top: 20px;" text-left>
-      <ion-item>
-        <ion-icon item-left name="contact"></ion-icon>
-        <ion-input type="text" placeholder="Full Name" required [(ngModel)]="fullName"></ion-input>
-      </ion-item>
+  <img src="../../assets/imgs/signup-icon3.png" width="150" height="150">
+  <form [formGroup]="signupForm" (submit)="showSignupConfirmationAlert()"
+        style="box-shadow: 4px 10px 14px -1px rgba(0,0,0,0.27); height: auto;  opacity: 0.90; border: 2px solid transparent; margin-top: 20px;"
+        text-left>
+    <ion-item>
+      <ion-icon item-left name="contact"></ion-icon>
+      <ion-input type="text" placeholder="Full Name" formControlName="fullName" [(ngModel)]="user.name"
+                 required></ion-input>
+      <button ion-button type="button" clear icon-only item-right
+              (click)="showHelperTextForInput(fullNameInputHelpText)">
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
+      </button>
+    </ion-item>
+
+    <mat-error style="color: red;"
+               *ngIf="signupForm.controls['fullName'].touched && signupForm.controls['fullName'].invalid">
+      <ion-icon name="close" margin-right></ion-icon>
+      "Username Required"
+    </mat-error>
+    <mat-hint style="color: green;" *ngIf="signupForm.controls['fullName'].valid">
+      <ion-icon name="checkmark" color="secondary" margin-right></ion-icon>
+    </mat-hint>
 
     <ion-item>
       <ion-icon item-left name="at"></ion-icon>
-      <ion-input type="email" placeholder="Email" [(ngModel)]="user.emailAddress" required></ion-input>
+      <ion-input type="email" placeholder="Email" formControlName="email" [(ngModel)]="user.emailAddress"
+                 required></ion-input>
+      <button ion-button type="button" clear icon-only item-right (click)="showHelperTextForInput(emailInputHelpText)">
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
+      </button>
     </ion-item>
+
+    <mat-error style="color: red;" *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].invalid">
+      <ion-icon name="close" margin-right></ion-icon>
+      {{getEmailValidationError()}}
+    </mat-error>
+    <mat-hint style="color: green;" *ngIf="signupForm.controls['email'].valid">
+      <ion-icon name="checkmark" color="secondary" margin-right></ion-icon>
+    </mat-hint>
 
     <ion-item>
       <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="passwordType" placeholder="Password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
-      <button ion-button clear icon-only item-right (click)="hideShowPassword()" >
+      <ion-input [type]="passwordType" placeholder="Password" formControlName="password" [(ngModel)]="password"
+                 clearOnEdit="false" required></ion-input>
+      <button ion-button type="button" clear icon-only item-right (click)="hideShowPassword()">
         <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
       </button>
-    </ion-item>
-    <ion-item>
-      <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="confirmationPasswordType" placeholder="Confirm Password" clearOnEdit="false" required></ion-input>
-      <button ion-button clear icon-only item-right (click)="hideShowPasswordForConfirmPassword()" >
-        <ion-icon [name]="confirmationPasswordIcon" style="color: black;"></ion-icon>
+      <button ion-button type="button" clear icon-only item-right
+              (click)="showHelperTextForInput(passwordInputHelpText)">
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
       </button>
     </ion-item>
-  </ion-item-group>
+    <mat-error style="color: red;" *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid"><ion-icon name="close" margin-right></ion-icon>{{getPasswordValidationError()}}</mat-error>
+    <mat-hint  style="color: green;" *ngIf="signupForm.controls['password'].valid"><ion-icon name="checkmark" color="secondary" margin-right></ion-icon></mat-hint>
 
-  <!--<button ion-button block icon-start color="danger" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="getLocationFromUser()">-->
+    <ion-item>
+      <ion-icon item-left name="lock"></ion-icon>
+      <ion-input [type]="confirmationPasswordType" placeholder="Confirm Password" formControlName="confirmPassword"
+                 clearOnEdit="false" required></ion-input>
+      <button ion-button type="button" clear icon-only item-right (click)="hideShowPasswordForConfirmPassword()">
+        <ion-icon [name]="confirmationPasswordIcon" style="color: black;"></ion-icon>
+      </button>
+      <button ion-button type="button" clear icon-only item-right
+              (click)="showHelperTextForInput(confirmPasswordInputHelpText)">
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
+      </button>
+    </ion-item>
+    <mat-error style="color: red;" *ngIf="signupForm.controls['confirmPassword'].touched && signupForm.controls['confirmPassword'].invalid"><ion-icon name="close" margin-right></ion-icon>{{getConfirmPasswordValidationError()}}</mat-error>
+    <mat-hint  style="color: green;" *ngIf="signupForm.controls['confirmPassword'].valid"><ion-icon name="checkmark" color="secondary" margin-right></ion-icon></mat-hint>
+
+    <!--<button ion-button block icon-start color="danger" style="font-family: 'Monotype Corsiva';font-size: 16px;" (click)="getLocationFromUser()">-->
     <!--<ion-icon name="locate"></ion-icon>-->
     <!--LOCATION-->
-  <!--</button>-->
+    <!--</button>-->
 
-  <ion-item style="background-color: beige" text-left>
-    <ion-toggle checked="false" (ionChange)="agreeToggleChangedState()"></ion-toggle>
-    <ion-label style="font-family:'Calibri Light';font-size: 16px;font-weight: bold;">
-      Agree to Terms and Conditions
-    </ion-label>
-  </ion-item>
+    <ion-item style="background-color: beige" text-left>
+      <ion-toggle checked="false" (ionChange)="agreeToggleChangedState()"></ion-toggle>
+      <ion-label style="font-family:'Calibri Light';font-size: 16px;font-weight: bold;">
+        Agree to Terms and Conditions
+      </ion-label>
+    </ion-item>
 
-  <p text-left style="font-family: 'Calibri Light';font-size:14px;">
-    By clicking SIGNUP, you agree to our <u><a>Terms of Service</a></u> and that you have read our <u><a>Privacy Policy</a></u>. Please note that this is
-    mandatory to complete your registration
-  </p>
+    <p text-left style="font-family: 'Calibri Light';font-size:14px;">
+      By clicking SIGNUP, you agree to our <u><a>Terms of Service</a></u> and that you have read our <u><a>Privacy
+      Policy</a></u>. Please note that this is
+      mandatory to complete your registration
+    </p>
 
-  <button ion-button block [disabled]="signupButtonDisabledFlag"  style= "background-color: mediumblue; margin-top: 25px; font-family: 'Monotype Corsiva';font-size: 16px;" (click)="showSignupConfirmationAlert()">
-    Signup
-  </button>
-
-  <p style="font-weight: bold;font-size: 16px; font-family:'Calibri Light', sans-serif; margin-top: 50px;">Already Have An Account?</p>
-  <a style="font-weight: bold;font-size: 18px; font-family: 'Calibri Light', sans-serif;" (click)="navigateToLoginPage()">Login Now!</a>
-
-
+    <button ion-button type="submit" block [disabled]="signupButtonDisabledFlag || !signupForm.valid"
+            style="background-color: mediumblue; margin-top: 25px; font-family: 'Monotype Corsiva';font-size: 16px;">
+      Signup
+    </button>
+  </form>
+  <p style="font-weight: bold;font-size: 16px; font-family:'Calibri Light', sans-serif; margin-top: 50px;">Already Have
+    An Account?</p>
+  <a style="font-weight: bold;font-size: 18px; font-family: 'Calibri Light', sans-serif;"
+     (click)="navigateToLoginPage()">Login Now!</a>
 
 
 </ion-content>

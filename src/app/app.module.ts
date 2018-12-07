@@ -13,6 +13,7 @@ import {ReportsPage} from "../pages/reports/reports";
 import {OnMyRoutePage} from "../pages/on-my-route/on-my-route";
 import {ReportPage} from "../pages/report/report";
 import {SettingsPage} from "../pages/settings/settings";
+import {UserLocationPage} from "../pages/user-location/user-location";
 
 import {AgmCoreModule} from '@agm/core';
 import {AgmDirectionModule} from 'agm-direction' // agm-direction
@@ -35,6 +36,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {OptionsPage} from "../pages/options/options";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule } from "@angular/material";
 import {LanguagePage} from "../pages/language/language";
 import {AngularFirestore} from "@angular/fire/firestore";
 
@@ -55,7 +58,8 @@ firebase.initializeApp(FIREBASE_CONFIG)
     SettingsPage,
     ReportsPage,
     OptionsPage,
-    LanguagePage
+    LanguagePage,
+    UserLocationPage
 
   ],
   imports: [
@@ -72,10 +76,12 @@ firebase.initializeApp(FIREBASE_CONFIG)
       }
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBHzZHoT7JnZJrJ7iUY2XDaZBYrDrEWXnY',
+      apiKey: 'AIzaSyBjAY1EQhsL6MePconXlJ40WxUu0Yn6mPA',
       libraries: ['places', 'geometry']
     }),
-    AgmDirectionModule     // agm-direction
+    AgmDirectionModule, // agm-direction
+    ReactiveFormsModule,
+    MatFormFieldModule
   ],
 
   bootstrap: [IonicApp],
@@ -92,6 +98,7 @@ firebase.initializeApp(FIREBASE_CONFIG)
     SettingsPage,
     ReportsPage,
     OptionsPage,
+    UserLocationPage,
     LanguagePage
 
   ],

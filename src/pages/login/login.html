@@ -1,62 +1,62 @@
 <ion-header>
 </ion-header>
-<ion-content padding text-center>
-  <img src="assets/imgs/collaboration.png" width="150" height="150">
-  <ion-item-group
-    style=" box-shadow: 0px 0px 21px -7px rgba(0,0,0,0.45); height: auto;  opacity: 0.90; border: 2px solid transparent;">
-    <ion-item>
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<ion-content padding text-center style="background-color: beige" >
+  <img src="../../assets/imgs/collaboration.png" width="150" height="150" style="margin-top: 50px">
+  <form [formGroup]= "loginForm" (submit)="loginWithEmailAndPassword(user)" text-left>
+    <ion-item no-lines>
       <ion-icon item-left name="at"></ion-icon>
-      <ion-input type="email" placeholder="{{'login.email' | translate}}" [(ngModel)]="user.emailAddress" email required
-                 [ngStyle]="{'text-align':this.platform.dir()==='rtl'? 'right' : 'left' }"
-
-      ></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon item-left name="lock"></ion-icon>
-      <ion-input [type]="passwordType" placeholder="{{'login.password' | translate}}" [(ngModel)]="user.password"
-                 clearOnEdit="false" required></ion-input>
-      <button ion-button clear icon-only item-right (click)="hideShowPassword()">
-        <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
+      <ion-input [ngStyle]="{'text-align':this.platform.dir()==='rtl'? 'right' : 'left' }" type="email" placeholder="{{'login.email' | translate}}" formControlName="email" [(ngModel)]="user.emailAddress" email required (mouseon)="inputMouseOn()"></ion-input>
+      <button ion-button type="button"  clear icon-only item-right (click)="showHelperTextForInput(emailInputHelpText)" >
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
       </button>
     </ion-item>
-  </ion-item-group>
+    <mat-error style="color: red;" *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid"><ion-icon name="close" margin-right></ion-icon>{{getEmailValidationError()}}</mat-error>
+    <mat-hint  style="color: green;" *ngIf="loginForm.controls['email'].valid"><ion-icon name="checkmark" color="secondary" margin-right></ion-icon></mat-hint>
 
-  <ion-item no-lines no-padding no-margin>
-    <a item-right style="font-family: 'Calibri Light', sans-serif; font-weight: bold; font-size: 18px;"
-       (click)="sendResetPasswordEmail(user.emailAddress)">{{'login.forgot_password' | translate}}</a>
-  </ion-item>
+    <ion-item no-lines margin-top>
+      <ion-icon item-left name="lock"></ion-icon>
+      <ion-input [ngStyle]="{'text-align':this.platform.dir()==='rtl'? 'right' : 'left' }" [type]="passwordType" placeholder="{{'login.password' | translate}}" formControlName="password" [(ngModel)]="user.password" clearOnEdit="false" required></ion-input>
+      <button ion-button type="button"  clear icon-only item-right (click)="hideShowPassword()" >
+        <ion-icon [name]="passwordIcon" style="color: black;"></ion-icon>
+      </button>
 
-  <button ion-button block icon-start
-          style="background-color: limegreen;font-family: 'Monotype Corsiva';font-size: 16px;"
-          (click)="loginWithEmailAndPassword(user)">
-    <ion-icon name="log-in"></ion-icon>
-    {{'login.login' | translate}}
-  </button>
+      <button ion-button type="button"  clear icon-only item-right (click)="showHelperTextForInput(passwordInputHelpText)" >
+        <ion-icon name="help-circle" style="color: black;"></ion-icon>
+      </button>
+
+    </ion-item>
+    <mat-error style="color: red;" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid"><ion-icon name="close" margin-right></ion-icon>{{getPasswordValidationError()}}</mat-error>
+    <mat-hint  style="color: green;" *ngIf="loginForm.controls['password'].valid"><ion-icon name="checkmark" color="secondary" margin-right></ion-icon></mat-hint>
+
+    <ion-item no-lines no-padding no-margin style="background-color: beige">
+      <a item-right style="font-family: 'Calibri Light', sans-serif; font-weight: bold; font-size: 18px;"(click)="sendResetPasswordEmail(user.emailAddress)" >{{'login.forgot_password' | translate}}</a>
+    </ion-item>
+
+    <button ion-button type="submit" block icon-start style="background-color: limegreen;font-family: 'Palatino';font-size: 16px;" [disabled]="!loginForm.valid">
+      <ion-icon name="log-in"></ion-icon>
+      {{'login.login' | translate}}
+    </button>
+  </form>
 
 
   <p text-center style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold; margin-top: 25px;">
     {{'login.or' | translate}}
   </p>
 
-  <!--<p text-center style="font-family: 'Gill Sans MT Condensed'; font-size: 24px; font-weight: bold; margin-top: 0px;">-->
-  <!--Login With-->
-  <!--</p>-->
 
-  <button block ion-button icon-start color="facebook" style="font-family: 'Monotype Corsiva';font-size: 16px;"
-          (click)="loginWithFacebook()">
+  <button block ion-button icon-start color="facebook" style="font-family: 'Palatino';font-size: 16px;" (click)="loginWithFacebook()">
     <ion-icon name="logo-facebook"></ion-icon>
     {{'login.facebook' | translate}}
   </button>
 
-  <button block ion-button icon-start color="google" style="font-family: 'Monotype Corsiva';font-size: 16px;"
-          (click)="loginWithGoogle()">
+  <button block ion-button icon-start color="google" style="font-family: 'Palatino';font-size: 16px;" (click)="loginWithGoogle()">
     <ion-icon name="logo-google"></ion-icon>
     {{'login.google' | translate}}
   </button>
 
-  <button ion-button block icon-start color="guest" style="font-family: 'Monotype Corsiva';font-size: 16px;"
-          (click)="loginAsGuest()">
+  <button ion-button block icon-start color="guest" style="font-family: 'Palatino';font-size: 16px;" (click)="loginAsGuest()">
     <ion-icon name="person"></ion-icon>
     {{'login.guest' | translate}}
   </button>

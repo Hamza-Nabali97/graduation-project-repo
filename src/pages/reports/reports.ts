@@ -17,6 +17,7 @@ import {Report, ReportDoc} from "../../models/report";
 import {Subscription} from "rxjs/Rx";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {UserService} from "../../services/user.service";
+import {User} from "../../models/user";
 
 
 @IonicPage()
@@ -26,27 +27,29 @@ import {UserService} from "../../services/user.service";
 })
 export class ReportsPage implements OnDestroy, OnInit {
 
-  reports: ReportDoc[] = [];
+  loginUser: User;
+  reports: ReportDoc[];
   index: number;
-  subscription: Subscription;
   reportsCollection: AngularFirestoreCollection<Report>;
 
   constructor(private loadingCtrl: LoadingController, private userService: UserService, public db: AngularFirestore, public reportService: ReportService, public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private angularFire: AngularFireAuth, public popoverCtrl: PopoverController) {
+    this.reportsCollection = this.db.collection("reports");
+    let loader = this.loadingCtrl.create({
+      content: 'Loading Data ...',
+      spinner: 'dots'
+    });
+
+    loader.present().then(() => {
+      this.reports = this.reportService.loadData();
+      this.loginUser = this.userService.getLoggedInUser();
+      loader.dismiss();
+    });
 
   }
 
 
   ionViewDidLoad() {
-    let toast = this.toastCtrl.create({
-      duration: 3000,
-    });
-    this.angularFire.authState.subscribe(loggedInUser => {
-      if (loggedInUser && loggedInUser.uid) {
-        if (loggedInUser.isAnonymous) {
-          toast.setMessage('Logged ')
-        }
-      }
-    })
+
   }
 
   onAddReport() {
@@ -73,29 +76,10 @@ export class ReportsPage implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
     this.reports = [];
   }
 
   ngOnInit() {
-    let loader = this.loadingCtrl.create({
-      content: 'Loading Data ...',
-      spinner: 'dots'
-    });
-
-    loader.present();
-
-    this.reportsCollection = this.db.collection("reports");
-
-    this.subscription = this.reportsCollection.snapshotChanges().subscribe(value => {
-      this.reports = [];
-      value.forEach((value1, index: number) => {
-        this.reports.push({reportId: value1.payload.doc.id, report: value1.payload.doc.data()});
-      });
-      this.reportService.setReports(this.reports);
-      loader.dismiss();
-    });
-
   }
 
   toggle(report: ReportDoc) {

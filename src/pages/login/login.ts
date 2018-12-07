@@ -1,37 +1,52 @@
-import {Component} from '@angular/core';
-import {NavController, AlertController, NavParams, LoadingController, Platform} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {NavController, AlertController, NavParams, LoadingController, Platform, ToastController} from 'ionic-angular';
 import {ReportsPage} from "../reports/reports";
 import {SignupPage} from "../signup/signup";
-import {User} from "../../models/user";
+import {User, UserDoc, UserLogin} from "../../models/user";
 import {AngularFireAuth} from 'angularfire2/auth';
 import {GooglePlus} from "@ionic-native/google-plus";
 import {Facebook} from "@ionic-native/facebook";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import firebase from 'firebase';
-import {AngularFirestore} from "@angular/fire/firestore";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {UserService} from "../../services/user.service";
 
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
-  user = {} as User;
+  user = {} as UserDoc;
+  loginForm: FormGroup;
+  emailInputHelpText: string = 'Enter Your Email Address';
+  passwordInputHelpText: string = 'Enter Your Password';
+  usersCollection: AngularFirestoreCollection<User>;
+  users: UserDoc[] = [];
+
 
   constructor(public  platform: Platform, public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth, public googlePlus: GooglePlus, public db: AngularFirestore, private userService: UserService,
-              public facebook: Facebook, private loadingCtrl: LoadingController) {
+              public facebook: Facebook, private loadingCtrl: LoadingController, private toastCtrl: ToastController,
+              private formBuilder: FormBuilder) {
 
+    this.loginForm = this.formBuilder.group({
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required
+      ]]
+    });
   }
+
+
+  ngOnInit() {
+  }
+
 
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
@@ -46,20 +61,40 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  loginWithEmailAndPassword(user: User): void {
+  loginWithEmailAndPassword(user: UserLogin): void {
     const loader = this.loadingCtrl.create({
-      content: 'Login...'
+      spinner: 'circles',
+      content: 'Logging In...'
     });
-    loader.present();
-    this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password)
-      .then(authenticationResult => {
+
+    loader.present().then(() => {
+      this.angularFireAuth.auth.signInWithEmailAndPassword(user.emailAddress, user.password)
+        .then(authenticationResult => {
+          loader.dismiss();
+          console.log(authenticationResult);
+
+          this.userService.setLoginUser(user.emailAddress);
+
+          this.navCtrl.setRoot(ReportsPage);
+        }).catch(error => {
         loader.dismiss();
-        console.log(authenticationResult);
-        this.navCtrl.setRoot(ReportsPage);
-      }).catch(error => {
-      loader.dismiss();
-      console.error(error);
-    })
+        let alert = this.alertCtrl.create({
+          title: "Login",
+          subTitle: error,
+          buttons: [
+            {
+              text: 'Try Again',
+              role: 'cancel',
+              handler: () => {
+                this.loginForm.reset()
+              }
+            }]
+        });
+        alert.present();
+      })
+    });
+
+
   }
 
   loginWithGoogle(): void {
@@ -76,7 +111,7 @@ export class LoginPage {
           alert(data.email);
           alert(data.uid);
           alert(data.displayName);
-        })
+        });
 
         this.navCtrl.setRoot(ReportsPage);
       }).catch(googleLoginError => {
@@ -120,32 +155,29 @@ export class LoginPage {
   }
 
   loginAsGuest(): void {
+
     const loader = this.loadingCtrl.create({
-      content: 'Login...'
+      spinner: 'circles',
+      content: 'Logging In...'
     });
-    loader.present();
+    loader.present().then(() => {
 
+      this.angularFireAuth.auth.signInAnonymously().then(() => {
+        let guestUser = {} as User;
+        guestUser.emailAddress = '';
+        guestUser.name = 'Guest';
+        guestUser.image = 'assets/imgs/anonymous.png';
+        guestUser.anonymous = true;
+        guestUser.uid = this.angularFireAuth.auth.currentUser.uid;
 
-    this.angularFireAuth.auth.signInAnonymously().catch(error => {
-      console.error(error);
-      loader.dismiss();
-    })
-    this.angularFireAuth.auth.onAuthStateChanged(authUser => {
-      if (authUser) {
-        let user = {
-          name: 'Guest',
-          emailAddress: '',
-          image: 'assets/imgs/anonymous.png'
-        };
-
-        this.userService.setLoginUser(user);
+        this.userService.setGuestUserLogin(guestUser);
         loader.dismiss();
-        console.log(authUser);
         this.navCtrl.setRoot(ReportsPage);
-      }
-      else {
-        console.log('Signed Out!');
-      }
+      })
+        .catch(error => {
+          loader.dismiss();
+          console.error(error);
+        })
     });
   }
 
@@ -162,5 +194,30 @@ export class LoginPage {
     })
   }
 
+  getEmailValidationError(): String {
+    let emailValidationError: String;
+    this.loginForm.controls['email'].hasError('required') ? emailValidationError = 'Email Address Required' :
+      this.loginForm.controls['email'].hasError('email') ? emailValidationError = 'Please Enter a Valid Email' : emailValidationError = '';
 
+    return emailValidationError;
+  }
+
+  getPasswordValidationError(): String {
+    let passwordValidationError: String;
+    this.loginForm.controls['password'].hasError('required') ? passwordValidationError = 'Password Required' : '';
+    return passwordValidationError;
+  }
+
+  showHelperTextForInput(input) {
+    this.showToast(input, 2000, 'top');
+  }
+
+  showToast(message, duration, position) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: duration,
+      position: position
+    });
+    toast.present().then();
+  }
 }
