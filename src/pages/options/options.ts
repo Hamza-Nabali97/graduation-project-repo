@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ViewController, NavController, NavParams} from 'ionic-angular';
+import {ViewController} from 'ionic-angular';
 import {ReportService} from "../../services/report.service";
 import {AngularFireAuth} from "angularfire2/auth";
 

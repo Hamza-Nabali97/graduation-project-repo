@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {MenuController, NavController, LoadingController, Platform} from 'ionic-angular';
+import {LoadingController, MenuController, NavController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
@@ -14,7 +14,6 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
 import {LanguagePage} from "../pages/language/language";
-import {UserLocationPage} from "../pages/user-location/user-location";
 import {timer} from "rxjs";
 
 @Component({

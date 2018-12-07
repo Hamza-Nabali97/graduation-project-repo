@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
-  IonicPage, Loading,
+  IonicPage,
   LoadingController,
   NavController,
   NavParams,
@@ -14,7 +14,6 @@ import {OptionsPage} from "../options/options";
 import {ReportPage} from "../report/report";
 import {AddReportPage} from "../add-report/add-report";
 import {Report, ReportDoc} from "../../models/report";
-import {Subscription} from "rxjs/Rx";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user";

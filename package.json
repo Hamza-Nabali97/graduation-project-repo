@@ -38,7 +38,7 @@
     "@ngx-translate/http-loader": "^3.0.1",
     "agm-direction": "^0.7.3",
     "angularfire2": "^5.0.1",
-    "cordova-android": "7.1.1",
+    "cordova-android": "6.3.0",
     "cordova-browser": "5.0.4",
     "cordova-plugin-add-swift-support": "1.7.2",
     "cordova-plugin-browsertab": "^0.2.0",
@@ -96,18 +96,17 @@
       },
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.775594715599-mqq01fjkntcg5gjlnm7vdrue752svaek",
-        "PLAY_SERVICES_VERSION": "+"
+        "PLAY_SERVICES_VERSION": "+",
+        "WEB_APPLICATION_CLIENT_ID": "775594715599-niumrsi0kvobse5qcjbtac84j4vssplf.apps.googleusercontent.com"
       },
       "cordova-plugin-facebook4": {
         "APP_ID": "422486318278625",
         "APP_NAME": "LoginAuthForGradProject"
       },
       "cordova-plugin-nativestorage": {},
-      "cordova-plugin-compat": {},
       "cordova-plugin-browsertab": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-buildinfo": {},
-      "cordova-universal-links-plugin": {},
       "cordova-plugin-customurlscheme": {
         "URL_SCHEME": "edu.bzu.gradproject",
         "ANDROID_SCHEME": " ",
@@ -116,7 +115,9 @@
       },
       "cordova-plugin-add-swift-support": {},
       "cordova-plugin-file-transfer": {},
-      "cordova-plugin-camera": {}
+      "cordova-plugin-camera": {},
+      "cordova-universal-links-plugin": {},
+      "cordova-plugin-compat": {}
     },
     "platforms": [
       "android"
