@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, AlertController, ToastController} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {User, UserLogin} from "../../models/user";
 import {LoginPage} from "../login/login";
@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {passwordMatchValidator} from "../../CustomValidators/password-match";
 import {UserLocationPage} from "../user-location/user-location";
 import {UserService} from "../../services/user.service";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 
 /**
  * Generated class for the SignupPage page.
@@ -35,11 +36,13 @@ export class SignupPage {
   emailInputHelpText: string = 'Enter Your Email Address';
   passwordInputHelpText: string = 'Password Must be At Least 8 Characters';
   confirmPasswordInputHelpText: string = 'Re-type Your Password';
+  private usersCollection: AngularFirestoreCollection<User>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(private loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public toastCtrl: ToastController,
-              public formBuilder: FormBuilder, public angularFireAuth: AngularFireAuth, public userService: UserService) {
+              public formBuilder: FormBuilder, public angularFireAuth: AngularFireAuth, public userService: UserService, public db: AngularFirestore) {
 
+    this.usersCollection = this.db.collection("users");
     this.signupForm = this.formBuilder.group({
       fullName: ['', [
         Validators.required
@@ -115,50 +118,64 @@ export class SignupPage {
   }
 
   showSignupConfirmationAlert() {
-    // this.userService.checkUserEmail(this.user.emailAddress);
-    // console.log(this.userService.flag);
-    // console.log(this.userService.checkUserEmail(this.user.emailAddress));
-    // if (true) {
-    //   const emailExist = this.alertCtrl.create({
-    //     title: 'Signup',
-    //     message: 'The email address you have entered is already registered',
-    //     buttons: [
-    //       {
-    //         text: 'Try Again',
-    //         handler: () => {
-    //           this.signupForm.reset();
-    //         }
-    //       }
-    //
-    //     ]
-    //   });
-    //   emailExist.present().then();
-    // }
 
-    const confirmationAlert = this.alertCtrl.create({
-      title: 'Signup Confirmation',
-      message: 'By Signing up, You Agree to our Terms & Conditions and that Your Read Data Use Policy.',
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: () => {
-            console.log('Canceled');
-          }
-        },
-        {
-          text: 'I Agree',
-          handler: () => {
-            this.user.image = 'https://www.w3schools.com/howto/img_avatar.png';
-            this.user.anonymous = false;
-            this.navCtrl.push(PhoneVerificationPage, {
-              newuser: this.user,
-              password: this.password
-            });
-          }
-        }
-      ]
+    const loader = this.loadingCtrl.create({
+      spinner: 'circles',
+      content: 'Signup ...'
     });
-    confirmationAlert.present().then();
+    loader.present().then(() => {
+      this.db.collection('users', ref => ref.where('emailAddress', '==', this.user.emailAddress).limit(1)).get()
+        .subscribe((querySnapshot) => {
+          loader.dismiss();
+          if (querySnapshot.size > 0) {
+            const emailExist = this.alertCtrl.create({
+              title: 'Signup',
+              message: 'The email address you have entered is already registered',
+              buttons: [
+                {
+                  text: 'Try Again',
+                  handler: () => {
+                    this.signupForm.reset();
+                  }
+                }
+
+              ]
+            });
+            emailExist.present().then();
+
+          } else {
+            const confirmationAlert = this.alertCtrl.create({
+              title: 'Signup Confirmation',
+              message: 'By Signing up, You Agree to our Terms & Conditions and that Your Read Data Use Policy.',
+              buttons: [
+                {
+                  text: 'Cancel',
+                  handler: () => {
+                    console.log('Canceled');
+                  }
+                },
+                {
+                  text: 'I Agree',
+                  handler: () => {
+                    this.user.image = 'https://www.w3schools.com/howto/img_avatar.png';
+                    this.user.anonymous = false;
+                    this.navCtrl.push(PhoneVerificationPage, {
+                      newuser: this.user,
+                      password: this.password
+                    });
+                  }
+                }
+              ]
+            });
+            confirmationAlert.present().then();
+
+          }
+
+        });
+
+    });
+
+
   }
 
   showHelperTextForInput(inputHelpText) {

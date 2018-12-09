@@ -12,11 +12,11 @@ import {ReportService} from "../../services/report.service";
 import * as moment from 'moment';
 import {OptionsPage} from "../options/options";
 import {ReportPage} from "../report/report";
-import {AddReportPage} from "../add-report/add-report";
 import {Report, ReportDoc} from "../../models/report";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user";
+import {TabsNewReportPage} from "../tabs-new-report/tabs-new-report";
 
 
 @IonicPage()
@@ -28,7 +28,6 @@ export class ReportsPage implements OnDestroy, OnInit {
 
   loginUser: User;
   reports: ReportDoc[];
-  index: number;
   reportsCollection: AngularFirestoreCollection<Report>;
 
   constructor(private loadingCtrl: LoadingController, private userService: UserService, public db: AngularFirestore, public reportService: ReportService, public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private angularFire: AngularFireAuth, public popoverCtrl: PopoverController) {
@@ -52,7 +51,8 @@ export class ReportsPage implements OnDestroy, OnInit {
   }
 
   onAddReport() {
-    this.navCtrl.push(AddReportPage);
+    // this.navCtrl.push(AddReportPage);
+    this.navCtrl.push(TabsNewReportPage);
 
   }
 
@@ -86,8 +86,7 @@ export class ReportsPage implements OnDestroy, OnInit {
     if (report.report.whoAgree.indexOf(uid) < 0) {
       report.report.whoAgree.push(uid);
       this.reportsCollection.doc(report.reportId).update(report.report);
-    }
-    else {
+    } else {
       report.report.whoAgree.splice(report.report.whoAgree.indexOf(uid), 1);
       this.reportsCollection.doc(report.reportId).update(report.report);
     }

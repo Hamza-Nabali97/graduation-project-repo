@@ -37,9 +37,12 @@ import {OptionsPage} from "../pages/options/options";
 import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule } from "@angular/material";
+import {MatFormFieldModule} from "@angular/material";
 import {LanguagePage} from "../pages/language/language";
 import {AngularFirestore} from "@angular/fire/firestore";
+import {TabsNewReportPage} from "../pages/tabs-new-report/tabs-new-report";
+import {WifiPage} from "../pages/wifi/wifi";
+import {SlidesPage} from "../pages/slides/slides";
 
 
 firebase.initializeApp(FIREBASE_CONFIG)
@@ -59,7 +62,10 @@ firebase.initializeApp(FIREBASE_CONFIG)
     ReportsPage,
     OptionsPage,
     LanguagePage,
-    UserLocationPage
+    UserLocationPage,
+    TabsNewReportPage,
+    WifiPage,
+    SlidesPage
 
   ],
   imports: [
@@ -99,7 +105,10 @@ firebase.initializeApp(FIREBASE_CONFIG)
     ReportsPage,
     OptionsPage,
     UserLocationPage,
-    LanguagePage
+    LanguagePage,
+    TabsNewReportPage,
+    WifiPage,
+    SlidesPage
 
   ],
   providers: [

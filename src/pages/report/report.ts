@@ -1,16 +1,8 @@
-import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {Report} from "../../models/report";
-import {LoadingController, AlertController} from 'ionic-angular';
 import {ReportService} from '../../services/report.service';
 
-/**
- /**
- * Generated class for the ReportsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-report',

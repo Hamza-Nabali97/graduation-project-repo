@@ -15,12 +15,14 @@ import {ReportService} from "../services/report.service";
 import {UserService} from "../services/user.service";
 import {LanguagePage} from "../pages/language/language";
 import {timer} from "rxjs";
+import {SlidesPage} from "../pages/slides/slides";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = LanguagePage;
+  rootPage: any = SlidesPage;
+  languagePage = LanguagePage;
   loginPage = LoginPage;
   reportsPage = ReportsPage;
   inboxPage = InboxPage;

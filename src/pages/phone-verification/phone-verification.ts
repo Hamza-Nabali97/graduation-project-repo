@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from 'firebase';
 import {User} from "../../models/user";
 import {ReportsPage} from "../reports/reports";
 import {UserService} from "../../services/user.service";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-phone-verification',
@@ -14,7 +15,7 @@ export class PhoneVerificationPage {
   //Fetch Data Passed from Signup Page
   name: string;
   emailAddress: string;
-  phoneNumber: string='';
+  phoneNumber: string = '';
   windowRef: any;
   verificationCode: string;
   recaptchVerifier: firebase.auth.RecaptchaVerifier;
@@ -22,7 +23,7 @@ export class PhoneVerificationPage {
   user = {} as User;
   password: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(private loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams,
               public angularFireAuth: AngularFireAuth, public userService: UserService) {
     this.user = this.navParams.get('newuser');
     this.password = this.navParams.get('password');
@@ -51,27 +52,37 @@ export class PhoneVerificationPage {
   }
 
   verifySMSCode() {
-    this.confirmationResult.confirm(this.verificationCode)
-      .then(phoneVerificationResult => {
-        //Register New User
-        this.angularFireAuth.auth.createUserWithEmailAndPassword(this.user.emailAddress, this.password)
-          .then(userRegistrationSuccess => {
-            if (userRegistrationSuccess.additionalUserInfo.isNewUser === true) {
-              let newUser = userRegistrationSuccess.user;
-              alert(JSON.stringify(newUser));
 
-              this.user.uid = userRegistrationSuccess.user.uid;
-              this.userService.addUser(this.user);
+    const loader = this.loadingCtrl.create({
+      spinner: 'circles',
+      content: 'Signup ...'
+    });
+    loader.present().then(() => {
 
-              this.navCtrl.setRoot(ReportsPage);
-            }
-          }).catch(userRegistrationError => {
-          alert(JSON.stringify(userRegistrationError));
-        })
-        console.log(this.user);
-      }).catch(incorrectVerificationCodeError => {
-      alert(JSON.stringify(incorrectVerificationCodeError));
-    })
+      this.confirmationResult.confirm(this.verificationCode)
+        .then(phoneVerificationResult => {
+          loader.dismiss();
+          //Register New User
+          this.angularFireAuth.auth.createUserWithEmailAndPassword(this.user.emailAddress, this.password)
+            .then(userRegistrationSuccess => {
+              if (userRegistrationSuccess.additionalUserInfo.isNewUser === true) {
+                let newUser = userRegistrationSuccess.user;
+                // alert(JSON.stringify(newUser));
+
+                this.user.uid = userRegistrationSuccess.user.uid;
+                this.userService.addUser(this.user);
+
+                this.navCtrl.setRoot(LoginPage);
+              }
+            }).catch(userRegistrationError => {
+            // alert(JSON.stringify(userRegistrationError));
+          })
+          console.log(this.user);
+        }).catch(incorrectVerificationCodeError => {
+        loader.dismiss();
+        // alert(JSON.stringify(incorrectVerificationCodeError));
+      })
+    });
   }
 
 }

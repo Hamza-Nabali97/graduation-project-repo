@@ -9,26 +9,11 @@ export class UserService {
   private loginUser = {} as User;
   private users: UserDoc[] = [];
   private usersCollection: AngularFirestoreCollection<User>;
-  // flag: any;
 
   constructor(public db: AngularFirestore, private angularFire: AngularFireAuth) {
     this.usersCollection = this.db.collection("users");
   }
 
-
-  // checkUserEmail(email: string) {
-  //
-  //   this.db.collection('users', ref => ref.where('emailAddress', '==', email).limit(1)).get()
-  //     .subscribe((querySnapshot) => {
-  //       console.log(querySnapshot.size);
-  //     this.update(querySnapshot.size);
-  //     });
-  //   this.update(0);
-  // }
-
-  // update(flag: any) {
-  //   this.flag = flag;
-  // }
 
   setLoginUser(email: string) {
     console.log("in");

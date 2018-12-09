@@ -2,25 +2,24 @@ import {Component} from '@angular/core';
 import {App, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {UserService} from "../../services/user.service";
 import {ReportService} from "../../services/report.service";
-import {NgForm} from "@angular/forms";
 import {Location} from "../../models/location";
-import {Camera, CameraOptions} from "@ionic-native/camera";
 import {Geolocation} from '@ionic-native/geolocation';
 import {AngularFireAuth} from "@angular/fire/auth";
 import {ReportsPage} from "../reports/reports";
 
-
 @IonicPage()
 @Component({
-  selector: 'page-add-report',
-  templateUrl: 'add-report.html',
+  selector: 'page-wifi',
+  templateUrl: 'wifi.html',
 })
-export class AddReportPage {
+export class WifiPage {
+
+  wifi_strength=0;
 
   source: string = '';
   myLocation: Location = new Location(31.898043, 35.204269);
   mylocationIsSet = false;
-  isToggled: false
+
 
   constructor(private app: App, private geolocation: Geolocation,
               private angularFire: AngularFireAuth,
@@ -28,86 +27,40 @@ export class AddReportPage {
               public reportService: ReportService,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public camera: Camera,
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController) {
-    this.source = "http://www.dcwastemanagement.co.uk/wp-content/uploads/2012/03/skip1.jpg";
-
-    this.isToggled = false;
-
-
   }
 
   ionViewWillEnter() {
     this.onLocate();
   }
 
-  uploadPhoto() {
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum: false
-    };
 
-    this.camera.getPicture(options).then((imageData) => {
-
-      this.source = 'data:image/jpeg;base64,' + imageData;
-
-    }, (err) => {
-
-    });
-
-  }
-
-
-  takePhoto() {
-
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true
-    };
-
-    this.camera.getPicture(options).then((imageData) => {
-
-      this.source = 'data:image/jpeg;base64,' + imageData;
-
-    }, (err) => {
-
-    });
-
-
-  }
-
-  onAddReport(form: NgForm) {
+  onAddReport() {
     let user = '';
     if (this.angularFire.auth.currentUser) {
       user = this.angularFire.auth.currentUser.uid;
     }
 
-    if (form.value.anonymous || this.angularFire.auth.currentUser.isAnonymous) {
+    if (this.angularFire.auth.currentUser.isAnonymous) {
       user = 'anonymous';
     }
 
 
     const data = {
       ownerId: user,
-      description: form.value.description,
+      description: "Wifi Strength = " + this.wifi_strength,
       location: {lat: this.myLocation.lat, lng: this.myLocation.lng},
-      image: this.source,
+      image: "assets/imgs/wifi_" + this.wifi_strength + ".png",
       createdDate: new Date(),
       status: 'submitted',
       lastUpdate: new Date(),
       whoAgree: []
     };
-
+    console.log(data.image);
     this.reportService.addReport(data);
-    form.reset();
+    this.wifi_strength = 0;
     this.app.getRootNav().setRoot(ReportsPage);
-
   }
 
   onLocate() {
@@ -138,4 +91,3 @@ export class AddReportPage {
   }
 
 }
-

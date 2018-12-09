@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Report Wifi Strength</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding text-center>
+
+
+    <img src="assets/imgs/wifi_report.png" style="margin-top: 10px">
+
+
+  <ion-label margin-top="10px">Select your Wifi Strength:</ion-label>
+
+  <ion-item >
+    <ion-range [(ngModel)]="wifi_strength" step="1" min="0" max="5" snaps="true">
+      <ion-icon range-left small name="wifi" color="primary"></ion-icon>
+      <ion-icon range-right name="wifi" color="primary"></ion-icon>
+    </ion-range>
+  </ion-item>
+
+  <button ion-button block round  margin-top="5px" (click)="onAddReport()">Report</button>
+
+</ion-content>
