@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title> Report Details</ion-title>
+    <ion-title>{{ 'report.report_details' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,12 +10,12 @@
   <ion-list no-border>
 
     <ion-list-header>
-      Report Details
+      {{ 'report.report_details' | translate }}
     </ion-list-header>
 
     <ion-item>
       <ion-icon class="icon-color" name="contact" item-start></ion-icon>
-      User
+      {{'report.user' | translate}}
       <ion-note item-end>
         Anonymous
       <!--{{report.user.name}}-->
@@ -25,7 +25,7 @@
 
     <ion-item>
       <ion-icon class="icon-color" name="calendar" item-start></ion-icon>
-      Date
+      {{'report.date' | translate}}
       <ion-note item-end>
         {{ report.createdDate.toDate() | date}}
       </ion-note>
@@ -33,7 +33,7 @@
 
     <ion-item>
       <ion-icon class="icon-color" name="thumbs-up" item-start></ion-icon>
-      Number of votes
+      {{'report.number_of_agreements' | translate}}
       <ion-note item-end>
         {{report.whoAgree.length}}
       </ion-note>
@@ -41,7 +41,7 @@
 
     <ion-item>
       <ion-icon class="icon-color" name="clipboard" item-start></ion-icon>
-      Description
+      {{'report.description' | translate}}
       <ion-note item-end>
         {{ report.description}}
       </ion-note>

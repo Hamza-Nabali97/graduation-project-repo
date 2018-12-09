@@ -90,7 +90,7 @@
           <ion-col>
             <div>
               <img
-                src="https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/40314904_1970126493049079_956113875332235264_n.jpg?_nc_cat=110&oh=b09e24f20ca8f763801ef778a92341fd&oe=5C60012D">
+                src={{this.userService.getLoggedInUser().image}} style="background-color: white">
             </div>
           </ion-col>
         </ion-row>
@@ -98,7 +98,7 @@
         <ion-row>
           <ion-col>
             <h2 ion-text text-center color="light">
-              Yazan Yahya
+              {{this.userService.getLoggedInUser().name == 'Guest' ? 'زائر' : this.userService.getLoggedInUser().name}}
             </h2>
           </ion-col>
         </ion-row>

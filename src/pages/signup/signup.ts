@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {passwordMatchValidator} from "../../CustomValidators/password-match";
 import {UserLocationPage} from "../user-location/user-location";
 import {UserService} from "../../services/user.service";
-import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
+import {AngularFirestore} from "@angular/fire/firestore";
 
 /**
  * Generated class for the SignupPage page.
@@ -36,13 +36,10 @@ export class SignupPage {
   emailInputHelpText: string = 'Enter Your Email Address';
   passwordInputHelpText: string = 'Password Must be At Least 8 Characters';
   confirmPasswordInputHelpText: string = 'Re-type Your Password';
-  private usersCollection: AngularFirestoreCollection<User>;
 
   constructor(private loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams,
               public alertCtrl: AlertController, public toastCtrl: ToastController,
               public formBuilder: FormBuilder, public angularFireAuth: AngularFireAuth, public userService: UserService, public db: AngularFirestore) {
-
-    this.usersCollection = this.db.collection("users");
     this.signupForm = this.formBuilder.group({
       fullName: ['', [
         Validators.required
@@ -157,7 +154,7 @@ export class SignupPage {
                 {
                   text: 'I Agree',
                   handler: () => {
-                    this.user.image = 'https://www.w3schools.com/howto/img_avatar.png';
+                    this.user.image = 'assets/imgs/img_avatar.png';
                     this.user.anonymous = false;
                     this.navCtrl.push(PhoneVerificationPage, {
                       newuser: this.user,

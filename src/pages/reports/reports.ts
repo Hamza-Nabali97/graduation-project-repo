@@ -1,12 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {
-  IonicPage,
-  LoadingController,
-  NavController,
-  NavParams,
-  PopoverController,
-  ToastController
-} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams, PopoverController} from 'ionic-angular';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {ReportService} from "../../services/report.service";
 import * as moment from 'moment';
@@ -17,6 +10,7 @@ import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firest
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user";
 import {TabsNewReportPage} from "../tabs-new-report/tabs-new-report";
+import {LanguageService} from "../../services/language";
 
 
 @IonicPage()
@@ -30,7 +24,8 @@ export class ReportsPage implements OnDestroy, OnInit {
   reports: ReportDoc[];
   reportsCollection: AngularFirestoreCollection<Report>;
 
-  constructor(private loadingCtrl: LoadingController, private userService: UserService, public db: AngularFirestore, public reportService: ReportService, public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private angularFire: AngularFireAuth, public popoverCtrl: PopoverController) {
+  constructor(private languageService: LanguageService, private loadingCtrl: LoadingController, private userService: UserService, public db: AngularFirestore, public reportService: ReportService, public navCtrl: NavController, public navParams: NavParams, private angularFire: AngularFireAuth, public popoverCtrl: PopoverController) {
+    moment.locale(this.languageService.getLanguage());
     this.reportsCollection = this.db.collection("reports");
     let loader = this.loadingCtrl.create({
       content: 'Loading Data ...',

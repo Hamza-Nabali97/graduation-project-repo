@@ -12,20 +12,20 @@
   <!--<ion-title padding>{{ 'route.select_your_direction' | translate }}:</ion-title>-->
 
   <!--<ion-grid>-->
-    <!--<ion-row>-->
-      <!--<ion-col>-->
-        <!--<button id="locateme"-->
-                <!--ion-button-->
-                <!--block-->
-                <!--outline-->
-                <!--type="button"-->
-                <!--icon-left-->
-                <!--(click)="onLocate()">-->
-          <!--<ion-icon name="locate"></ion-icon>-->
-          <!--{{ 'route.locate_me' | translate }}-->
-        <!--</button>-->
-      <!--</ion-col>-->
-    <!--</ion-row>-->
+  <!--<ion-row>-->
+  <!--<ion-col>-->
+  <!--<button id="locateme"-->
+  <!--ion-button-->
+  <!--block-->
+  <!--outline-->
+  <!--type="button"-->
+  <!--icon-left-->
+  <!--(click)="onLocate()">-->
+  <!--<ion-icon name="locate"></ion-icon>-->
+  <!--{{ 'route.locate_me' | translate }}-->
+  <!--</button>-->
+  <!--</ion-col>-->
+  <!--</ion-row>-->
   <!--</ion-grid>-->
 
 
@@ -39,10 +39,10 @@
                   [iconUrl]="'assets/icon/problem1.png'">
 
         <agm-info-window [isOpen]="true">
-          <div >
+          <div>
             {{reports[i].description}}
             <br>
-            <img src="{{reports[i].image}}"style="height: auto;width:120px;">
+            <img src="{{reports[i].image}}" style="height: auto;width:120px;">
           </div>
         </agm-info-window>
 
@@ -52,13 +52,13 @@
       <agm-marker *ngIf="mylocationIsSet"
                   [latitude]="myLocation.lat"
                   [longitude]="myLocation.lng"
-                  label="Me"
+                  label="{{ 'route.me' | translate }}"
       ></agm-marker>
 
       <agm-marker *ngIf="destinationIsSet"
                   [latitude]="destination.lat"
                   [longitude]="destination.lng"
-                  label="Destination"
+                  label="{{ 'route.destination' | translate }}"
       ></agm-marker>
 
       <agm-direction *ngIf="getdirectionIsSet"
@@ -72,16 +72,13 @@
   </div>
 
   <button
-    id="get_direction_btn"
-    [disabled]="!mylocationIsSet|| !destinationIsSet"
     ion-button
-    icon-left
     block
+    round
+    [disabled]="!mylocationIsSet|| !destinationIsSet"
+    icon-left
     (click)="onGetDirection()">
     <ion-icon name="compass"></ion-icon>
-    {{ 'route.get_direction' | translate }}
-
-  </button>
-
+    {{ 'route.get_direction' | translate }}</button>
 
 </ion-content>

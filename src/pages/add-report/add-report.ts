@@ -84,17 +84,23 @@ export class AddReportPage {
 
   onAddReport(form: NgForm) {
     let user = '';
+    let uname=this.userService.getLoggedInUser().name;
+    let uimage=this.userService.getLoggedInUser().image;
     if (this.angularFire.auth.currentUser) {
       user = this.angularFire.auth.currentUser.uid;
     }
 
     if (form.value.anonymous || this.angularFire.auth.currentUser.isAnonymous) {
       user = 'anonymous';
+      uname="Guest"
+      uimage="assets/imgs/anonymous.png"
     }
 
 
     const data = {
       ownerId: user,
+      ownerName: uname,
+      ownerImage: uimage,
       description: form.value.description,
       location: {lat: this.myLocation.lat, lng: this.myLocation.lng},
       image: this.source,

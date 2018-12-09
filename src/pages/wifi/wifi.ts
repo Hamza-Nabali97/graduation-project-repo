@@ -14,7 +14,7 @@ import {ReportsPage} from "../reports/reports";
 })
 export class WifiPage {
 
-  wifi_strength=0;
+  wifi_strength = 0;
 
   source: string = '';
   myLocation: Location = new Location(31.898043, 35.204269);
@@ -49,6 +49,8 @@ export class WifiPage {
 
     const data = {
       ownerId: user,
+      ownerName: this.userService.getLoggedInUser().name,
+      ownerImage: this.userService.getLoggedInUser().image,
       description: "Wifi Strength = " + this.wifi_strength,
       location: {lat: this.myLocation.lat, lng: this.myLocation.lng},
       image: "assets/imgs/wifi_" + this.wifi_strength + ".png",

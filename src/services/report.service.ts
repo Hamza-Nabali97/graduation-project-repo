@@ -62,18 +62,7 @@ export class ReportService {
   }
 
   addReport(report: Report) {
-    const data = {
-      ownerId: report.ownerId,
-      description: report.description,
-      location: report.location,
-      image: report.image,
-      createdDate: report.createdDate,
-      status: report.status,
-      lastUpdate: report.lastUpdate,
-      whoAgree: report.whoAgree
-    };
-
-    this.reportsCollection.add(data);
+    this.reportsCollection.add(report);
   }
 
   getReports() {

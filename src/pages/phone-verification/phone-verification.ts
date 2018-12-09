@@ -3,7 +3,6 @@ import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from 'firebase';
 import {User} from "../../models/user";
-import {ReportsPage} from "../reports/reports";
 import {UserService} from "../../services/user.service";
 import {LoginPage} from "../login/login";
 
@@ -66,8 +65,6 @@ export class PhoneVerificationPage {
           this.angularFireAuth.auth.createUserWithEmailAndPassword(this.user.emailAddress, this.password)
             .then(userRegistrationSuccess => {
               if (userRegistrationSuccess.additionalUserInfo.isNewUser === true) {
-                let newUser = userRegistrationSuccess.user;
-                // alert(JSON.stringify(newUser));
 
                 this.user.uid = userRegistrationSuccess.user.uid;
                 this.userService.addUser(this.user);

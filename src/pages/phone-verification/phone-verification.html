@@ -1,21 +1,22 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bolder;">SMS
-      Verification
+    <ion-title text-center style="font-family: 'Comic Sans MS'; font-size: 20px; font-weight: bolder;">
+      {{'phone-verification.title' | translate}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content *ngIf="!confirmationResult" text-center padding style="background-color: beige">
-  <p style="font-family: 'Baskerville Old Face';font-size: 14px; font-weight: bold;" text-left>
-    Please enter your phone number and complete the captcha below to receive a 6-digit code via SMS. This process is
-    to verify your identity and ownership of the account.
+  <p style="font-family: 'Baskerville Old Face';font-size: 14px; font-weight: bold;" text-center>
+    {{'phone-verification.description' | translate}}
   </p>
-  <ion-label style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">Enter Your Phone Number
+  <ion-label
+    style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">{{'phone-verification.enter_number' | translate}}
   </ion-label>
+
   <ion-item style="height: 10px;">
     <ion-icon name="phone-portrait" item-left></ion-icon>
-    <ion-item item-end style="background-color: beige">
+    <ion-item item-end>
       <ion-label inline>+970</ion-label>
       <ion-input [(ngModel)]="phoneNumber"></ion-input>
     </ion-item>
@@ -26,26 +27,26 @@
 
   <button ion-button icon-left block color="danger" (click)="sendSMSVerificationToPhone()">
     <ion-icon name="mail"></ion-icon>
-    Send Code
+    {{'phone-verification.send_code' | translate}}
   </button>
 
 </ion-content>
 
 <ion-content *ngIf="confirmationResult" margin-top="30px">
-  <ion-label margin-top style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">Enter 6-Digit
-    Verification Code:
+  <ion-label margin-top style="font-family: 'Baskerville Old Face';font-size: 20px; font-weight: bold;">
+    {{'phone-verification.enter_6d' | translate}}
   </ion-label>
   <br>
   <ion-item style="height: 10px;background-color: beige">
     <ion-icon name="unlock" item-left></ion-icon>
     <ion-item item-end style="background-color: beige">
-      <ion-label inline>Code Here</ion-label>
+      <ion-label inline>{{'phone-verification.code_here' | translate}}</ion-label>
       <ion-input [(ngModel)]="verificationCode"></ion-input>
     </ion-item>
   </ion-item>
 
   <button ion-button block icon-start color="secondary" (click)="verifySMSCode()">
     <ion-icon name="checkmark-circle"></ion-icon>
-    Verify
+    {{'phone-verification.verify' | translate}}
   </button>
 </ion-content>

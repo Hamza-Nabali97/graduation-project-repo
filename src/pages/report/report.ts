@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {Report} from "../../models/report";
-import {ReportService} from '../../services/report.service';
 
 
 @Component({
@@ -17,8 +16,7 @@ export class ReportPage implements OnInit{
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
-    private reportService: ReportService) {
+    public navParams: NavParams) {
   }
 
 

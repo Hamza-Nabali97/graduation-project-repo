@@ -24,26 +24,86 @@
     "reports": "التقارير",
     "inbox": "البريد",
     "route": "في طريقي",
-    "contactus": "تواصل معنا",
+    "contact_us": "تواصل معنا",
     "settings": "الإعدادات"
   },
-
   "route": {
     "select_your_direction": "حدد مسارك ",
     "locate_me": "تحديد مكاني",
-    "get_direction": "تحدد مساري"
+    "get_direction": "تحدد مساري",
+    "me": "أنا",
+    "destination": "مكان الوصول"
   },
-  "login":{
-    "email":"البريد الإلكتروني",
-    "password":"كلمة المرور",
-    "forgot_password":"نسيت كلمة المرور ؟",
-    "or":"أو",
-    "facebook":"الدخول عبر الفيسبوك",
-    "google":"الدخول عبر جوجل",
-    "guest":"الدخول كزائر",
-    "login":"تسجيل الدخول",
-    "account":"ليس لديك حساب ؟",
-    "register":"سجل الان!"
-
+  "login": {
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgot_password": "نسيت كلمة المرور ؟",
+    "or": "أو",
+    "facebook": "الدخول عبر الفيسبوك",
+    "google": "الدخول عبر جوجل",
+    "guest": "الدخول كزائر",
+    "login": "تسجيل الدخول",
+    "account": "ليس لديك حساب ؟",
+    "register": "سجل الان!"
+  },
+  "reports": {
+    "reports": "التقارير",
+    "submitted": "قُدمت",
+    "inprogress": "يتم العمل عليها ",
+    "solved": "تم حلها",
+    "agreements": "موافقات",
+    "guest": "زائر"
+  },
+  "report": {
+    "report_details": "تفاصيل التقرير",
+    "user": "المستخدم",
+    "date": "التاريخ",
+    "description": "الوصف",
+    "number_of_agreements": "عدد الموافقات"
+  },
+  "signup": {
+    "signup": "تسجيل",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور",
+    "agreement_of_terms": "أوافق على الشروط والاحكام",
+    "account": "هل لديك حساب؟",
+    "login_now": "سجّل الدخول الآن!",
+    "full_name": "الاسم الكامل",
+    "username_required": "اسم المستخدم مطلوب",
+    "terms_of_service": "شروط الخدمة ",
+    "privacy_policy": "سياسة الخصوصية ",
+    "signup_click1": "بالنقر فوق تسجيل ، فإنك توافق على ",
+    "signup_click2": "الخاصة بنا وأنك قد قرأت ",
+    "signup_click3": "الخاصة بنا. يرجى ملاحظة أن هذا إلزامي لإكمال تسجيلك"
+  },
+  "contact_us": {
+    "hi": "مرحباً",
+    "reach_us": "هل تريد الوصول الينا؟"
+  },
+  "add_report": {
+    "new_report": "تقرير جديد",
+    "anonymous": "مجهول",
+    "add_report": "أضف التقرير",
+    "upload_photo": "تحميل صورة ",
+    "take_a_photo": "التقاط صورة",
+    "location": "الموقع",
+    "add_img": "أضف صورة",
+    "description": "الوصف"
+  },
+  "options": {
+    "my_reports": "تقاريري",
+    "most_agreed_reports": "التقارير الأكثر اتفاقا عليها",
+    "recent_reports": "أحدث التقارير",
+    "sortby": "رتّب حسب:"
+  },
+  "phone-verification": {
+    "title": "التحقق من الهاتف",
+    "description": "يرجى إدخال رقم هاتفك وإكمال اختبار CAPTCHA أدناه للحصول على رمز مكون من 6 أرقام عبر الرسائل القصيرة. هذه العملية هي للتحقق من هويتك وملكيتك للحساب.",
+    "enter_number": "أدخل رقم هاتفك",
+    "send_code": "إرسال رمز التحقق",
+    "enter_6d": "أدخل رمز التحقق المكون من 6 خانات",
+    "code_here": "الرمز هنا",
+    "verify": "التحقق"
   }
 }

@@ -5,6 +5,8 @@ export interface Report {
   lastUpdate: Date;
   location: { lat: number, lng: number };
   ownerId: string;
+  ownerName: string;
+  ownerImage: string;
   status: string;
   whoAgree: string[];
 }

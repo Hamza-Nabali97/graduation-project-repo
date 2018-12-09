@@ -1,16 +1,14 @@
-import {User, UserDoc} from "../models/user";
+import {User} from "../models/user";
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
-import {AngularFireAuth} from "angularfire2/auth";
 
 @Injectable()
 export class UserService {
 
   private loginUser = {} as User;
-  private users: UserDoc[] = [];
   private usersCollection: AngularFirestoreCollection<User>;
 
-  constructor(public db: AngularFirestore, private angularFire: AngularFireAuth) {
+  constructor(public db: AngularFirestore) {
     this.usersCollection = this.db.collection("users");
   }
 
@@ -39,11 +37,6 @@ export class UserService {
 
   setGuestUserLogin(guestUser: User) {
     this.loginUser = guestUser;
-  }
-
-
-  setUsers(users: UserDoc[]) {
-    this.users = users;
   }
 
 
