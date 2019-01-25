@@ -103,23 +103,23 @@ export class LoginPage implements OnInit {
       'offline': true,
       'scopes': 'email profile'
     }).then(googleConnectSuccess => {
-      alert('Logged In');
+      // alert('Logged In');
       let credential = firebase.auth.GoogleAuthProvider.credential(googleConnectSuccess.idToken);
       this.angularFireAuth.auth.signInWithCredential(credential).then(googleLoginSuccess => {
-        alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
+        // alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
         this.angularFireAuth.authState.subscribe(data => {
-          alert(data.email);
-          alert(data.uid);
-          alert(data.displayName);
+          // alert(data.email);
+          // alert(data.uid);
+          // alert(data.displayName);
         });
 
         this.navCtrl.setRoot(ReportsPage);
       }).catch(googleLoginError => {
-        alert('Login Failure/Error');
-        alert('FAILURE!');
+        // alert('Login Failure/Error');
+        // alert('FAILURE!');
       })
     }).catch(googleConnectFailure => {
-      alert('Google Connect Failure');
+      // alert('Google Connect Failure');
     });
   }
 
@@ -128,20 +128,20 @@ export class LoginPage implements OnInit {
     this.facebook.login(['email', 'public_profile']).then(fbAuthResponse => {
       let credential = firebase.auth.FacebookAuthProvider.credential(fbAuthResponse.authResponse.accessToken);
       this.angularFireAuth.auth.signInWithCredential(credential).then(info => {
-          alert(JSON.stringify(info));
+          // alert(JSON.stringify(info));
           this.angularFireAuth.authState.subscribe(data => {
-            alert(data.email);
-            alert(data.uid);
-            alert(data.displayName);
+            // alert(data.email);
+            // alert(data.uid);
+            // alert(data.displayName);
           })
-          alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
+          // alert(JSON.stringify(this.angularFireAuth.auth.currentUser));
           this.navCtrl.setRoot(ReportsPage);
         }
       ).catch(authError => {
-        alert(JSON.stringify(authError));
+        // alert(JSON.stringify(authError));
       })
     }).catch(fbAuthNoResponse => {
-      alert(JSON.stringify(fbAuthNoResponse));
+      // alert(JSON.stringify(fbAuthNoResponse));
     });
 
     // let facebookAuthProvider = new firebase.auth.FacebookAuthProvider();

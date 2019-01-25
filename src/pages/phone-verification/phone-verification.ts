@@ -29,24 +29,29 @@ export class PhoneVerificationPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PhoneVerificationPage');
-    this.recaptchVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-    this.recaptchVerifier.render().then(renderResult => {
-      console.log('Successfully Rendered');
-    }).catch(renderError => {
-      console.error(renderError);
-    })
+    // console.log('ionViewDidLoad PhoneVerificationPage');
+    // this.recaptchVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    // this.recaptchVerifier.render().then(renderResult => {
+    //   console.log('Successfully Rendered');
+    //   alert('Successfully Rendered');
+    // }).catch(renderError => {
+    //   alert(renderError);
+    //   console.error(renderError);
+    // })
   }
 
   sendSMSVerificationToPhone() {
     let appRecaptchaVerifier = this.recaptchVerifier;
+    this.phoneNumber = ""
     this.phoneNumber = "+970" + this.phoneNumber;
     alert(this.phoneNumber);
     this.angularFireAuth.auth.signInWithPhoneNumber(this.phoneNumber, appRecaptchaVerifier)
       .then(phoneSigninResult => {
+        alert(phoneSigninResult);
         this.confirmationResult = phoneSigninResult;
       }).catch(phoneSigninError => {
-      console.error(phoneSigninError);
+      alert(phoneSigninError);
+      // console.error(phoneSigninError);
     })
   }
 

@@ -32,7 +32,7 @@ export class WifiPage {
   }
 
   ionViewWillEnter() {
-    this.onLocate();
+    // this.onLocate();
   }
 
 

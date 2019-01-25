@@ -43,6 +43,7 @@ import {AngularFirestore} from "@angular/fire/firestore";
 import {TabsNewReportPage} from "../pages/tabs-new-report/tabs-new-report";
 import {WifiPage} from "../pages/wifi/wifi";
 import {SlidesPage} from "../pages/slides/slides";
+import {Push} from '@ionic-native/push';
 
 
 firebase.initializeApp(FIREBASE_CONFIG)
@@ -124,6 +125,7 @@ firebase.initializeApp(FIREBASE_CONFIG)
     Camera,
     Geolocation,
     AngularFirestore,
+    Push,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

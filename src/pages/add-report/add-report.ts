@@ -31,7 +31,7 @@ export class AddReportPage {
               public camera: Camera,
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController) {
-    this.source = "http://www.dcwastemanagement.co.uk/wp-content/uploads/2012/03/skip1.jpg";
+    this.source = "";
 
     this.isToggled = false;
 

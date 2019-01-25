@@ -125,4 +125,8 @@
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
     <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
+    <plugin name="phonegap-plugin-push" spec="^2.1.3">
+        <variable name="SENDER_ID" value="775594715599" />
+        <variable name="FCM_VERSION" value="11.6.2" />
+    </plugin>
 </widget>

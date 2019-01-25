@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
 import {LanguagePage} from "../language/language";
+import {Push, PushObject, PushOptions} from '@ionic-native/push';
 
 /**
  * Generated class for the SlidesPage page.
@@ -14,11 +15,12 @@ import {LanguagePage} from "../language/language";
   selector: 'page-slides',
   templateUrl: 'slides.html',
 })
-export class SlidesPage {
+export class SlidesPage implements OnInit {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private push: Push) {
 
   }
+
 
   navigate() {
     this.navCtrl.push(LanguagePage);
@@ -41,5 +43,30 @@ export class SlidesPage {
       image: "assets/imgs/slide3.png",
     }
   ];
+
+  ngOnInit(): void {
+
+    // to initialize push notifications
+
+    const options: PushOptions = {
+      android: {
+        senderID: '775594715599'
+      },
+      ios: {
+        alert: 'true',
+        badge: true,
+        sound: 'false'
+      }
+    };
+
+    const pushObject: PushObject = this.push.init(options);
+
+
+    pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+
+    pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+
+    pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+  }
 
 }
